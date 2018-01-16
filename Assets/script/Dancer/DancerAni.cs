@@ -87,5 +87,27 @@ namespace isletspace
             print("   do cheer  " + type);
             animator.SetFloat("cheerType", type);
         }
+
+        public void DoAddLight(int type)
+        {
+            Material[] oriMat = null;
+            MeshRenderer smr = GameObject.Find("gu").GetComponent<MeshRenderer>();
+            //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
+            oriMat = smr.sharedMaterials;
+
+            var mat1 = Resources.Load("prefab/bd_119") as Material;
+            Material[] newMat = { oriMat[0], mat1 };
+            smr.sharedMaterials = newMat;
+        }
+
+        public void DoDelLight(int type)
+        {
+            MeshRenderer smr = GameObject.Find("gu").GetComponent<MeshRenderer>();
+            //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
+            Material[] oriMat = smr.sharedMaterials;
+
+            Material[] newMat = { oriMat[0] };
+            smr.sharedMaterials = newMat;
+        }
     }
 }
