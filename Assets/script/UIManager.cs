@@ -25,10 +25,11 @@ namespace isletspace
         public Transform panelParent;
         public PanelBase currentPanel;
         public NetManager net;
+        public Director director;
 
         private void Start()
         {
-            currentPanel = FindChildPanel("StartPanel");
+            currentPanel = Utils.FindDirectChildComponent<PanelBase>("StartPanel", panelParent);
             currentPanel.DoStart(this);
         }
 
@@ -36,14 +37,20 @@ namespace isletspace
         {
             //JumpTo("OPPanel");
             //JumpTo("RankPanel");
+            //JumpTo("TrainLeaderPanel");
             net.StartNet();
         }
 
-        public void OnPanelOver(string name, string next)
+        public void OnPanelOver(string name, string next, string camera)
         {
             if(!string.IsNullOrEmpty(next))
             {
                 JumpTo(next);
+            }
+            
+            if(!string.IsNullOrEmpty(camera))
+            {
+                director.ChangeCamera(camera);
             }
 
             switch (name)
@@ -55,26 +62,15 @@ namespace isletspace
 
         private void JumpTo(string name)
         {
-            var next = FindChildPanel(name);
+            var next = Utils.FindDirectChildComponent<PanelBase>(name, panelParent);
             if (next == null)
             {
-                next = FindChildPanel("OPPanel");
+                next = Utils.FindDirectChildComponent<PanelBase>("OPPanel", panelParent);
             }
 
             currentPanel.DoEnd();
             next.DoStart(this);
             currentPanel = next;
-        }
-
-        private PanelBase FindChildPanel(string name)
-        {
-            var child = panelParent.Find(name);
-            if (child == null)
-            {
-                return null;
-            }
-
-            return child.gameObject.GetComponent<PanelBase>();
         }
     }
 }

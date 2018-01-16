@@ -61,6 +61,9 @@
     <Reference Include="UnityEngine.Analytics">
       <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
     </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>Assets/Demigiant/DemiLib/Core/DemiLib.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
@@ -73,14 +76,11 @@
     <Reference Include="DOTween50">
       <HintPath>Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/Plugins/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="DemiLib">
-      <HintPath>Assets/Demigiant/DemiLib/Core/DemiLib.dll</HintPath>
-    </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>Assets/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets/Plugins/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
@@ -90,10 +90,13 @@
     <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
+    <Compile Include="Assets\script\Camera\Director.cs" />
     <Compile Include="Assets\script\Camera\MoveCamera.cs" />
+    <Compile Include="Assets\script\Camera\SceneCamera.cs" />
     <Compile Include="Assets\script\Dancer\DancerAni.cs" />
     <Compile Include="Assets\script\PlayArrow\ArrowManager.cs" />
     <Compile Include="Assets\script\UIManager.cs" />
+    <Compile Include="Assets\script\common\BezierGenerate.cs" />
     <Compile Include="Assets\script\common\DelayUtils.cs" />
     <Compile Include="Assets\script\common\GameManager.cs" />
     <Compile Include="Assets\script\common\ISingleton.cs" />

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Text;
+using System.Net;
 
 public static class Utils
 {
@@ -79,7 +80,36 @@ public static class Utils
 		return null;
 	}
 
-	public static string GetLongName (Transform transform)
+    public static Transform GetChildByName(string name, GameObject go)
+    {
+        Transform result = null;
+        Transform t = go.transform.FindChild(name);
+
+        if (t != null)
+            return t;
+
+        for (int i = 0; i < go.transform.childCount; i++)
+        {
+            t = go.transform.GetChild(i);
+            result = GetChildByName(name, t.gameObject);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    public static T FindDirectChildComponent<T>(string name, Transform obj)
+    {
+        var child = obj.Find(name);
+        if (child == null)
+        {
+            return default(T);
+        }
+
+        return child.gameObject.GetComponent<T>();
+    }
+
+    public static string GetLongName (Transform transform)
 	{
 		return transform == null ? "" : GetLongName (transform.parent) + "/" + transform.name;   
 	}
@@ -241,24 +271,6 @@ public static class Utils
 //		return uint.Parse (sDate);
 //	}
 
-	public static Transform GetChildByName (string name, GameObject go)
-	{
-		Transform result = null;
-		Transform t = go.transform.FindChild (name);
-		
-		if (t != null)
-			return t;
-		
-		for (int i = 0; i < go.transform.childCount; i++)
-		{
-			t = go.transform.GetChild (i);
-			result = GetChildByName (name, t.gameObject);
-			if (result != null)
-				return result;
-		}
-		return null;
-	}
-
 	public static string GetEnumDes (Enum en)
 	{
 		Type type = en.GetType ();
@@ -418,5 +430,27 @@ public static class Utils
         }
         n = num / 10000000f;
         return n.ToString("F" + Decimal) + "千万";
+    }
+
+    public static string Decode(ref StringBuilder cache)
+    {
+        //Debug.Log("  Raw  DAtga   :" + cache);
+        string[] subdata = cache.ToString().Split(new char[] { ':' }, 2);
+
+        if (subdata.Length < 2) //没接到分割符
+        {
+            return null;
+        }
+        //Debug.Log("    splitt  Data   " + subdata[0] + "  -  " + subdata[1]);
+
+        int len = int.Parse(subdata[0]);
+        if (len > subdata[1].Length) //接受的数据长度不够
+        {
+            return null;
+        }
+
+        string data = subdata[1].Substring(0, len);
+        cache.Remove(0, len + 1 + subdata[0].Length);
+        return data;
     }
 }

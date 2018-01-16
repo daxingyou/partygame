@@ -22,7 +22,7 @@ public class NetClient
     //每次接受和发送数据的大小
     private const int size = 1024;
     //接收数据池
-    private List<byte> receiveCache;
+    private StringBuilder receiveCache;
     private bool isReceiving;
     // 连接成功
     public Action connectCallBack;
@@ -32,7 +32,7 @@ public class NetClient
     public void StartClient()
     {
         buffer = new byte[size];
-        receiveCache = new List<byte>();
+        receiveCache = new StringBuilder();
 
         IPAddress[] adds = Dns.GetHostAddresses(address);
 
@@ -209,7 +209,7 @@ public class NetClient
     {
         //UnityEngine.Debug.Log("接收到数据");
         //将接收到的数据放入数据池中
-        receiveCache.AddRange(data);
+        receiveCache.Append(Encoding.UTF8.GetString(data));
         //如果没在读数据
         if (!isReceiving)
         {
@@ -221,28 +221,15 @@ public class NetClient
     // 读取数据
     private void ReadData()
     {
-        string data = Encoding.UTF8.GetString(receiveCache.ToArray());
-
-        /*
-        var tmp = receiveCache.ToArray();
-        Debug.Log("    Read Data list  " + tmp.Length);
-        for (int i = 0; i < receiveCache.Count; ++i)
+        string data = Utils.Decode(ref receiveCache);
+        if (data != null)
         {
-            Debug.Log("  for  -- " + i + " : " + tmp[i]);
-        }
-        Debug.Log("    Read Data list >>>>>>>>>>>  " + data);
-        */
+            Debug.Log("    ReadData   " + data + "    =>    " + receiveCache);
 
-        Debug.Log("  Readdate    " + data);
-        //说明获取到一条完整数据
-        if (data != null && data != "")
-        {
-            //清空消息池
-            receiveCache.Clear();
+            //说明获取到一条完整数据
             JsonSerializer serializer = new JsonSerializer();
             StringReader sr = new StringReader(data);
             NetPacket msg = serializer.Deserialize(new JsonTextReader(sr), typeof(NetPacket)) as NetPacket;
-
             
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
             string dataStr = Utils.ToStr(msg);

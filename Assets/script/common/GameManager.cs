@@ -27,7 +27,10 @@ namespace isletspace
         public static void SetPlayNum(NetPacket msg)
         {
             currentPlayNum = int.Parse(msg.data);
-            UpdatePlayNumCallback();
+            if (UpdatePlayNumCallback != null)
+            {
+                UpdatePlayNumCallback();
+            }
         }
     }
 }

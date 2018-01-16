@@ -20,7 +20,7 @@ namespace isletspace
 {
     public class RankBoard : MonoBehaviour
     {
-        
+        /*
         string data0 =
                 "[{\"name\":\"爱我中华\"}]";
 
@@ -43,27 +43,19 @@ namespace isletspace
 
         public void test()
         {
-            
-            Debug.Log("大陆的时候看见");
             var t1 = Encoding.UTF8.GetBytes(data0);
-            /*print("  list  cnt  " + t1.Length);
-            for (int i = 0; i < t1.Length; ++i)
-            {
-                print(" for  " + t1[i]);
-            }
-            print("       list print end  <<<<<<<<<<<  ");*/
             print(t1);
             var t2 = Encoding.UTF8.GetString(t1);
             print(t2);
-            SetAllRank(t2);
-            //StartCoroutine(test2());
+            SetAllRank(data1);
+            StartCoroutine(test2());
         }
 
         IEnumerator test2()
         {
             yield return new WaitForSeconds(3);
             SetAllRank(data2);
-        } 
+        } */
 
         List<RankVO> lastData;
 

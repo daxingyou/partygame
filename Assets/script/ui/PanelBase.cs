@@ -21,7 +21,8 @@ namespace isletspace
     public class PanelBase : MonoBehaviour
     {
         public float timeout = -1;
-        public string nextPanel = "";
+        public List<string> nextPanelOrder;
+        public string cameraScene = "";
 
         [System.NonSerialized]
         public UIManager manager;
@@ -46,7 +47,17 @@ namespace isletspace
         virtual public void TimeOut()
         {
             CancelInvoke("TimeOut");
-            manager.OnPanelOver(gameObject.name, nextPanel);
+            Over();
+        }
+
+        private void Over()
+        {
+            int l = nextPanelOrder.Count - 1;
+            manager.OnPanelOver(gameObject.name, nextPanelOrder[l], cameraScene);
+            if (l != 0)
+            {
+                nextPanelOrder.RemoveAt(l);
+            }
         }
     }
 }

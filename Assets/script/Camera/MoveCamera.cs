@@ -33,7 +33,7 @@ namespace isletspace
 
         public int targetpos;
 
-        void Start()
+        void Awake()
         {
             StartPos = transform.position;
             StartRotate = transform.rotation.eulerAngles;
@@ -52,24 +52,28 @@ namespace isletspace
                 return -2;
             }
 
-            Vector3 target = Ground.GetChild(num).position;
+            Transform target = Ground.GetChild(num);
+            var ani = target.GetComponent<DancerAni>();
+            int a = Random.Range(1, 4);
+            print("   do pose  " + a);
+            ani.DoPose(a);
 
             isPlaying = true;
 
             Sequence seq = DOTween.Sequence();
             //ZoomIn
-            seq.Append(transform.DOMove(target, 2).SetEase(Ease.OutExpo));
-            seq.Join(transform.DORotate(LookFront, 2));
+            seq.Append(transform.DOMove(target.position, 0.8f).SetEase(Ease.OutExpo));
+            seq.Join(transform.DORotate(LookFront, 0.8f));
             //gap
-            seq.AppendInterval(1);
+            seq.AppendInterval(0.3f);
             //Rotate
             seq.Append(transform.DORotate(LookRotatePoint1, 1).SetEase(Ease.Linear));
             seq.Append(transform.DORotate(LookRotatePoint2, 1).SetEase(Ease.Linear));
             //gap
-            seq.AppendInterval(1);
+            seq.AppendInterval(0.3f);
             //ZoomOut
-            seq.Append(transform.DOMove(StartPos, 2));
-            seq.Join(transform.DORotate(StartRotate, 2));
+            seq.Append(transform.DOMove(StartPos, 0.8f));
+            seq.Join(transform.DORotate(StartRotate, 0.8f));
             //PlayEnd
             seq.AppendCallback(() => { isPlaying = false; });
 

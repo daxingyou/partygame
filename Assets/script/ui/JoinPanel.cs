@@ -40,7 +40,7 @@ namespace isletspace
 
         public void UpdatePlayNum()
         {
-            playNum.text = "²ÎÓëÈËÊı£º" + GameManager.currentPlayNum + "/100";
+            playNum.text = "å‚ä¸äººæ•°ï¼š" + GameManager.currentPlayNum + "/100";
         }
     }
 }

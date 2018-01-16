@@ -22,6 +22,7 @@ namespace isletspace
     {
         private Animator animator;
 
+        /*
         private void OnGUI()
         {
             if (GUILayout.Button("pose1"))
@@ -60,8 +61,8 @@ namespace isletspace
             {
                 DoCheer(false);
             }
-        }
-
+        }*/
+        
         private void Start()
         {
             animator = gameObject.GetComponent<Animator>();
@@ -82,6 +83,9 @@ namespace isletspace
         public void DoCheer(bool flag)
         {
             animator.SetBool("cheerFlag", flag);
+            int type = Random.Range(1, 4);
+            print("   do cheer  " + type);
+            animator.SetFloat("cheerType", type);
         }
     }
 }
