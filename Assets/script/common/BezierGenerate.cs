@@ -18,7 +18,7 @@ namespace isletspace
     /// <summary>
     /// 
     /// </summary>
-    public class BezierGenerate
+    public static class BezierGenerate
     {
         public static Vector3 CreatePoint(Vector3 beginPos, Vector3 controlPos, Vector3 endPos, float ratio)
         {

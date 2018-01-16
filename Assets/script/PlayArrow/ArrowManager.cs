@@ -29,19 +29,18 @@ namespace isletspace
             switch (type)
             {
                 case 1:
-                    path = "prefab/Arrow/A";
+                    path = "Arrow/A";
                     break;
                 case 2:
-                    path = "prefab/Arrow/B";
+                    path = "Arrow/B";
                     break;
                 case 3:
-                    path = "prefab/Arrow/AB";
+                    path = "Arrow/AB";
                     break;
                 default:
                     return;
             }
-            var prefab = Resources.Load(path) as GameObject;
-            var obj = Instantiate(prefab, Vector3.one, Quaternion.identity, List) as GameObject;
+            var obj = Pool.CreateObject(path, List);
             if(dancer != null)
             {
                 dancer.DoAction(type);

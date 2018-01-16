@@ -22,7 +22,7 @@ namespace isletspace
     public class RankPanel : PanelBase
     {
         #region ³£Êý
-        private Vector3 OriginPos = new Vector3(900, 600);
+        private Vector3 OriginPos = new Vector3(1100, 600);
         #endregion
         public RankBoard board;
 

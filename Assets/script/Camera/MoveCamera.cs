@@ -56,6 +56,7 @@ namespace isletspace
             var ani = target.GetComponent<DancerAni>();
             int a = Random.Range(1, 4);
             print("   do pose  " + a);
+            ani.DoLightMove();
             ani.DoPose(a);
 
             isPlaying = true;

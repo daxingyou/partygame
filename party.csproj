@@ -127,12 +127,16 @@
     <Compile Include="Assets\script\Camera\SceneCamera.cs" />
     <Compile Include="Assets\script\Dancer\DancerAni.cs" />
     <Compile Include="Assets\script\PlayArrow\ArrowManager.cs" />
+    <Compile Include="Assets\script\SceneManager\AllDancerManager.cs" />
+    <Compile Include="Assets\script\SceneManager\CheerManager.cs" />
+    <Compile Include="Assets\script\SceneManager\LeaderManager.cs" />
     <Compile Include="Assets\script\UIManager.cs" />
     <Compile Include="Assets\script\common\BezierGenerate.cs" />
     <Compile Include="Assets\script\common\DelayUtils.cs" />
     <Compile Include="Assets\script\common\GameManager.cs" />
     <Compile Include="Assets\script\common\ISingleton.cs" />
     <Compile Include="Assets\script\common\PlayMovie.cs" />
+    <Compile Include="Assets\script\common\Pool.cs" />
     <Compile Include="Assets\script\common\Utils.cs" />
     <Compile Include="Assets\script\net\NetClient.cs" />
     <Compile Include="Assets\script\net\NetManager.cs" />
@@ -140,10 +144,13 @@
     <Compile Include="Assets\script\net\SocketNetTools.cs" />
     <Compile Include="Assets\script\rankBoard\OneRank.cs" />
     <Compile Include="Assets\script\rankBoard\RankBoard.cs" />
+    <Compile Include="Assets\script\ui\AlwaysPanel.cs" />
+    <Compile Include="Assets\script\ui\CheerPanel.cs" />
     <Compile Include="Assets\script\ui\JoinPanel.cs" />
     <Compile Include="Assets\script\ui\LeaderPanel.cs" />
     <Compile Include="Assets\script\ui\OPPanel.cs" />
     <Compile Include="Assets\script\ui\PanelBase.cs" />
+    <Compile Include="Assets\script\ui\ProgressBar.cs" />
     <Compile Include="Assets\script\ui\RankPanel.cs" />
     <Compile Include="Assets\script\ui\StartPanel.cs" />
   </ItemGroup>

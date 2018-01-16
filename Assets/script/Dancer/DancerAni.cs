@@ -12,6 +12,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace isletspace
 {
@@ -21,6 +22,13 @@ namespace isletspace
     public class DancerAni : MonoBehaviour
     {
         private Animator animator;
+        private Vector3 mid;
+        private Transform lightEffectPos;
+        public GameObject SpotLight;
+
+        #region ³£Êý
+        Vector3 target = new Vector3(-500, 0, 0);
+        #endregion
 
         /*
         private void OnGUI()
@@ -61,11 +69,18 @@ namespace isletspace
             {
                 DoCheer(false);
             }
-        }*/
+            if (GUILayout.Button("lightfly"))
+            {
+                DoLightMove();
+            }
+        }
+        */
         
         private void Start()
         {
             animator = gameObject.GetComponent<Animator>();
+            mid = (transform.position + target) / 2;
+            lightEffectPos = transform.Find("LightEffect");
         }
 
         public void DoPose(int type)
@@ -83,9 +98,54 @@ namespace isletspace
         public void DoCheer(bool flag)
         {
             animator.SetBool("cheerFlag", flag);
-            int type = Random.Range(1, 4);
-            print("   do cheer  " + type);
-            animator.SetFloat("cheerType", type);
+            if (flag)
+            {
+                int type = Random.Range(1, 4);
+                print("   do cheer  " + type);
+                animator.SetFloat("cheerType", type);
+            }
+        }
+
+        public void DoLightMove()
+        {
+            StartCoroutine(MoveLight(20, 5f));
+        }
+
+        private IEnumerator MoveLight(int d, float time)
+        {
+            var obj = Pool.CreateObject("lightspot/lightspot", lightEffectPos);
+
+            //move obj
+            mid.y = Random.Range(5.0f, 10.0f);
+            float timegap = time / d;
+            for (int i = 0; i < d; ++i)
+            {
+                Vector3 point = BezierGenerate.CreatePoint(obj.transform.position, mid, target, (i + 1f) / d);
+                obj.transform.DOMove(point, timegap).SetEase(Ease.Linear);
+                yield return new WaitForSeconds(timegap);
+            }
+            
+            Destroy(obj);
+        }
+
+        public void PlayOP()
+        {
+            SpotLight.SetActive(true);
+            animator.SetTrigger("OP");
+        }
+
+        public void PlayEndOP()
+        {
+            SpotLight.SetActive(false);
+        }
+
+        public void PlayJoin()
+        {
+            animator.SetTrigger("startjoin");
+        }
+        public void PlayEndJoin()
+        {
+            animator.SetTrigger("endjoin");
         }
     }
 }

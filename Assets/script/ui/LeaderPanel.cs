@@ -52,6 +52,11 @@ namespace isletspace
             StringReader sr = new StringReader(json);
             ArrowData data = serializer.Deserialize(new JsonTextReader(sr), typeof(ArrowData)) as ArrowData;
 
+            if(gameObject.name == "LeaderPanel")
+            {
+                manager.StartPanel("AlwaysPanel");
+            }
+
             StartCoroutine(TestAddArrow(data));
         }
 

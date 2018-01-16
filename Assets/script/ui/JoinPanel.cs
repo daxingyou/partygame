@@ -22,6 +22,7 @@ namespace isletspace
     /// </summary>
     public class JoinPanel : PanelBase
     {
+        public LeaderManager SceneManager;
         public Text playNum;
 
         override public void DoStart(UIManager manager)
@@ -29,13 +30,15 @@ namespace isletspace
             base.DoStart(manager);
             transform.DOLocalMoveX(0, 1);
             GameManager.UpdatePlayNumCallback += UpdatePlayNum;
+            SceneManager.PlayJoin();
         }
 
         override public void DoEnd()
         {
             base.DoEnd();
-            transform.DOLocalMoveX(900, 1);
+            transform.DOLocalMoveX(1100, 1);
             GameManager.UpdatePlayNumCallback -= UpdatePlayNum;
+            SceneManager.PlayEndJoin();
         }
 
         public void UpdatePlayNum()
