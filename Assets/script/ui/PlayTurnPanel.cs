@@ -25,7 +25,9 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            DoCloseUp();
+            SceneManager.AllRandomDrum(timeout);
+            Invoke("DoCloseUp", 3);
+            InvokeRepeating("test", 1, 1);
         }
 
         public void DoCloseUp()
@@ -33,13 +35,12 @@ namespace isletspace
             int pos = 3;
             Vector3 target = SceneManager.CloseUp(pos);
             manager.director.DoAllDancerCloseUp(target);
-
-            Invoke("test", 4);
         }
 
         public void test()
         {
-            SceneManager.PlayLightSpot(5);
+            int ran = Random.Range(1, 30);
+            SceneManager.PlayLightSpot(ran);
         }
     }
 }

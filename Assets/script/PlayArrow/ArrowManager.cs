@@ -21,7 +21,6 @@ namespace isletspace
     public class ArrowManager : MonoBehaviour
     {
         public Transform List;
-        public DancerAni dancer;
 
         public void AddArrow(int type)
         {
@@ -41,10 +40,6 @@ namespace isletspace
                     return;
             }
             Pool.CreateObject(path, List);
-            if(dancer != null)
-            {
-                dancer.DoDrum(type);
-            }
         }
     }
 }

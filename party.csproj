@@ -147,6 +147,7 @@
     <Compile Include="Assets\script\rankBoard\RankBoard.cs" />
     <Compile Include="Assets\script\ui\AlwaysPanel.cs" />
     <Compile Include="Assets\script\ui\CheerPanel.cs" />
+    <Compile Include="Assets\script\ui\FlashScreen.cs" />
     <Compile Include="Assets\script\ui\JoinPanel.cs" />
     <Compile Include="Assets\script\ui\LeaderPanel.cs" />
     <Compile Include="Assets\script\ui\OPPanel.cs" />

@@ -35,31 +35,19 @@ namespace isletspace
         {
             if (GUILayout.Button("pose1"))
             {
-                DoPose(1);
-            }
-            if (GUILayout.Button("pose2"))
-            {
-                DoPose(2);
-            }
-            if (GUILayout.Button("pose3"))
-            {
-                DoPose(3);
-            }
-            if (GUILayout.Button("pose4"))
-            {
-                DoPose(4);
+                DoPose();
             }
             if (GUILayout.Button("action1"))
             {
-                DoAction(1);
+                DoDrum(1);
             }
             if (GUILayout.Button("action2"))
             {
-                DoAction(2);
+                DoDrum(2);
             }
             if (GUILayout.Button("action3"))
             {
-                DoAction(3);
+                DoDrum(3);
             }
             if (GUILayout.Button("cheer"))
             {
@@ -71,7 +59,15 @@ namespace isletspace
             }
             if (GUILayout.Button("lightfly"))
             {
-                DoLightMove();
+                DoLightSpotMove();
+            }
+            if (GUILayout.Button("drumlight"))
+            {
+                DoAddLight();
+            }
+            if (GUILayout.Button("drumend"))
+            {
+                DoDelLight();
             }
         }
         */
@@ -161,8 +157,12 @@ namespace isletspace
         {
             animator.SetTrigger("endjoin");
         }
+        public void DoYourTurn(bool flag)
+        {
+            animator.SetBool("EndLeading", flag);
+        }
 
-        public void DoAddLight(int type)
+        public void DoAddLight()
         {
             Material[] oriMat = null;
             MeshRenderer smr = GameObject.Find("gu").GetComponent<MeshRenderer>();
@@ -174,7 +174,7 @@ namespace isletspace
             smr.sharedMaterials = newMat;
         }
 
-        public void DoDelLight(int type)
+        public void DoDelLight()
         {
             MeshRenderer smr = GameObject.Find("gu").GetComponent<MeshRenderer>();
             //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
@@ -182,6 +182,22 @@ namespace isletspace
 
             Material[] newMat = { oriMat[0] };
             smr.sharedMaterials = newMat;
+        }
+
+        public IEnumerator RandomDrum(int count, float totalTime)
+        {
+            for (int i = 0; i < count; ++i)
+            {
+                float gap = Random.Range(0.5f, 3f);
+                int type = Random.Range(1, 4);
+                DoDrum(type);
+                yield return new WaitForSeconds(gap);
+                totalTime -= gap;
+                if(totalTime < 0)
+                {
+                    yield break;
+                }
+            }
         }
     }
 }

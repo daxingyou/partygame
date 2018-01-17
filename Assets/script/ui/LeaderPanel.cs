@@ -35,12 +35,14 @@ namespace isletspace
     public class LeaderPanel : PanelBase
     {
         string data = "{basetime:19000,beats:[{type:1,time:20000}, {type:2,time:22000}, {type:3,time:22500}, {type:1,time:24500}, {type:2,time:25000}, ]}";
+        
+        public LeaderManager SceneManager;
+        public ArrowManager arrowManager;
 
-        ArrowManager arrowManager;
-
-        private void Start()
+        public override void DoStart(UIManager manager)
         {
-            arrowManager = gameObject.GetComponent<ArrowManager>();
+            base.DoStart(manager);
+            SceneManager.dancer.DoYourTurn(false);
             StartPlay(data);
         }
 
@@ -63,10 +65,18 @@ namespace isletspace
             int preTime = data.basetime;
             for (int i = 0; i < data.beats.Count; ++i)
             {
-                yield return new WaitForSeconds((data.beats[i].time - preTime) / 1000.0f);
-                preTime = data.beats[i].time;
+                yield return new WaitForSeconds((data.beats[i].time - preTime) / 1000.0f - 0.3f);
+
+                SceneManager.dancer.DoDrum(data.beats[i].type);
+
+                yield return new WaitForSeconds(0.3f);
                 arrowManager.AddArrow(data.beats[i].type);
+                preTime = data.beats[i].time;
             }
+
+            yield return new WaitForSeconds(0.3f);
+
+            SceneManager.dancer.DoYourTurn(true);
         }
     }
 }

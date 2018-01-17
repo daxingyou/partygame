@@ -59,6 +59,7 @@ namespace isletspace
 
         public void JumpTo(string name)
         {
+            //FlashScreen.Instance.DoFlash(Color.black);
             currentPanel.DoEnd();
             StartPanelAsCurrent(name);
         }

@@ -29,8 +29,28 @@ namespace isletspace
                 return;
             }
 
+            //FlashScreen.Instance.DoFlash(Color.black);
+
+            //var scene = Utils.FindDirectChildComponent<SceneCamera>(name, transform);
+            //if(currentCamera != null)
+            //{
+            //    currentCamera.StopCamera();
+            //}
+            //scene.StartCamera();
+            //currentCamera = scene;
+
+            StartCoroutine(changeRoute(name));
+        }
+
+        IEnumerator changeRoute(string name)
+        {
+
+            FlashScreen.Instance.DoFlash(Color.black);
+
+            yield return new WaitForSeconds(0.3f);
+
             var scene = Utils.FindDirectChildComponent<SceneCamera>(name, transform);
-            if(currentCamera != null)
+            if (currentCamera != null)
             {
                 currentCamera.StopCamera();
             }
