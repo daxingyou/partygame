@@ -1,11 +1,5 @@
 ﻿using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace isletspace
 {
@@ -15,32 +9,30 @@ namespace isletspace
     public class ProgressBar : MonoBehaviour
     {
         private float progressNum;
-        private UnityEngine.UI.Image progressBar;
+        private UnityEngine.UI.Slider progressBar;
 
         private void Start()
         {
             progressNum = 0;
-            progressBar = GameObject.Find("Img").GetComponent<UnityEngine.UI.Image>();
-            progressBar.fillAmount = progressNum;
+            progressBar = gameObject.GetComponent<UnityEngine.UI.Slider>();
+            progressBar.value = progressNum;
 
-            InvokeRepeating("AddProgress", 0, 1);
+            InvokeRepeating("AddProgress", 0, 0.1f);
         }
 
         private void AddProgress()
         {
             float interval = 0;
-            float duration = 1;
             float arg1 = progressNum;
 
             if (arg1 > 1)
             {
                 CancelInvoke("AddProgress");
                 progressNum = 1;
-                duration = 0.01f;
             }
             else if (arg1 > 0.6)
             {
-                interval = 0.2f;
+                interval = 0.02f;
                 progressNum += interval;
                 if (arg1 < 1 && progressNum >= 1)
                 {
@@ -49,7 +41,7 @@ namespace isletspace
             }
             else if (arg1 > 0.3)
             {
-                interval = 0.15f;
+                interval = 0.015f;
                 progressNum += interval;
                 if (arg1 < 0.6 && progressNum >= 0.6)
                 {
@@ -58,14 +50,14 @@ namespace isletspace
             }
             else
             {
-                interval = 0.1f;
+                interval = 0.01f;
                 progressNum += interval;
                 if (arg1 < 0.3 && progressNum >= 0.3)
                 {
                     Callback(1);
                 }
             }
-            progressBar.DOFillAmount(progressNum, duration);
+            progressBar.value = progressNum;
         }
 
         private void Callback(int tag)

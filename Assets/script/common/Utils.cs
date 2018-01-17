@@ -453,4 +453,17 @@ public static class Utils
         cache.Remove(0, len + 1 + subdata[0].Length);
         return data;
     }
+
+    public static void ChildLook(Transform obj)
+    {
+        if (obj == null)
+        {
+            return;
+        }
+        for (int i = 0; i < obj.childCount; i++)
+        {
+            var c = obj.GetChild(i);
+            c.LookAt(obj);
+        }
+    }
 }
