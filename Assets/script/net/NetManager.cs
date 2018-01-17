@@ -19,12 +19,15 @@ namespace isletspace
     /// <summary>
     /// 
     /// </summary>
-    public class NetManager : MonoBehaviour
+    public class NetManager : ISingleton<NetManager>
     {
         string ipaddress = "192.168.0.77:4001";
+        private SocketNetTools socketNetTools;
 
-        public SocketNetTools SocketNetTools;
-        public List<RankPanel> rankPanels;
+        private void Awake()
+        {
+            socketNetTools = gameObject.GetComponent<SocketNetTools>();
+        }
 
         public void StartNet()
         {
@@ -32,11 +35,10 @@ namespace isletspace
 
             AddEventListener(PacketType.ConnectSucc, OnConnectOK);
             AddEventListener(PacketType.AccountCountRet, OnUpdatePlayerNum);
-            AddEventListener(PacketType.RankListRet, OnRankListRet);
             AddEventListener(PacketType.MsgAck, OnAck);
 
-            SocketNetTools.OnConnect -= OnConnect;
-            SocketNetTools.OnConnect += OnConnect;
+            socketNetTools.OnConnect -= OnConnect;
+            socketNetTools.OnConnect += OnConnect;
         }
 
 
@@ -51,21 +53,21 @@ namespace isletspace
             string ip = adds[0];
             int port = int.Parse(adds[1]);
 
-            if (SocketNetTools.Connected)
+            if (socketNetTools.Connected)
             {
-                if (SocketNetTools.address == ip && SocketNetTools.port == port)
+                if (socketNetTools.address == ip && socketNetTools.port == port)
                 {
                     return;
                 }
             }
             
-            SocketNetTools.StopClient();
-            SocketNetTools.StartClient(ip, port);
+            socketNetTools.StopClient();
+            socketNetTools.StartClient(ip, port);
         }
 
         void OnConnect()
         {
-            if (!SocketNetTools.Connected)
+            if (!socketNetTools.Connected)
             {
                 Debug.Log("连接游戏服务器失败");
             }
@@ -73,25 +75,16 @@ namespace isletspace
 
         public void AddEventListener(PacketType cmd, System.Action<NetPacket> callback)
         {
-            SocketNetTools.AddEventListener((int)cmd, callback);
+            socketNetTools.AddEventListener((int)cmd, callback);
         }
 
         #region Event
-        public void OnRankListRet(NetPacket msg)
-        {
-            Debug.Log("   OnRankListRet ");
-            for (int i = 0; i < rankPanels.Count; ++i)
-            {
-                rankPanels[i].OnRankRet(msg);
-            }
-        }
-
         public void OnConnectOK(NetPacket msg)
         {
             var timePackage = new NetPacket();
             timePackage.msg_id = PacketType.UploadStartTime;
             timePackage.data = "{start_time:" + GetTimeStamp() + "}";
-            SocketNetTools.SendMsg(timePackage);
+            socketNetTools.SendMsg(timePackage);
             Debug.Log("   ok " + msg.data);
         }
 

@@ -22,11 +22,6 @@ namespace isletspace
     {
         public SceneCamera currentCamera;
 
-        private void Start()
-        {
-            ChangeCamera("LeaderScene");
-        }
-
         public void ChangeCamera(string name)
         {
             if (currentCamera != null && currentCamera.gameObject.name == name)

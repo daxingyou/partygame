@@ -46,8 +46,6 @@ namespace isletspace
 
         public void StartPlay(string json)
         {
-            print(json);
-
             JsonSerializer serializer = new JsonSerializer();
             StringReader sr = new StringReader(json);
             ArrowData data = serializer.Deserialize(new JsonTextReader(sr), typeof(ArrowData)) as ArrowData;

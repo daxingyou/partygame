@@ -22,7 +22,7 @@ namespace isletspace
     {
         public Transform allDancer;
         public Transform allTorch;
-        public int time = 0;
+        public Transform allEffect;
 
         public void DoCheer()
         {
@@ -32,14 +32,31 @@ namespace isletspace
                 ani.DoCheer(true);
             }
 
-            if(time >= allTorch.childCount)
+            if (0 <= GameManager.gamePhase && GameManager.gamePhase < 2)
             {
-                return;
+                StartCoroutine(PlayTorchChange());
             }
+        }
 
-            var torch = allTorch.GetChild(time).GetComponent<ParticleAndAnimation>();
-            torch.gameObject.SetActive(true);
-            torch.PlayOnce();
+        IEnumerator PlayTorchChange()
+        {
+            yield return new WaitForSeconds(1);
+            
+            var effect = allEffect.GetChild(GameManager.gamePhase).GetComponent<ParticleAndAnimation>();
+            effect.gameObject.SetActive(true);
+            effect.PlayOnce();
+
+            yield return new WaitForSeconds(3);
+            
+            var torch = allTorch.GetChild(GameManager.gamePhase).gameObject;
+            torch.SetActive(false);
+            torch = allTorch.GetChild(GameManager.gamePhase + 1).gameObject;
+            torch.SetActive(true);
+
+            effect.Stop();
+            effect.gameObject.SetActive(false);
+
+            GameManager.AddGamePhase();
         }
 
         public void CheerEnd()
@@ -49,17 +66,6 @@ namespace isletspace
                 var ani = allDancer.GetChild(i).GetComponent<DancerAni>();
                 ani.DoCheer(false);
             }
-
-            if (time >= allTorch.childCount)
-            {
-                return;
-            }
-
-            var torch = allTorch.GetChild(time).GetComponent<ParticleAndAnimation>();
-            torch.gameObject.SetActive(false);
-            torch.Stop();
-
-            time += 1;
         }
     }
 }

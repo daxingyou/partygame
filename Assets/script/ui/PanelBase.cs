@@ -12,6 +12,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace isletspace
 {
@@ -24,6 +25,8 @@ namespace isletspace
         public List<string> nextPanelOrder;
         public string cameraScene = "";
 
+        public Vector2 OriginPos;
+
         [System.NonSerialized]
         public UIManager manager;
         
@@ -32,6 +35,11 @@ namespace isletspace
         {
             this.manager = manager;
             gameObject.SetActive(true);
+
+            if(OriginPos != null)
+            {
+                transform.DOLocalMove(Vector3.zero, 1);
+            }
 
             if(timeout > 0)
             {
@@ -42,6 +50,13 @@ namespace isletspace
         virtual public void DoEnd()
         {
             gameObject.SetActive(false);
+
+            transform.localPosition = OriginPos;
+            /*  //TODO  要不要做移动玩了再SetActive(False)？
+            if (OriginPos != null)
+            {
+                transform.DOLocalMove(OriginPos, 1);
+            }*/
         }
 
         virtual public void TimeOut()

@@ -25,7 +25,7 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            Invoke("DoCheer", 1); //TODO ·Ö¿ªÑÓ³Ù
+            DoCheer();
         }
 
         override public void DoEnd()

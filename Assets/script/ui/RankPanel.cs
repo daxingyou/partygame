@@ -21,29 +21,21 @@ namespace isletspace
     /// </summary>
     public class RankPanel : PanelBase
     {
-        #region ³£Êý
-        private Vector3 OriginPos = new Vector3(1100, 600);
-        #endregion
         public RankBoard board;
-
-        public void OnRankRet(NetPacket msg)
-        {
-            string data = msg.data;
-            print("   receive  rank ret  " + data );
-            board.SetAllRank(data);
-        }
 
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            transform.DOLocalMove(Vector3.zero, 1);
+            NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
+
             //board.test();
         }
 
-        override public void DoEnd()
+        public void OnRankRet(NetPacket msg)
         {
-            base.DoEnd();
-            transform.DOLocalMove(OriginPos, 1);
+            string data = msg.data;
+            print("   receive  rank ret  " + data);
+            board.SetAllRank(data);
         }
     }
 }

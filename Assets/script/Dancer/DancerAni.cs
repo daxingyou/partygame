@@ -83,16 +83,31 @@ namespace isletspace
             lightEffectPos = transform.Find("LightEffect");
         }
 
-        public void DoPose(int type)
+        public void DoPose()
         {
             animator.SetTrigger("pose");
+            int type = Random.Range(1, 7);
             animator.SetFloat("poseType", type);
         }
 
-        public void DoAction(int type)
+        public void DoDrum(int type)
         {
             animator.SetTrigger("drum");
-            animator.SetFloat("drumType", type);
+
+            int realType = type;
+            switch (type)
+            {
+                case 1:
+                    realType = Random.Range(1, 3);
+                    break;
+                case 2:
+                    realType = 3;
+                    break;
+                case 3:
+                    realType = 4;
+                    break;
+            }
+            animator.SetFloat("drumType", realType);
         }
 
         public void DoCheer(bool flag)
@@ -101,7 +116,6 @@ namespace isletspace
             if (flag)
             {
                 int type = Random.Range(1, 4);
-                print("   do cheer  " + type);
                 animator.SetFloat("cheerType", type);
             }
         }

@@ -23,14 +23,15 @@ namespace isletspace
     public class UIManager : MonoBehaviour
     {
         public Transform panelParent;
-        public PanelBase currentPanel;
         public NetManager net;
         public Director director;
+        public AllDancerManager allDancerManager;
+
+        private PanelBase currentPanel;
 
         private void Start()
         {
-            currentPanel = Utils.FindDirectChildComponent<PanelBase>("StartPanel", panelParent);
-            currentPanel.DoStart(this);
+            StartPanelAsCurrent("StartPanel");
         }
 
         public void ClickStart()
@@ -38,7 +39,7 @@ namespace isletspace
             JumpTo("OPPanel");
             //JumpTo("RankPanel");
             //JumpTo("TrainLeaderPanel");
-            net.StartNet();
+            //net.StartNet();
         }
 
         public void OnPanelOver(string name, string next, string camera)
@@ -46,11 +47,6 @@ namespace isletspace
             if(!string.IsNullOrEmpty(next))
             {
                 JumpTo(next);
-            }
-            
-            if(!string.IsNullOrEmpty(camera))
-            {
-                director.ChangeCamera(camera);
             }
 
             switch (name)
@@ -62,15 +58,8 @@ namespace isletspace
 
         public void JumpTo(string name)
         {
-            var next = Utils.FindDirectChildComponent<PanelBase>(name, panelParent);
-            if (next == null)
-            {
-                next = Utils.FindDirectChildComponent<PanelBase>("OPPanel", panelParent);
-            }
-
             currentPanel.DoEnd();
-            next.DoStart(this);
-            currentPanel = next;
+            StartPanelAsCurrent(name);
         }
 
         public void StartPanel(string name)
@@ -81,6 +70,23 @@ namespace isletspace
                 return;
             }
             panel.DoStart(this);
+        }
+
+        private void StartPanelAsCurrent(string name)
+        {
+            var panel = Utils.FindDirectChildComponent<PanelBase>(name, panelParent);
+            if (panel == null)
+            {
+                panel = Utils.FindDirectChildComponent<PanelBase>("OPPanel", panelParent);
+            }
+
+            panel.DoStart(this);
+            string camera = panel.cameraScene;
+            if (!string.IsNullOrEmpty(camera))
+            {
+                director.ChangeCamera(camera);
+            }
+            currentPanel = panel;
         }
 
         public void EndPanel(string name)

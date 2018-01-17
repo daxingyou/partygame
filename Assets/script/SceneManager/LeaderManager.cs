@@ -34,6 +34,8 @@ namespace isletspace
         {
             spotLight.SetActive(true);
             dancer.PlayEndOP();
+            //TODO ºÚÆÁ×à¹ÄÉù
+            //ÑÓ³Ùµ÷ÓÃ ÁÁÆÁ¡£
         }
 
         public void PlayJoin()

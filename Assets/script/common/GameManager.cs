@@ -32,5 +32,18 @@ namespace isletspace
                 UpdatePlayNumCallback();
             }
         }
+
+        public static int gamePhase = 0;
+        public static event Action BeforeUpdateGamePhase;
+
+        public static void AddGamePhase()
+        {
+            if (BeforeUpdateGamePhase != null)
+            {
+                BeforeUpdateGamePhase();
+            }
+            gamePhase++;
+        }
+
     }
 }

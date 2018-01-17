@@ -19,7 +19,22 @@ namespace isletspace
     /// <summary>
     /// 
     /// </summary>
-    public class AlwaysPanel : RankPanel
+    public class AlwaysPanel : PanelBase
     {
+        public RankBoard board;
+
+        override public void DoStart(UIManager manager)
+        {
+            base.DoStart(manager);
+            NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
+
+            //board.test();
+        }
+
+        public void OnRankRet(NetPacket msg)
+        {
+            string data = msg.data;
+            board.SetAllRank(data);
+        }
     }
 }

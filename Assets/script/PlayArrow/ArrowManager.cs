@@ -40,10 +40,10 @@ namespace isletspace
                 default:
                     return;
             }
-            var obj = Pool.CreateObject(path, List);
+            Pool.CreateObject(path, List);
             if(dancer != null)
             {
-                dancer.DoAction(type);
+                dancer.DoDrum(type);
             }
         }
     }

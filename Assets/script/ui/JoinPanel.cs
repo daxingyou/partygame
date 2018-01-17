@@ -28,7 +28,6 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            transform.DOLocalMoveX(0, 1);
             GameManager.UpdatePlayNumCallback += UpdatePlayNum;
             SceneManager.PlayJoin();
         }
@@ -36,7 +35,6 @@ namespace isletspace
         override public void DoEnd()
         {
             base.DoEnd();
-            transform.DOLocalMoveX(1100, 1);
             GameManager.UpdatePlayNumCallback -= UpdatePlayNum;
             SceneManager.PlayEndJoin();
         }
