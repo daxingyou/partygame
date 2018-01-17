@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using UnityEngine;
 
 namespace isletspace
@@ -6,48 +6,42 @@ namespace isletspace
     /// <summary>
     /// 
     /// </summary>
-    public class ProgressBar : MonoBehaviour
+    public class TimeSlider : MonoBehaviour
     {
         private float progressNum;
-        private UnityEngine.UI.Image progressBar;
-        private float width;
-        private Transform effect;
+        private UnityEngine.UI.Slider slider;
 
         private void Start()
         {
             progressNum = 0;
-            progressBar = GameObject.Find("Img").GetComponent<UnityEngine.UI.Image>();
-            progressBar.fillAmount = progressNum;
-            effect = GameObject.Find("Node").transform;
-            width = progressBar.preferredWidth;
+            slider = gameObject.GetComponent<UnityEngine.UI.Slider>();
+            slider.value = progressNum;
 
-            InvokeRepeating("AddProgress", 0, 1);
+            InvokeRepeating("AddProgress", 0, 0.1f);
         }
 
         private void AddProgress()
         {
             float interval = 0;
-            float duration = 1;
             float arg1 = progressNum;
 
-            if (arg1 >= 1)
+            if (arg1 > 1)
             {
                 CancelInvoke("AddProgress");
                 progressNum = 1;
-                duration = 0.01f;
             }
-            else if (arg1 >= 0.6)
+            else if (arg1 > 0.6)
             {
-                interval = 0.2f;
+                interval = 0.02f;
                 progressNum += interval;
                 if (arg1 < 1 && progressNum >= 1)
                 {
                     Callback(3);
                 }
             }
-            else if (arg1 >= 0.3)
+            else if (arg1 > 0.3)
             {
-                interval = 0.15f;
+                interval = 0.015f;
                 progressNum += interval;
                 if (arg1 < 0.6 && progressNum >= 0.6)
                 {
@@ -56,31 +50,29 @@ namespace isletspace
             }
             else
             {
-                interval = 0.1f;
+                interval = 0.01f;
                 progressNum += interval;
                 if (arg1 < 0.3 && progressNum >= 0.3)
                 {
                     Callback(1);
                 }
             }
-            float x = width * progressNum - width / 2;
-            effect.DOLocalMoveX(x, duration);
-            progressBar.DOFillAmount(progressNum, duration);
+            slider.value = progressNum;
         }
 
         private void Callback(int tag)
         {
             if(tag == 1)
             {
-                Debug.Log("========== section 11");
+                Debug.Log("========== section 1");
             }
             else if(tag == 2)
             {
-                Debug.Log("========== section 21");
+                Debug.Log("========== section 2");
             }
             else if (tag == 3)
             {
-                Debug.Log("========== end1");
+                Debug.Log("========== end");
             }
         }
     }
