@@ -77,6 +77,15 @@ namespace isletspace
         {
             socketNetTools.AddEventListener((int)cmd, callback);
         }
+        public void RemoveEventListener(PacketType cmd, System.Action<NetPacket> callback)
+        {
+            if (socketNetTools == null)
+            {
+                return;
+            }
+
+            socketNetTools.RemoveEventListener((int)cmd, callback);
+        }
 
         #region Event
         public void OnConnectOK(NetPacket msg)

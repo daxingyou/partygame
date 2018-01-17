@@ -39,6 +39,7 @@ namespace isletspace
             JumpTo("OPPanel");
             //JumpTo("RankPanel");
             //JumpTo("TrainLeaderPanel");
+            //JumpTo("CheerPanel");
             net.StartNet();
         }
 

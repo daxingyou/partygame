@@ -24,12 +24,14 @@ namespace isletspace
     {
         public LeaderManager SceneManager;
         public Text playNum;
+        public Time countDown;
 
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
             GameManager.UpdatePlayNumCallback += UpdatePlayNum;
             SceneManager.PlayJoin();
+            countDown.StartCountDown(60);
         }
 
         override public void DoEnd()
@@ -37,6 +39,7 @@ namespace isletspace
             base.DoEnd();
             GameManager.UpdatePlayNumCallback -= UpdatePlayNum;
             SceneManager.PlayEndJoin();
+            countDown.StopCountDown();
         }
 
         public void UpdatePlayNum()

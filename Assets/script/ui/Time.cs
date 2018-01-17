@@ -11,35 +11,41 @@ namespace isletspace
     /// </summary>
     public class Time : MonoBehaviour
     {
-        private int time;
+        private int countDown;
         private UnityEngine.UI.Text timeText;
 
-        private void Start()
+        public event Action<int> callBack; //1: 倒计时结束 2:强制关闭
+
+        public void StartCountDown(int time)
         {
-            time = 30;
+            countDown = time;
             timeText = gameObject.GetComponent<UnityEngine.UI.Text>();
             timeText.text = time.ToString();
-
             InvokeRepeating("AddTime", 0, 1);
+        }
+
+        public void StopCountDown()
+        {
+            CancelInvoke("AddTime");
+            timeText.text = "";
+            if (callBack != null)
+            {
+                callBack(2);
+            }
         }
 
         private void AddTime()
         {
-            time -= 1;
-            timeText.text = time.ToString();
+            countDown -= 1;
+            timeText.text = countDown.ToString();
 
-            if (time < 1)
+            if (countDown < 1)
             {
                 CancelInvoke("AddTime");
-                Callback(1);
-            }
-        }
-
-        private void Callback(int tag)
-        {
-            if (tag == 1)
-            {
-                Debug.Log("========== Game Over");
+                if(callBack != null)
+                {
+                    callBack(1);
+                }
             }
         }
     }

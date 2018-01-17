@@ -31,6 +31,11 @@ namespace isletspace
             NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
         }
 
+        private void OnDisable()
+        {
+            NetManager.Instance.RemoveEventListener(PacketType.RankListRet, OnRankRet);
+        }
+
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
