@@ -35,7 +35,7 @@ namespace isletspace
 
         public void ClickStart()
         {
-            //JumpTo("OPPanel");
+            JumpTo("OPPanel");
             //JumpTo("RankPanel");
             //JumpTo("TrainLeaderPanel");
             net.StartNet();
@@ -60,7 +60,7 @@ namespace isletspace
             }
         }
 
-        private void JumpTo(string name)
+        public void JumpTo(string name)
         {
             var next = Utils.FindDirectChildComponent<PanelBase>(name, panelParent);
             if (next == null)
@@ -71,6 +71,26 @@ namespace isletspace
             currentPanel.DoEnd();
             next.DoStart(this);
             currentPanel = next;
+        }
+
+        public void StartPanel(string name)
+        {
+            var panel = Utils.FindDirectChildComponent<PanelBase>(name, panelParent);
+            if (panel == null)
+            {
+                return;
+            }
+            panel.DoStart(this);
+        }
+
+        public void EndPanel(string name)
+        {
+            var panel = Utils.FindDirectChildComponent<PanelBase>(name, panelParent);
+            if (panel == null)
+            {
+                return;
+            }
+            panel.DoEnd();
         }
     }
 }

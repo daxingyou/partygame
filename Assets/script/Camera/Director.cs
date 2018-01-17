@@ -24,7 +24,7 @@ namespace isletspace
 
         private void Start()
         {
-            ChangeCamera("MainScene");
+            ChangeCamera("LeaderScene");
         }
 
         public void ChangeCamera(string name)

@@ -24,7 +24,7 @@ namespace isletspace
         string ipaddress = "192.168.0.77:4001";
 
         public SocketNetTools SocketNetTools;
-        public RankPanel rankPanel;
+        public List<RankPanel> rankPanels;
 
         public void StartNet()
         {
@@ -80,7 +80,10 @@ namespace isletspace
         public void OnRankListRet(NetPacket msg)
         {
             Debug.Log("   OnRankListRet ");
-            rankPanel.OnRankRet(msg);
+            for (int i = 0; i < rankPanels.Count; ++i)
+            {
+                rankPanels[i].OnRankRet(msg);
+            }
         }
 
         public void OnConnectOK(NetPacket msg)

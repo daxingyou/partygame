@@ -16,14 +16,6 @@ namespace isletspace
     {
         private float progressNum;
         private UnityEngine.UI.Image progressBar;
-        private UnityEngine.UI.Text te;
-        private float x0;
-        private float y0;
-        private float x1;
-        private float y1;
-        private float x2;
-        private float y2;
-        private float t;
 
         private void Start()
         {
@@ -32,28 +24,6 @@ namespace isletspace
             progressBar.fillAmount = progressNum;
 
             InvokeRepeating("AddProgress", 0, 1);
-
-            te = GameObject.Find("Progress").GetComponent<UnityEngine.UI.Text>();
-            x0 = -300;
-            y0 = 0;
-            x1 = 300;
-            y1 = 0;
-            x2 = 0;
-            y2 = 300;
-            t = 0;
-            InvokeRepeating("Run", 0, 0.01f);
-        }
-
-        private void Run()
-        {
-            float x = (1 - t) * (1 - t) * x0 + 2 * t * (1 - t) * x2 + t * t * x1;
-            float y = (1 - t) * (1 - t) * y0 + 2 * t * (1 - t) * y2 + t * t * y1;
-            t += 0.01f;
-            te.transform.localPosition = new Vector2(x, y);
-            if (t > 1)
-            {
-                CancelInvoke("Run");
-            }
         }
 
         private void AddProgress()

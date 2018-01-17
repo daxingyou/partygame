@@ -21,18 +21,11 @@ namespace isletspace
     /// </summary>
     public class OPPanel : PanelBase
     {
-        public PlayMovie movie;
-
+        public LeaderManager SceneManager;
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            movie.DoPlay();
-        }
-
-        override public void DoEnd()
-        {
-            movie.DoStop();
-            base.DoEnd();
+            SceneManager.PlayOP();
         }
     }
 }

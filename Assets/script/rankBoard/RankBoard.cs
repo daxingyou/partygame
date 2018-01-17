@@ -78,8 +78,7 @@ namespace isletspace
                 lastData = data;
                 for (int i = 0; i < data.Count; ++i)
                 {
-                    var prefab = Resources.Load("prefab/UI/one") as GameObject;
-                    var obj = Instantiate(prefab, Vector3.one, Quaternion.identity, transform) as GameObject;
+                    var obj = Pool.CreateObject("UI/one", transform);
                     var one = obj.GetComponent<OneRank>();
                     one.SetAllData(data[i]);
                 }

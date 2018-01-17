@@ -53,6 +53,10 @@ namespace isletspace
         private void Over()
         {
             int l = nextPanelOrder.Count - 1;
+            if(l < 0)
+            {
+                return;
+            }
             manager.OnPanelOver(gameObject.name, nextPanelOrder[l], cameraScene);
             if (l != 0)
             {
