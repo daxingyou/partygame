@@ -72,7 +72,7 @@ namespace isletspace
             {
                 return;
             }
-            manager.OnPanelOver(gameObject.name, nextPanelOrder[l], cameraScene);
+            manager.OnPanelOver(gameObject.name, nextPanelOrder[l]);
             if (l != 0)
             {
                 nextPanelOrder.RemoveAt(l);

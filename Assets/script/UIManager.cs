@@ -39,10 +39,10 @@ namespace isletspace
             JumpTo("OPPanel");
             //JumpTo("RankPanel");
             //JumpTo("TrainLeaderPanel");
-            //net.StartNet();
+            net.StartNet();
         }
 
-        public void OnPanelOver(string name, string next, string camera)
+        public void OnPanelOver(string name, string next)
         {
             if(!string.IsNullOrEmpty(next))
             {

@@ -126,6 +126,7 @@
     <Compile Include="Assets\script\Camera\MoveCamera.cs" />
     <Compile Include="Assets\script\Camera\SceneCamera.cs" />
     <Compile Include="Assets\script\Dancer\DancerAni.cs" />
+    <Compile Include="Assets\script\Dancer\LookCenter.cs" />
     <Compile Include="Assets\script\PlayArrow\ArrowManager.cs" />
     <Compile Include="Assets\script\SceneManager\AllDancerManager.cs" />
     <Compile Include="Assets\script\SceneManager\CheerManager.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Assets\script\ui\SettlePanel.cs" />
     <Compile Include="Assets\script\ui\StartPanel.cs" />
     <Compile Include="Assets\script\ui\Time.cs" />
+    <Compile Include="Assets\script\ui\TimeSlider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />

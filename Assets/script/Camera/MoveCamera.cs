@@ -17,9 +17,6 @@ namespace isletspace
 {
     public class MoveCamera : MonoBehaviour
     {
-        [SerializeField]
-        private Transform Ground;
-
         public bool isPlaying;
 
         public Vector3 StartPos;
@@ -31,18 +28,15 @@ namespace isletspace
         private Vector3 LookRotatePoint2 = new Vector3(0, 180 + 40, 0);
         #endregion
 
-        public int targetpos;
-
         void Awake()
         {
             StartPos = transform.position;
             StartRotate = transform.rotation.eulerAngles;
-            DoCameraMove(targetpos);
         }
 
-        public int DoCameraMove(int num)
+        public int DoCameraMove(Vector3 target)
         {
-            if (num < 0 || num >= Ground.childCount)
+            if (target == null)
             {
                 return -1;
             }
@@ -52,16 +46,11 @@ namespace isletspace
                 return -2;
             }
 
-            Transform target = Ground.GetChild(num);
-            var ani = target.GetComponent<DancerAni>();
-            ani.DoLightMove();
-            ani.DoPose();
-
             isPlaying = true;
 
             Sequence seq = DOTween.Sequence();
             //ZoomIn
-            seq.Append(transform.DOMove(target.position, 0.8f).SetEase(Ease.OutExpo));
+            seq.Append(transform.DOMove(target, 0.8f).SetEase(Ease.OutExpo));
             seq.Join(transform.DORotate(LookFront, 0.8f));
             //gap
             seq.AppendInterval(0.3f);

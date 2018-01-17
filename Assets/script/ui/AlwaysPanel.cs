@@ -23,12 +23,9 @@ namespace isletspace
     {
         public RankBoard board;
 
-        override public void DoStart(UIManager manager)
+        private void Start()
         {
-            base.DoStart(manager);
             NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
-
-            //board.test();
         }
 
         public void OnRankRet(NetPacket msg)

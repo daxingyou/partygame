@@ -13,6 +13,8 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
 
 namespace isletspace
 {
@@ -22,13 +24,24 @@ namespace isletspace
     public class RankPanel : PanelBase
     {
         public RankBoard board;
+        public Blur cam;
 
-        override public void DoStart(UIManager manager)
+        private void Start()
+        {
+            NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
+        }
+
+        public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
+            manager.EndPanel("AlwaysPanel");
+            cam.enabled = true;
+        }
 
-            //board.test();
+        public override void DoEnd()
+        {
+            base.DoEnd();
+            cam.enabled = false;
         }
 
         public void OnRankRet(NetPacket msg)

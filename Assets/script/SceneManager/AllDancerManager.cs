@@ -20,7 +20,6 @@ namespace isletspace
     /// </summary>
     public class AllDancerManager : MonoBehaviour
     {
-        public Director director;
         public Transform allDancer;
         public Transform allTorch;
 
@@ -42,12 +41,20 @@ namespace isletspace
             torch.SetActive(true);
         }
 
-        public void CloseUp(int pos)
+        public Vector3 CloseUp(int pos)
         {
-            //1. camera to main
-            //2. camera.zoomin
-            //3. delay play pos
+            var target = allDancer.GetChild(pos);
+
+            var ani = target.GetComponent<DancerAni>();
+            ani.DoPose();
+
+            return target.position;
         }
 
+        public void PlayLightSpot(int pos)
+        {
+            var ani = allDancer.GetChild(pos).GetComponent<DancerAni>();
+            ani.DoLightSpotMove();
+        }
     }
 }

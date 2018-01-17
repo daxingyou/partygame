@@ -38,13 +38,13 @@ namespace isletspace
             currentCamera = scene;
         }
 
-        public void DoAllDancerCameraZoom(int pos)
+        public void DoAllDancerCloseUp(Vector3 target)
         {
             if(currentCamera.gameObject.name != "AllDancerScene")
             {
                 ChangeCamera("AllDancerScene");
             }
-            currentCamera.StartZoomCamera(pos);
+            currentCamera.StartCloseUp(target);
         }
     }
 }

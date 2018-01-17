@@ -30,10 +30,14 @@ namespace isletspace
             gameObject.SetActive(false);
         }
 
-        public void StartZoomCamera(int pos)
+        //TODO  random camera func
+        //TODO  jump camera func
+
+        public void StartCloseUp(Vector3 target)
         {
+            //TODO  if not main camera, jump to main.
             var camera = Utils.FindDirectChildComponent<MoveCamera>("MainCamera", transform);
-            camera.DoCameraMove(pos);
+            camera.DoCameraMove(target);
         }
     }
 }

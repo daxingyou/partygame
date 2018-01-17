@@ -20,6 +20,26 @@ namespace isletspace
     /// </summary>
     public class PlayTurnPanel : PanelBase
     {
-        
+        public AllDancerManager SceneManager;
+
+        public override void DoStart(UIManager manager)
+        {
+            base.DoStart(manager);
+            DoCloseUp();
+        }
+
+        public void DoCloseUp()
+        {
+            int pos = 3;
+            Vector3 target = SceneManager.CloseUp(pos);
+            manager.director.DoAllDancerCloseUp(target);
+
+            Invoke("test", 4);
+        }
+
+        public void test()
+        {
+            SceneManager.PlayLightSpot(5);
+        }
     }
 }
