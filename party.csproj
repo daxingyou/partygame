@@ -150,8 +150,10 @@
     <Compile Include="Assets\script\ui\LeaderPanel.cs" />
     <Compile Include="Assets\script\ui\OPPanel.cs" />
     <Compile Include="Assets\script\ui\PanelBase.cs" />
+    <Compile Include="Assets\script\ui\PlayTurnPanel.cs" />
     <Compile Include="Assets\script\ui\ProgressBar.cs" />
     <Compile Include="Assets\script\ui\RankPanel.cs" />
+    <Compile Include="Assets\script\ui\SettlePanel.cs" />
     <Compile Include="Assets\script\ui\StartPanel.cs" />
   </ItemGroup>
   <ItemGroup>
