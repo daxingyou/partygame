@@ -57,6 +57,18 @@ namespace isletspace
             ani.DoLightSpotMove();
         }
 
+        public void PlayLightSpotAll()
+        {
+            int total = Random.Range((int)(allDancer.childCount / 2), (int)(allDancer.childCount * 0.7f));
+            for (int num = 0; num < total; ++num)
+            {
+                int idx = Random.Range(0, allDancer.childCount);
+                float starttime = Random.Range(0f, 1.8f);
+                var ani = allDancer.GetChild(idx).GetComponent<DancerAni>();
+                ani.DoLightSpotMove(starttime);
+            }
+        }
+
         public void AllRandomDrum(float time)
         {
             for (int i = 0; i < allDancer.childCount; ++i)

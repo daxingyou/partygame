@@ -42,7 +42,7 @@ namespace isletspace
 
         public void SetAllData(RankVO data)
         {
-            RankObj.text = "第" + data.rank + "名";
+            RankObj.text = data.rank.ToString();
             ScoreObj.text = "分数：" + data.score.ToString();
             NameObj.text = data.name;
             //HeadImgObj.renderer;

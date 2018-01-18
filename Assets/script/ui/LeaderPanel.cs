@@ -42,8 +42,13 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            SceneManager.dancer.DoYourTurn(false);
             StartPlay(data);
+        }
+
+        public override void DoEnd()
+        {
+            base.DoEnd();
+            SceneManager.dancer.DoYourTurn(false);
         }
 
         public void StartPlay(string json)
