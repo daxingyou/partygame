@@ -23,8 +23,6 @@ namespace isletspace
     public class UIManager : MonoBehaviour
     {
         public Transform panelParent;
-        public NetManager net;
-        public Director director;
         public AllDancerManager allDancerManager;
 
         private PanelBase currentPanel;
@@ -38,7 +36,7 @@ namespace isletspace
         {
             JumpTo("OPPanel");
             //JumpTo("PlayTurnPanel");
-            net.StartNet();
+            NetManager.Instance.StartNet();
         }
 
         public void OnPanelOver(string name, string next)
@@ -84,7 +82,7 @@ namespace isletspace
             string camera = panel.cameraScene;
             if (!string.IsNullOrEmpty(camera))
             {
-                director.ChangeCamera(camera);
+                Director.Instance.ChangeCamera(camera);
             }
             currentPanel = panel;
         }

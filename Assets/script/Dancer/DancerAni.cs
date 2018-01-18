@@ -24,53 +24,10 @@ namespace isletspace
         private Animator animator;
         private Vector3 mid;
         private Transform lightEffectPos;
-        public GameObject SpotLight;
 
         #region 常数
         Vector3 target = new Vector3(-500, 0, 0);
         #endregion
-
-        /*
-        private void OnGUI()
-        {
-            if (GUILayout.Button("pose1"))
-            {
-                DoPose();
-            }
-            if (GUILayout.Button("action1"))
-            {
-                DoDrum(1);
-            }
-            if (GUILayout.Button("action2"))
-            {
-                DoDrum(2);
-            }
-            if (GUILayout.Button("action3"))
-            {
-                DoDrum(3);
-            }
-            if (GUILayout.Button("cheer"))
-            {
-                DoCheer(true);
-            }
-            if (GUILayout.Button("cheerEnd"))
-            {
-                DoCheer(false);
-            }
-            if (GUILayout.Button("lightfly"))
-            {
-                DoLightSpotMove();
-            }
-            if (GUILayout.Button("drumlight"))
-            {
-                DoAddLight();
-            }
-            if (GUILayout.Button("drumend"))
-            {
-                DoDelLight();
-            }
-        }
-        */
         
         private void Start()
         {
@@ -116,6 +73,7 @@ namespace isletspace
             }
         }
 
+        #region 光点飞行动画
         public void DoLightSpotMove(float startTime = 0)
         {
             StartCoroutine(MoveLightSpot(20, 3f, startTime));
@@ -142,18 +100,17 @@ namespace isletspace
             
             Destroy(obj);
         }
+        #endregion
 
+        #region 片头动作
         public void PlayOP()
         {
-            SpotLight.SetActive(true);
             animator.SetTrigger("OP");
         }
-
-        public void PlayEndOP()
+        public void PlayOPPose()
         {
-            SpotLight.SetActive(false);
+            animator.SetTrigger("OPpose");
         }
-
         public void PlayJoin()
         {
             animator.SetTrigger("startjoin");
@@ -166,7 +123,9 @@ namespace isletspace
         {
             animator.SetBool("EndLeading", flag);
         }
+        #endregion
 
+        #region 击鼓特效
         public void DoAddLight()
         {
             Material[] oriMat = null;
@@ -188,6 +147,7 @@ namespace isletspace
             Material[] newMat = { oriMat[0] };
             smr.sharedMaterials = newMat;
         }
+        #endregion
 
         public IEnumerator RandomDrum(int count, float totalTime)
         {

@@ -30,5 +30,17 @@ namespace isletspace
             image.color = color;
             image.DOFade(1, 0.3f).SetLoops(2, LoopType.Yoyo);
         }
+
+        public void DoCover(Color color)
+        {
+            color.a = 0;
+            image.color = color;
+            image.DOFade(1, 0.3f);
+        }
+
+        public void DoUnCover()
+        {
+            image.DOFade(0, 0.3f);
+        }
     }
 }

@@ -156,6 +156,7 @@
     <Compile Include="Assets\script\ui\PlayTurnPanel.cs" />
     <Compile Include="Assets\script\ui\ProgressBar.cs" />
     <Compile Include="Assets\script\ui\RankPanel.cs" />
+    <Compile Include="Assets\script\ui\ReadyPanel.cs" />
     <Compile Include="Assets\script\ui\SettlePanel.cs" />
     <Compile Include="Assets\script\ui\StartPanel.cs" />
     <Compile Include="Assets\script\ui\Time.cs" />

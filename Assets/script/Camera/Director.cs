@@ -18,7 +18,7 @@ namespace isletspace
     /// <summary>
     /// 
     /// </summary>
-    public class Director : MonoBehaviour
+    public class Director : ISingleton<Director>
     {
         public SceneCamera currentCamera;
 
@@ -28,17 +28,6 @@ namespace isletspace
             {
                 return;
             }
-
-            //FlashScreen.Instance.DoFlash(Color.black);
-
-            //var scene = Utils.FindDirectChildComponent<SceneCamera>(name, transform);
-            //if(currentCamera != null)
-            //{
-            //    currentCamera.StopCamera();
-            //}
-            //scene.StartCamera();
-            //currentCamera = scene;
-
             StartCoroutine(changeRoute(name));
         }
 

@@ -21,21 +21,73 @@ namespace isletspace
     public class LeaderManager : MonoBehaviour
     {
         public GameObject spotLight;
+        public GameObject fireLight;
+        public GameObject torch;
         public DancerAni dancer;
+        public Transform cameraLookPoint;
+        
+
+        public bool isCameraFollow = false;
+
+        private Transform mainCamera;
+        private Vector3 oldCamera;
 
         public void PlayOP()
         {
-            spotLight.SetActive(false);
-            dancer.PlayOP();
-            Invoke("PlayEndOP", 4);
+            StartCoroutine(OPRoute());
         }
 
-        public void PlayEndOP()
+        IEnumerator OPRoute()
         {
+            //³õÊ¼»¯³¡¾°
+            StartCameraFollow();
+            yield return new WaitForSeconds(1f);
+            dancer.PlayOP();
+            yield return new WaitForSeconds(0.3f);
+            //Èë³¡¿ªµÆ
             spotLight.SetActive(true);
-            dancer.PlayEndOP();
-            //TODO ºÚÆÁ×à¹ÄÉù
-            //ÑÓ³Ùµ÷ÓÃ ÁÁÆÁ¡£
+            yield return new WaitForSeconds(8.3f);
+            //ºÚÆÁ×à¹ÄÉù
+            EndCameraFollow();
+            spotLight.SetActive(false);
+            yield return new WaitForSeconds(5);
+            //½áÊøÑÝ×à
+            dancer.PlayOPPose();
+            yield return new WaitForSeconds(0.3f);
+            torch.SetActive(true);
+            fireLight.SetActive(true);
+        }
+
+        private void StartCameraFollow()
+        {
+            enabled = true;
+            mainCamera = Director.Instance.currentCamera.transform;
+            oldCamera = mainCamera.position;
+            isCameraFollow = true;
+        }
+
+        private void EndCameraFollow()
+        {
+            if (mainCamera == null)
+            {
+                return;
+            }
+
+            mainCamera.position = oldCamera;
+            mainCamera = null;
+            isCameraFollow = false;
+            enabled = false;
+        }
+
+        private void Update()
+        {
+            if(isCameraFollow && mainCamera != null)
+            {
+                Vector3 pos = cameraLookPoint.position;
+                pos.y = 0;
+                mainCamera.position = pos;
+                spotLight.transform.position = pos;
+            }
         }
 
         public void PlayJoin()

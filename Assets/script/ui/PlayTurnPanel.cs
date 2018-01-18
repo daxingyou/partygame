@@ -34,7 +34,7 @@ namespace isletspace
         {
             int pos = 3;
             Vector3 target = SceneManager.CloseUp(pos);
-            manager.director.DoAllDancerCloseUp(target);
+            Director.Instance.DoAllDancerCloseUp(target);
         }
 
         public void test()
