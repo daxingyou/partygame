@@ -128,19 +128,24 @@ namespace isletspace
         #region »÷¹ÄÌØÐ§
         public void DoAddLight()
         {
+            print("    do  add light  ");
+
             Material[] oriMat = null;
-            MeshRenderer smr = GameObject.Find("gu").GetComponent<MeshRenderer>();
+            MeshRenderer smr = GameObject.Find("gu (1)").GetComponent<MeshRenderer>();
             //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
             oriMat = smr.sharedMaterials;
 
             var mat1 = Resources.Load("prefab/bd_119") as Material;
-            Material[] newMat = { oriMat[0], mat1 };
+            Material[] newMat = { mat1 };
             smr.sharedMaterials = newMat;
+
+
+            print("   is null ?  " + oriMat + ", " + smr + ", " + mat1);
         }
 
         public void DoDelLight()
         {
-            MeshRenderer smr = GameObject.Find("gu").GetComponent<MeshRenderer>();
+            MeshRenderer smr = GameObject.Find("gu (1)").GetComponent<MeshRenderer>();
             //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
             Material[] oriMat = smr.sharedMaterials;
 

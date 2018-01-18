@@ -44,7 +44,7 @@ namespace isletspace
 
         public void UpdatePlayNum()
         {
-            playNum.text = "参与人数：" + GameManager.currentPlayNum + "/100";
+            playNum.text = "当前参与人数：" + GameManager.currentPlayNum;
         }
     }
 }
