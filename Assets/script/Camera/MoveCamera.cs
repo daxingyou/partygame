@@ -55,8 +55,8 @@ namespace isletspace
             //gap
             seq.AppendInterval(0.3f);
             //Rotate
-            seq.Append(transform.DORotate(LookRotatePoint1, 1).SetEase(Ease.Linear));
-            seq.Append(transform.DORotate(LookRotatePoint2, 1).SetEase(Ease.Linear));
+            seq.Append(transform.DORotate(LookRotatePoint1, 0.8f).SetEase(Ease.Linear));
+            seq.Append(transform.DORotate(LookRotatePoint2, 0.8f).SetEase(Ease.Linear));
             //gap
             seq.AppendInterval(0.3f);
             //ZoomOut

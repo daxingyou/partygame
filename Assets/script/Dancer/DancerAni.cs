@@ -116,13 +116,18 @@ namespace isletspace
             }
         }
 
-        public void DoLightSpotMove()
+        public void DoLightSpotMove(float startTime = 0)
         {
-            StartCoroutine(MoveLightSpot(20, 5f));
+            StartCoroutine(MoveLightSpot(20, 3f, startTime));
         }
 
-        private IEnumerator MoveLightSpot(int d, float time)
+        private IEnumerator MoveLightSpot(int d, float time, float startTime)
         {
+            if (startTime > 0)
+            {
+                yield return new WaitForSeconds(startTime);
+            }
+
             var obj = Pool.CreateObject("lightspot/lightspot", lightEffectPos);
 
             //move obj

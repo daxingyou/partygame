@@ -143,6 +143,7 @@
     <Compile Include="Assets\script\net\NetManager.cs" />
     <Compile Include="Assets\script\net\NetPacket.cs" />
     <Compile Include="Assets\script\net\SocketNetTools.cs" />
+    <Compile Include="Assets\script\othertween\LightSpotFade.cs" />
     <Compile Include="Assets\script\rankBoard\OneRank.cs" />
     <Compile Include="Assets\script\rankBoard\RankBoard.cs" />
     <Compile Include="Assets\script\ui\AlwaysPanel.cs" />

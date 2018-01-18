@@ -27,7 +27,7 @@ namespace isletspace
             base.DoStart(manager);
             SceneManager.AllRandomDrum(timeout);
             Invoke("DoCloseUp", 3);
-            InvokeRepeating("test", 1, 1);
+            InvokeRepeating("test", 1, 7);
         }
 
         public void DoCloseUp()
@@ -39,8 +39,7 @@ namespace isletspace
 
         public void test()
         {
-            int ran = Random.Range(1, 30);
-            SceneManager.PlayLightSpot(ran);
+            SceneManager.PlayLightSpotAll();
         }
     }
 }
