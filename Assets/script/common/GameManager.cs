@@ -43,7 +43,9 @@ namespace isletspace
                 BeforeUpdateGamePhase();
             }
             gamePhase++;
+            phaseTime = 0;
         }
 
+        public static int phaseTime = 0;
     }
 }

@@ -20,6 +20,22 @@ namespace isletspace
     /// </summary>
     public class SettlePanel : PanelBase
     {
-        
+        public AllDancerManager SceneManager;
+
+        public override void DoStart(UIManager manager)
+        {
+            base.DoStart(manager);
+            if (gameObject.name == "SettlePanel")
+            {
+                Invoke("DoCloseUp", 3);
+            }
+        }
+
+        public void DoCloseUp()
+        {
+            int pos = 3;
+            Vector3 target = SceneManager.CloseUp(pos);
+            Director.Instance.DoAllDancerCloseUp(target);
+        }
     }
 }

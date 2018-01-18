@@ -25,19 +25,11 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            SceneManager.AllRandomDrum(timeout);
-            Invoke("DoCloseUp", 3);
-            InvokeRepeating("test", 1, 7);
+            SceneManager.AllRandomDrum(nextPanelOrder[nextPanelOrder.Count - 1].timeout);
+            Invoke("PlayLightSpotAll", 7);
         }
 
-        public void DoCloseUp()
-        {
-            int pos = 3;
-            Vector3 target = SceneManager.CloseUp(pos);
-            Director.Instance.DoAllDancerCloseUp(target);
-        }
-
-        public void test()
+        public void PlayLightSpotAll()
         {
             SceneManager.PlayLightSpotAll();
         }

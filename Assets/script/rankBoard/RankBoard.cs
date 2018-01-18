@@ -20,43 +20,6 @@ namespace isletspace
 {
     public class RankBoard : MonoBehaviour
     {
-        /*
-        string data0 =
-                "[{\"name\":\"爱我中华\"}]";
-
-        string data1 =
-                "[{\"id\":1, \"score\":0000, \"name\":\"爱我中华\", \"pic_url\":\"www.g.cn\"}," +
-                "]";
-
-        string data2 =
-                "[{id:1, score:9000, name:\"-test0000\", headimg:\"www.g.cn\"}," +
-                "{id:2, score:8000, name:\"-test1000\", headimg:\"www.g.cn\"}," +
-                "{id:3, score:7000, name:\"-test2000\", headimg:\"www.g.cn\"}," +
-                "{id:4, score:6000, name:\"-test3000\", headimg:\"www.g.cn\"}," + 
-                "{id:5, score:5000, name:\"-test4000\", headimg:\"www.g.cn\"}," +
-                "{id:6, score:4000, name:\"-test5000\", headimg:\"www.g.cn\"}," +
-                "{id:7, score:3000, name:\"-test6000\", headimg:\"www.g.cn\"}," +
-                "{id:8, score:2000, name:\"-test7000\", headimg:\"www.g.cn\"}," +
-                "{id:9, score:1000, name:\"-test8000\", headimg:\"www.g.cn\"}," +
-                "{id:0, score:0000, name:\"-test9000\", headimg:\"www.g.cn\"}," +
-                "]";
-
-        public void test()
-        {
-            var t1 = Encoding.UTF8.GetBytes(data0);
-            print(t1);
-            var t2 = Encoding.UTF8.GetString(t1);
-            print(t2);
-            SetAllRank(data1);
-            StartCoroutine(test2());
-        }
-
-        IEnumerator test2()
-        {
-            yield return new WaitForSeconds(3);
-            SetAllRank(data2);
-        } */
-
         List<RankVO> lastData;
 
         public void SetAllRank(string json)

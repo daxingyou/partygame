@@ -136,6 +136,7 @@
     <Compile Include="Assets\script\common\DelayUtils.cs" />
     <Compile Include="Assets\script\common\GameManager.cs" />
     <Compile Include="Assets\script\common\ISingleton.cs" />
+    <Compile Include="Assets\script\common\ImportRoute.cs" />
     <Compile Include="Assets\script\common\PlayMovie.cs" />
     <Compile Include="Assets\script\common\Pool.cs" />
     <Compile Include="Assets\script\common\Utils.cs" />

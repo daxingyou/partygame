@@ -41,5 +41,13 @@ namespace isletspace
             }
             Pool.CreateObject(path, List);
         }
+
+        public void ClearList()
+        {
+            for (int i = List.childCount - 1; i >= 0; --i)
+            {
+                Destroy(List.GetChild(i).gameObject);
+            }
+        }
     }
 }

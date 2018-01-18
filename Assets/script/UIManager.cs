@@ -35,16 +35,16 @@ namespace isletspace
         public void ClickStart()
         {
             //JumpTo("OPPanel");
-            JumpTo("LeaderPanel");
+            JumpTo("ReadyPanel");
             //JumpTo("PlayTurnPanel");
             //NetManager.Instance.StartNet();
         }
 
-        public void OnPanelOver(string name, string next)
+        public void OnPanelOver(string name, NextPanel panel)
         {
-            if(!string.IsNullOrEmpty(next))
+            if(panel != null)
             {
-                JumpTo(next);
+                JumpTo(panel.nextName);
             }
 
             switch (name)
@@ -56,7 +56,6 @@ namespace isletspace
 
         public void JumpTo(string name)
         {
-            //FlashScreen.Instance.DoFlash(Color.black);
             currentPanel.DoEnd();
             StartPanelAsCurrent(name);
         }

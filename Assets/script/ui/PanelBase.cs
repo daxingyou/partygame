@@ -16,13 +16,31 @@ using DG.Tweening;
 
 namespace isletspace
 {
+    [System.Serializable]
+    public class NextPanel
+    {
+        public float timeout;
+        public string nextName;
+
+        public NextPanel(string name, float time)
+        {
+            timeout = time;
+            nextName = name;
+        }
+        
+        public NextPanel(string name, string time)
+        {
+            timeout = float.Parse(time);
+            nextName = name;
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
     public class PanelBase : MonoBehaviour
     {
-        public float timeout = -1;
-        public List<string> nextPanelOrder;
+        public List<NextPanel> nextPanelOrder;
         public string cameraScene = "";
 
         public Vector2 OriginPos;
@@ -41,7 +59,13 @@ namespace isletspace
                 transform.DOLocalMove(Vector3.zero, 1);
             }
 
-            if(timeout > 0)
+            var l = nextPanelOrder.Count - 1;
+            if(l < 0)
+            {
+                return;
+            }
+            var timeout = nextPanelOrder[l].timeout;
+            if (timeout > 0)
             {
                 Invoke("TimeOut", timeout);
             }

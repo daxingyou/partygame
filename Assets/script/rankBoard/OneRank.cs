@@ -28,6 +28,7 @@ namespace isletspace
     public class OneRank : MonoBehaviour
     {
         Text RankObj;
+        Image RankImgObj;
         Text ScoreObj;
         Text NameObj;
         Image HeadImgObj;
@@ -42,7 +43,21 @@ namespace isletspace
 
         public void SetAllData(RankVO data)
         {
-            RankObj.text = data.rank.ToString();
+            if (data.rank < 4)
+            {
+                RankImgObj.gameObject.SetActive(true);
+                RankObj.gameObject.SetActive(false);
+
+                string path = "img/rank_" + data.rank;
+                RankImgObj.material.mainTexture = Resources.Load(path) as Texture;
+            }
+            else
+            {
+                RankImgObj.gameObject.SetActive(false);
+                RankObj.gameObject.SetActive(true);
+
+                RankObj.text = data.rank.ToString();
+            }
             ScoreObj.text = "分数：" + data.score.ToString();
             NameObj.text = data.name;
             //HeadImgObj.renderer;
