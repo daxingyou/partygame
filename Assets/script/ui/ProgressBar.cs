@@ -21,13 +21,13 @@ namespace isletspace
             effect = GameObject.Find("Node").transform;
             width = progressBar.preferredWidth;
 
-            InvokeRepeating("AddProgress", 0, 1);
+            InvokeRepeating("AddProgress", 0, 0.1f);
         }
 
         private void AddProgress()
         {
             float interval = 0;
-            float duration = 1;
+            float duration = 0.1f;
             float arg1 = progressNum;
 
             if (arg1 >= 1)
@@ -36,29 +36,29 @@ namespace isletspace
                 progressNum = 1;
                 duration = 0.01f;
             }
-            else if (arg1 >= 0.6)
+            else if (arg1 >= 0.65)
             {
-                interval = 0.2f;
+                interval = 0.01f;
                 progressNum += interval;
-                if (arg1 < 1 && progressNum >= 1)
+                if(arg1 < 1 && progressNum >= 1)
                 {
                     Callback(3);
                 }
             }
-            else if (arg1 >= 0.3)
+            else if (arg1 >= 0.32)
             {
-                interval = 0.15f;
+                interval = 0.008f;
                 progressNum += interval;
-                if (arg1 < 0.6 && progressNum >= 0.6)
+                if(arg1 < 0.65f && progressNum >= 0.65f)
                 {
                     Callback(2);
                 }
             }
             else
             {
-                interval = 0.1f;
+                interval = 0.005f;
                 progressNum += interval;
-                if (arg1 < 0.3 && progressNum >= 0.3)
+                if (arg1 < 0.32f && progressNum >= 0.32f)
                 {
                     Callback(1);
                 }
@@ -70,17 +70,20 @@ namespace isletspace
 
         private void Callback(int tag)
         {
-            if(tag == 1)
+            if(tag ==1)
             {
-                Debug.Log("========== section 11");
+                var fire = GameObject.Find("ImgFire1").GetComponent<UnityEngine.UI.Image>();
+                fire.sprite = Resources.Load("Textures/img_fire_01", typeof(Sprite)) as Sprite;
             }
             else if(tag == 2)
             {
-                Debug.Log("========== section 21");
+                var fire = GameObject.Find("ImgFire2").GetComponent<UnityEngine.UI.Image>();
+                fire.sprite = Resources.Load("Textures/img_fire_02", typeof(Sprite)) as Sprite;
             }
             else if (tag == 3)
             {
-                Debug.Log("========== end1");
+                var fire = GameObject.Find("ImgFire3").GetComponent<UnityEngine.UI.Image>();
+                fire.sprite = Resources.Load("Textures/img_fire_03", typeof(Sprite)) as Sprite;
             }
         }
     }
