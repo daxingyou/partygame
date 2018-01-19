@@ -128,6 +128,7 @@ namespace isletspace
         #region »÷¹ÄÌØÐ§
         public void DoAddLight()
         {
+            return;
             //print("    do  add light  ");
 
             Material[] oriMat = null;
@@ -145,6 +146,7 @@ namespace isletspace
 
         public void DoDelLight()
         {
+            return;
             MeshRenderer smr = GameObject.Find("gu (1)").GetComponent<MeshRenderer>();
             //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
             Material[] oriMat = smr.sharedMaterials;

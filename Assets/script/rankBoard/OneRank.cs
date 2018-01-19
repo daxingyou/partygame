@@ -36,6 +36,7 @@ namespace isletspace
         void Awake()
         {
             RankObj = transform.Find("Rank").GetComponent<Text>();
+            RankImgObj = transform.Find("RankImg").GetComponent<Image>();
             ScoreObj = transform.Find("Score").GetComponent<Text>();
             NameObj = transform.Find("Name").GetComponent<Text>();
             HeadImgObj = transform.Find("HeadImg").GetComponent<Image>();
@@ -43,13 +44,15 @@ namespace isletspace
 
         public void SetAllData(RankVO data)
         {
+            print("     rnk " + data.rank);
             if (data.rank < 4)
             {
                 RankImgObj.gameObject.SetActive(true);
                 RankObj.gameObject.SetActive(false);
 
                 string path = "img/rank_" + data.rank;
-                RankImgObj.material.mainTexture = Resources.Load(path) as Texture;
+                RankImgObj.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+                //RankImgObj.material.mainTexture = Resources.Load(path) as Texture;
             }
             else
             {

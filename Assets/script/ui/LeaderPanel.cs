@@ -42,26 +42,33 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            print(  "   start   play   " + GameManager.gamePhase + " , " + GameManager.phaseTime + " , " + ImportRoute.GetBeat() + " , " + ImportRoute.GetBeatTime());
-            StartPlay(ImportRoute.GetBeat(), ImportRoute.GetBeatTime());
 
-            GameManager.phaseTime += 1;
+            string beat = "";
+            string beattime = "";
+            if (gameObject.name == "LeaderPanel")
+            {
+                manager.StartPanel("AlwaysPanel");
+                beat = ImportRoute.GetBeat();
+                beattime = ImportRoute.GetBeatTime();
+
+                print("   start   play   " + GameManager.gamePhase + " , " + GameManager.phaseTime);
+                print("    play  args   " + ImportRoute.GetBeat() + " , " + ImportRoute.GetBeatTime());
+
+                GameManager.phaseTime += 1;
+            }
+            else
+            {
+                beat = this.beat;
+                beattime = this.beattime;
+            }
+
+            StartCoroutine(TestAddArrow(Str2List(beat), Str2List(beattime)));
         }
 
         public override void DoEnd()
         {
             base.DoEnd();
             SceneManager.dancer.DoYourTurn(false);
-        }
-
-        public void StartPlay(string beat, string beattime)
-        {
-            if(gameObject.name == "LeaderPanel")
-            {
-                manager.StartPanel("AlwaysPanel");
-            }
-
-            StartCoroutine(TestAddArrow(Str2List(beat), Str2List(beattime)));
         }
 
         IEnumerator TestAddArrow(List<int> beat, List<int> beattime)
