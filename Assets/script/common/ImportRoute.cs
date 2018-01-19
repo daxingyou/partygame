@@ -26,6 +26,7 @@ namespace isletspace
 
     public class RouteData
     {
+        public List<OnePhase> phase0;
         public List<OnePhase> phase1;
         public List<OnePhase> phase2;
         public List<OnePhase> phase3;
@@ -64,6 +65,30 @@ namespace isletspace
         private void SetNextPanel()
         {
             PanelBase panel = null;
+
+            for (int i = 0; i < data.phase0.Count; ++i)
+            {
+                string endphase = i == (data.phase0.Count - 1) ? "ReadyPanel" : "TrainLeaderPanel";
+
+                string[] substring = data.phase0[i].time.Split(new char[] { ',' });
+
+                panel = Utils.FindDirectChildComponent<PanelBase>("TrainLeaderPanel", panelParent);
+                panel.nextPanelOrder.Add(new NextPanel("TrainPlayTurnPanel", substring[0]));
+
+                if (substring.Length == 2)
+                {
+                    panel = Utils.FindDirectChildComponent<PanelBase>("TrainPlayTurnPanel", panelParent);
+                    panel.nextPanelOrder.Add(new NextPanel(endphase, substring[1]));
+                }
+                else if (substring.Length == 3)
+                {
+                    panel = Utils.FindDirectChildComponent<PanelBase>("TrainPlayTurnPanel", panelParent);
+                    panel.nextPanelOrder.Add(new NextPanel("TrainSettlePanel", substring[1]));
+
+                    panel = Utils.FindDirectChildComponent<PanelBase>("TrainSettlePanel", panelParent);
+                    panel.nextPanelOrder.Add(new NextPanel(endphase, substring[2]));
+                }
+            }
 
             for (int i = 0; i < data.phase1.Count; ++i)
             {
@@ -136,7 +161,13 @@ namespace isletspace
                     panel.nextPanelOrder.Add(new NextPanel(endphase, substring[2]));
                 }
             }
-            
+
+            panel = Utils.FindDirectChildComponent<PanelBase>("TrainLeaderPanel", panelParent);
+            panel.nextPanelOrder.Reverse();
+            panel = Utils.FindDirectChildComponent<PanelBase>("TrainPlayTurnPanel", panelParent);
+            panel.nextPanelOrder.Reverse();
+            panel = Utils.FindDirectChildComponent<PanelBase>("TrainSettlePanel", panelParent);
+            panel.nextPanelOrder.Reverse();
             panel = Utils.FindDirectChildComponent<PanelBase>("LeaderPanel", panelParent);
             panel.nextPanelOrder.Reverse();
             panel = Utils.FindDirectChildComponent<PanelBase>("PlayTurnPanel", panelParent);
@@ -151,6 +182,8 @@ namespace isletspace
             int time = GameManager.phaseTime;
             switch (phase)
             {
+                case 99:
+                    return data.phase0[time].beat;
                 case 0:
                     return data.phase1[time].beat;
                 case 1:
@@ -168,6 +201,8 @@ namespace isletspace
             int time = GameManager.phaseTime;
             switch (phase)
             {
+                case 99:
+                    return data.phase0[time].beattime;
                 case 0:
                     return data.phase1[time].beattime;
                 case 1:

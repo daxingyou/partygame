@@ -25,6 +25,8 @@ namespace isletspace
         private Vector3 mid;
         private Transform lightEffectPos;
 
+        private Material[] oldMaterial;
+
         #region 常数
         Vector3 target = new Vector3(-500, 0, 0);
         #endregion
@@ -128,31 +130,20 @@ namespace isletspace
         #region 击鼓特效
         public void DoAddLight()
         {
-            return;
-            //print("    do  add light  ");
-
-            Material[] oriMat = null;
-            MeshRenderer smr = GameObject.Find("gu (1)").GetComponent<MeshRenderer>();
-            //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
-            oriMat = smr.sharedMaterials;
+            //MeshRenderer smr = Utils.FindDirectChildComponent<MeshRenderer>("gu", transform);
+            SkinnedMeshRenderer smr = Utils.FindDirectChildComponent<SkinnedMeshRenderer>("gu", transform);
+            oldMaterial = smr.materials;
 
             var mat1 = Resources.Load("prefab/bd_119") as Material;
             Material[] newMat = { mat1 };
-            smr.sharedMaterials = newMat;
-
-
-            //print("   is null ?  " + oriMat + ", " + smr + ", " + mat1);
+            smr.materials = newMat;
         }
 
         public void DoDelLight()
         {
-            return;
-            MeshRenderer smr = GameObject.Find("gu (1)").GetComponent<MeshRenderer>();
-            //SkinnedMeshRenderer smr = GameObject.Find("gu").GetComponent<SkinnedMeshRenderer>();
-            Material[] oriMat = smr.sharedMaterials;
-
-            Material[] newMat = { oriMat[0] };
-            smr.sharedMaterials = newMat;
+            //MeshRenderer smr = Utils.FindDirectChildComponent<MeshRenderer>("gu", transform);
+            SkinnedMeshRenderer smr = Utils.FindDirectChildComponent<SkinnedMeshRenderer>("gu", transform);
+            smr.materials = oldMaterial;
         }
         #endregion
 

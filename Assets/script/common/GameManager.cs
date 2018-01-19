@@ -21,7 +21,7 @@ namespace isletspace
     /// </summary>
     public static class GameManager
     {
-        public static int currentPlayNum;
+        public static int currentPlayNum = 0;
         public static event Action UpdatePlayNumCallback;
 
         public static void SetPlayNum(NetPacket msg)
@@ -33,8 +33,14 @@ namespace isletspace
             }
         }
 
-        public static int gamePhase = 0;
+        public static int gamePhase = 99;
         public static event Action BeforeUpdateGamePhase;
+
+        public static void InitGamePhase()
+        {
+            gamePhase = 0;
+            phaseTime = 0;
+        }
 
         public static void AddGamePhase()
         {

@@ -33,36 +33,22 @@ namespace isletspace
     /// </summary>
     public class LeaderPanel : PanelBase
     {
-        public string beat = "1,2,3,2,1";
-        public string beattime = "1000,3000,3500,5500,6000";
-        
         public LeaderManager SceneManager;
         public ArrowManager arrowManager;
 
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-
-            string beat = "";
-            string beattime = "";
             if (gameObject.name == "LeaderPanel")
             {
                 manager.StartPanel("AlwaysPanel");
-                beat = ImportRoute.GetBeat();
-                beattime = ImportRoute.GetBeatTime();
-
-                print("   start   play   " + GameManager.gamePhase + " , " + GameManager.phaseTime);
-                print("    play  args   " + ImportRoute.GetBeat() + " , " + ImportRoute.GetBeatTime());
-
-                GameManager.phaseTime += 1;
-            }
-            else
-            {
-                beat = this.beat;
-                beattime = this.beattime;
             }
 
-            StartCoroutine(TestAddArrow(Str2List(beat), Str2List(beattime)));
+            print("   start   play   " + GameManager.gamePhase + " , " + GameManager.phaseTime);
+            print("    play  args   " + ImportRoute.GetBeat() + " , " + ImportRoute.GetBeatTime());
+            StartCoroutine(TestAddArrow(Str2List(ImportRoute.GetBeat()), Str2List(ImportRoute.GetBeatTime())));
+
+            GameManager.phaseTime += 1;
         }
 
         public override void DoEnd()

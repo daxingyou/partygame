@@ -25,6 +25,7 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
+            GameManager.InitGamePhase();
             countDown.StartCountDown(4);
         }
     }

@@ -92,7 +92,7 @@ namespace isletspace
         {
             var timePackage = new NetPacket();
             timePackage.msg_id = PacketType.UploadStartTime;
-            timePackage.data = "{start_time:" + GetTimeStamp() + "}";
+            timePackage.data = "{start_time:" + GetTimeStamp() + ",gap:80000}";
             socketNetTools.SendMsg(timePackage);
             Debug.Log("   ok " + msg.data);
         }
