@@ -52,7 +52,16 @@ namespace isletspace
             {
                 ChangeCamera("AllDancerScene");
             }
-            currentCamera.StartCloseUp(target);
+            currentCamera.AllDancerCloseUp(target);
+        }
+
+        public void DoCheerRotate()
+        {
+            if (currentCamera.gameObject.name != "CheerScene" && currentCamera.gameObject.name != "SecondCheerScene")
+            {
+                ChangeCamera("CheerScene");
+            }
+            currentCamera.CheerRotate();
         }
     }
 }

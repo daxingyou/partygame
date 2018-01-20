@@ -189,7 +189,7 @@ namespace isletspace
             int preTime = 0;
             for (int i = 0; i < beat.Count; ++i)
             {
-                yield return new WaitForSeconds((beattime[i] - preTime) / 1000.0f - 0.3f);
+                yield return new WaitForSeconds((beattime[i]) / 1000.0f - 0.3f);
                 DoDrum(beat[i]);
                 yield return new WaitForSeconds(0.3f);
                 if(callback != null)

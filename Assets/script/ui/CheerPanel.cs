@@ -25,7 +25,8 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            DoCheer();
+            Invoke("DoCheer", 0.13f);
+            //DoCheer();
         }
 
         override public void DoEnd()
@@ -37,6 +38,7 @@ namespace isletspace
         private void DoCheer()
         {
             SceneManager.DoCheer();
+            Director.Instance.DoCheerRotate();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace isletspace
         public Transform allDancer;
         public Transform allTorch;
         public Transform allEffect;
+        public GameObject allLight;
 
         public void DoCheer()
         {
@@ -31,6 +32,8 @@ namespace isletspace
                 var ani = allDancer.GetChild(i).GetComponent<DancerAni>();
                 ani.DoCheer(true);
             }
+
+            allLight.SetActive(true);
 
             if (0 <= GameManager.gamePhase && GameManager.gamePhase < 2)
             {
@@ -42,25 +45,20 @@ namespace isletspace
         {
             yield return new WaitForSeconds(1);
             
-            var effect = allEffect.GetChild(GameManager.gamePhase).GetComponent<ParticleAndAnimation>();
+            var effect = allEffect.GetChild(0).GetComponent<ParticleAndAnimation>();
             effect.gameObject.SetActive(true);
             effect.PlayOnce();
 
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
             
-            var torch = allTorch.GetChild(GameManager.gamePhase).gameObject;
+            var torch = allTorch.GetChild(0).gameObject;
             torch.SetActive(false);
-            torch = allTorch.GetChild(GameManager.gamePhase + 1).gameObject;
-            torch.SetActive(true);
-
-            effect.Stop();
-            effect.gameObject.SetActive(false);
-
             GameManager.AddGamePhase();
         }
 
         public void CheerEnd()
         {
+            allLight.SetActive(true);
             for (int i = 0; i < allDancer.childCount; ++i)
             {
                 var ani = allDancer.GetChild(i).GetComponent<DancerAni>();

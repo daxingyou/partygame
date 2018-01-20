@@ -26,6 +26,7 @@ namespace isletspace
         {
             base.DoStart(manager);
             GameManager.InitGamePhase();
+            GameManager.gamePhase = 1;//TODEL!   test
             countDown.StartCountDown(4);
         }
     }
