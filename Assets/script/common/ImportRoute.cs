@@ -75,7 +75,7 @@ namespace isletspace
                 panel = Utils.FindDirectChildComponent<PanelBase>("TrainLeaderPanel", panelParent);
                 panel.nextPanelOrder.Add(new NextPanel("TrainPlayTurnPanel", substring[0]));
 
-                if (substring.Length == 2)
+                if (substring.Length == 2 || substring[2] == "0")
                 {
                     panel = Utils.FindDirectChildComponent<PanelBase>("TrainPlayTurnPanel", panelParent);
                     panel.nextPanelOrder.Add(new NextPanel(endphase, substring[1]));
@@ -99,7 +99,7 @@ namespace isletspace
                 panel = Utils.FindDirectChildComponent<PanelBase>("LeaderPanel", panelParent);
                 panel.nextPanelOrder.Add(new NextPanel("PlayTurnPanel", substring[0]));
 
-                if(substring.Length == 2)
+                if(substring.Length == 2 || substring[2] == "0")
                 {
                     panel = Utils.FindDirectChildComponent<PanelBase>("PlayTurnPanel", panelParent);
                     panel.nextPanelOrder.Add(new NextPanel(endphase, substring[1]));
@@ -123,7 +123,7 @@ namespace isletspace
                 panel = Utils.FindDirectChildComponent<PanelBase>("LeaderPanel", panelParent);
                 panel.nextPanelOrder.Add(new NextPanel("PlayTurnPanel", substring[0]));
 
-                if (substring.Length == 2)
+                if (substring.Length == 2 || substring[2] == "0")
                 {
                     panel = Utils.FindDirectChildComponent<PanelBase>("PlayTurnPanel", panelParent);
                     panel.nextPanelOrder.Add(new NextPanel(endphase, substring[1]));
@@ -147,7 +147,7 @@ namespace isletspace
                 panel = Utils.FindDirectChildComponent<PanelBase>("LeaderPanel", panelParent);
                 panel.nextPanelOrder.Add(new NextPanel("PlayTurnPanel", substring[0]));
 
-                if (substring.Length == 2)
+                if (substring.Length == 2 || substring[2] == "0")
                 {
                     panel = Utils.FindDirectChildComponent<PanelBase>("PlayTurnPanel", panelParent);
                     panel.nextPanelOrder.Add(new NextPanel(endphase, substring[1]));
@@ -176,42 +176,63 @@ namespace isletspace
             panel.nextPanelOrder.Reverse();
         }
 
-        public static string GetBeat()
+        public static List<int> GetBeat()
         {
             int phase = GameManager.gamePhase;
             int time = GameManager.phaseTime;
+            string result = "";
             switch (phase)
             {
                 case 99:
-                    return data.phase0[time].beat;
+                    result = data.phase0[time].beat;
+                    break;
                 case 0:
-                    return data.phase1[time].beat;
+                    result = data.phase1[time].beat;
+                    break;
                 case 1:
-                    return data.phase2[time].beat;
+                    result = data.phase2[time].beat;
+                    break;
                 case 2:
-                    return data.phase3[time].beat;
-                default:
-                    return "";
+                    result = data.phase3[time].beat;
+                    break;
             }
+            return Str2List(result);
         }
 
-        public static string GetBeatTime()
+        public static List<int> GetBeatTime()
         {
             int phase = GameManager.gamePhase;
             int time = GameManager.phaseTime;
+            string result = "";
             switch (phase)
             {
                 case 99:
-                    return data.phase0[time].beattime;
+                    result = data.phase0[time].beattime;
+                    break;
                 case 0:
-                    return data.phase1[time].beattime;
+                    result = data.phase1[time].beattime;
+                    break;
                 case 1:
-                    return data.phase2[time].beattime;
+                    result = data.phase2[time].beattime;
+                    break;
                 case 2:
-                    return data.phase3[time].beattime;
-                default:
-                    return "";
+                    result = data.phase3[time].beattime;
+                    break;
             }
+            return Str2List(result);
+        }
+        
+        public static List<int> Str2List(string data)
+        {
+            List<int> result = new List<int>();
+
+            string[] subString = data.Split(new char[] { ',' });
+            for (int i = 0; i < subString.Length; ++i)
+            {
+                result.Add(int.Parse(subString[i]));
+            }
+
+            return result;
         }
     }
 }

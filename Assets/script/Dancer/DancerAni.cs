@@ -129,31 +129,39 @@ namespace isletspace
 
         #region 击鼓特效
         public void DoAddLight()
-        {
+        {/*
             //MeshRenderer smr = Utils.FindDirectChildComponent<MeshRenderer>("gu", transform);
             SkinnedMeshRenderer smr = Utils.FindDirectChildComponent<SkinnedMeshRenderer>("gu", transform);
             oldMaterial = smr.materials;
 
             var mat1 = Resources.Load("prefab/bd_119") as Material;
             Material[] newMat = { mat1 };
-            smr.materials = newMat;
+            smr.materials = newMat;*/
+            var ani = Utils.FindDirectChildComponent<Animator>("gu", transform);
+            ani.SetTrigger("doflash");
         }
 
         public void DoDelLight()
         {
+            /*
             //MeshRenderer smr = Utils.FindDirectChildComponent<MeshRenderer>("gu", transform);
             SkinnedMeshRenderer smr = Utils.FindDirectChildComponent<SkinnedMeshRenderer>("gu", transform);
             smr.materials = oldMaterial;
+            */
         }
         #endregion
 
-        public IEnumerator RandomDrum(int count, float totalTime)
+        #region 自动序列击鼓
+        public IEnumerator DrumRandom(int count, float totalTime)
         {
             for (int i = 0; i < count; ++i)
             {
-                float gap = Random.Range(0.5f, 3f);
+                float gap = Random.Range(0.5f, 1f);
                 int type = Random.Range(1, 4);
-                DoDrum(type);
+                if (Random.Range(0f, 1f) < 0.3f)
+                {
+                    DoDrum(type);
+                }
                 yield return new WaitForSeconds(gap);
                 totalTime -= gap;
                 if(totalTime < 0)
@@ -162,5 +170,30 @@ namespace isletspace
                 }
             }
         }
+        public IEnumerator DrumConstant(int type, int count, float gap)
+        {
+            for (int i = 0; i < count; ++i)
+            {
+                DoDrum(type);
+                yield return new WaitForSeconds(gap);
+            }
+        }
+
+        public IEnumerator DrumList(List<int> beat, List<int> beattime, System.Action<int> callback = null)
+        {
+            int preTime = 0;
+            for (int i = 0; i < beat.Count; ++i)
+            {
+                yield return new WaitForSeconds((beattime[i] - preTime) / 1000.0f - 0.3f);
+                DoDrum(beat[i]);
+                yield return new WaitForSeconds(0.3f);
+                if(callback != null)
+                {
+                    callback(beat[i]);
+                }
+                preTime = beattime[i];
+            }
+        }
+        #endregion
     }
 }

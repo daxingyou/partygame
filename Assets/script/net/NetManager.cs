@@ -21,6 +21,8 @@ namespace isletspace
     /// </summary>
     public class NetManager : ISingleton<NetManager>
     {
+        public string starttimegap = "50000";
+
         string ipaddress = "192.168.0.77:4001";
         private SocketNetTools socketNetTools;
 
@@ -92,7 +94,7 @@ namespace isletspace
         {
             var timePackage = new NetPacket();
             timePackage.msg_id = PacketType.UploadStartTime;
-            timePackage.data = "{start_time:" + GetTimeStamp() + ",gap:80000}";
+            timePackage.data = "{\"start_time\":" + GetTimeStamp() + ",\"gap\":" + starttimegap + "}";
             socketNetTools.SendMsg(timePackage);
             Debug.Log("   ok " + msg.data);
         }

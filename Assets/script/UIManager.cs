@@ -34,9 +34,9 @@ namespace isletspace
 
         public void ClickStart()
         {
-            JumpTo("OPPanel");
-            //JumpTo("LeaderPanel");
-            //JumpTo("PlayTurnPanel");
+            //JumpTo("OPPanel");
+            JumpTo("LeaderPanel");
+            //JumpTo("CheerPanel");
             NetManager.Instance.StartNet();
         }
 

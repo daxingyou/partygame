@@ -131,6 +131,7 @@
     <Compile Include="Assets\script\SceneManager\AllDancerManager.cs" />
     <Compile Include="Assets\script\SceneManager\CheerManager.cs" />
     <Compile Include="Assets\script\SceneManager\LeaderManager.cs" />
+    <Compile Include="Assets\script\SoundManager.cs" />
     <Compile Include="Assets\script\UIManager.cs" />
     <Compile Include="Assets\script\common\BezierGenerate.cs" />
     <Compile Include="Assets\script\common\DelayUtils.cs" />
@@ -140,6 +141,8 @@
     <Compile Include="Assets\script\common\PlayMovie.cs" />
     <Compile Include="Assets\script\common\Pool.cs" />
     <Compile Include="Assets\script\common\Utils.cs" />
+    <Compile Include="Assets\script\icon\IconManager.cs" />
+    <Compile Include="Assets\script\icon\ImageExtends.cs" />
     <Compile Include="Assets\script\net\NetClient.cs" />
     <Compile Include="Assets\script\net\NetManager.cs" />
     <Compile Include="Assets\script\net\NetPacket.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="Assets\script\rankBoard\RankBoard.cs" />
     <Compile Include="Assets\script\ui\AlwaysPanel.cs" />
     <Compile Include="Assets\script\ui\CheerPanel.cs" />
+    <Compile Include="Assets\script\ui\CloseUpUI.cs" />
     <Compile Include="Assets\script\ui\FlashScreen.cs" />
     <Compile Include="Assets\script\ui\JoinPanel.cs" />
     <Compile Include="Assets\script\ui\LeaderPanel.cs" />

@@ -69,14 +69,38 @@ namespace isletspace
             }
         }
 
-        public void AllRandomDrum(float time)
+        public void AllDrumRandom(float time)
         {
             for (int i = 0; i < allDancer.childCount; ++i)
             {
                 var ani = allDancer.GetChild(i).GetComponent<DancerAni>();
                 if (ani.gameObject.activeSelf)
                 {
-                    StartCoroutine(ani.RandomDrum(10, time));
+                    StartCoroutine(ani.DrumRandom(10, time));
+                }
+            }
+        }
+
+        public void AllDrumConstant()
+        {
+            for (int i = 0; i < allDancer.childCount; ++i)
+            {
+                var ani = allDancer.GetChild(i).GetComponent<DancerAni>();
+                if (ani.gameObject.activeSelf)
+                {
+                    StartCoroutine(ani.DrumConstant(2, 10, 0.5f));
+                }
+            }
+        }
+
+        public void AllDrumList()
+        {
+            for (int i = 0; i < allDancer.childCount; ++i)
+            {
+                var ani = allDancer.GetChild(i).GetComponent<DancerAni>();
+                if (ani.gameObject.activeSelf)
+                {
+                    StartCoroutine(ani.DrumList(ImportRoute.GetBeat(), ImportRoute.GetBeatTime()));
                 }
             }
         }

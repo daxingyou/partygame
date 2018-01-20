@@ -50,7 +50,7 @@ namespace isletspace
             //ºÚÆÁ×à¹ÄÉù
             EndCameraFollow();
             spotLight.SetActive(false);
-            StartCoroutine(dancer.RandomDrum(20, 5));
+            StartCoroutine(dancer.DrumRandom(20, 5));
             yield return new WaitForSeconds(5);
             //½áÊøÑÝ×à
             dancer.PlayOPPose();

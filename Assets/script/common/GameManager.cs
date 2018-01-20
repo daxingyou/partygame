@@ -33,7 +33,7 @@ namespace isletspace
             }
         }
 
-        public static int gamePhase = 99;
+        public static int gamePhase = 0;
         public static event Action BeforeUpdateGamePhase;
 
         public static void InitGamePhase()

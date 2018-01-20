@@ -25,8 +25,11 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            SceneManager.AllRandomDrum(nextPanelOrder[nextPanelOrder.Count - 1].timeout);
-            Invoke("PlayLightSpotAll", 7);
+            //SceneManager.AllDrumRandom(currentTime);
+            SceneManager.AllDrumList();
+            Invoke("PlayLightSpotAll", currentTime - 7);
+
+            GameManager.phaseTime += 1;
         }
 
         public void PlayLightSpotAll()

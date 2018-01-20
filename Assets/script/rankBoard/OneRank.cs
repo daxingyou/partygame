@@ -31,20 +31,19 @@ namespace isletspace
         Image RankImgObj;
         Text ScoreObj;
         Text NameObj;
-        Image HeadImgObj;
+        IconManager HeadImgObj;
 
         void Awake()
         {
-            RankObj = transform.Find("Rank").GetComponent<Text>();
-            RankImgObj = transform.Find("RankImg").GetComponent<Image>();
-            ScoreObj = transform.Find("Score").GetComponent<Text>();
-            NameObj = transform.Find("Name").GetComponent<Text>();
-            HeadImgObj = transform.Find("HeadImg").GetComponent<Image>();
+            RankObj = Utils.FindDirectChildComponent<Text>("Rank", transform);
+            RankImgObj = Utils.FindDirectChildComponent<Image>("RankImg", transform);
+            ScoreObj = Utils.FindDirectChildComponent<Text>("Score", transform);
+            NameObj = Utils.FindDirectChildComponent<Text>("Name", transform);
+            HeadImgObj = Utils.FindDirectChildComponent<IconManager>("HeadImg", transform);
         }
 
         public void SetAllData(RankVO data)
         {
-            print("     rnk " + data.rank);
             if (data.rank < 4)
             {
                 RankImgObj.gameObject.SetActive(true);
@@ -52,7 +51,6 @@ namespace isletspace
 
                 string path = "img/rank_" + data.rank;
                 RankImgObj.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
-                //RankImgObj.material.mainTexture = Resources.Load(path) as Texture;
             }
             else
             {
@@ -63,7 +61,7 @@ namespace isletspace
             }
             ScoreObj.text = "分数：" + data.score.ToString();
             NameObj.text = data.name;
-            //HeadImgObj.renderer;
+            HeadImgObj.SetFace(data.pic_url);
         }
 
         public void PlayNewAni()

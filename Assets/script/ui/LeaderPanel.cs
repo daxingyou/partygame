@@ -41,14 +41,15 @@ namespace isletspace
             base.DoStart(manager);
             if (gameObject.name == "LeaderPanel")
             {
-                manager.StartPanel("AlwaysPanel");
+                //manager.StartPanel("AlwaysPanel");
+                if(GameManager.gamePhase < 5)
+                    SoundManager.Instance.PlayBackground(GameManager.gamePhase);
             }
 
             print("   start   play   " + GameManager.gamePhase + " , " + GameManager.phaseTime);
-            print("    play  args   " + ImportRoute.GetBeat() + " , " + ImportRoute.GetBeatTime());
-            StartCoroutine(TestAddArrow(Str2List(ImportRoute.GetBeat()), Str2List(ImportRoute.GetBeatTime())));
 
-            GameManager.phaseTime += 1;
+            arrowManager.ClearList();
+            StartCoroutine(PlayDrumList(ImportRoute.GetBeat(), ImportRoute.GetBeatTime()));
         }
 
         public override void DoEnd()
@@ -57,38 +58,12 @@ namespace isletspace
             SceneManager.dancer.DoYourTurn(false);
         }
 
-        IEnumerator TestAddArrow(List<int> beat, List<int> beattime)
+        IEnumerator PlayDrumList(List<int> beat, List<int> beattime)
         {
-            arrowManager.ClearList();
-
-            int preTime = 0;
-            for (int i = 0; i < beat.Count; ++i)
-            {
-                yield return new WaitForSeconds((beattime[i] - preTime) / 1000.0f - 0.3f);
-
-                SceneManager.dancer.DoDrum(beat[i]);
-
-                yield return new WaitForSeconds(0.3f);
-                arrowManager.AddArrow(beat[i]);
-                preTime = beattime[i];
-            }
-
+            yield return StartCoroutine(SceneManager.dancer.DrumList(beat, beattime, arrowManager.AddArrow));
+            
             yield return new WaitForSeconds(0.3f);
-
             SceneManager.dancer.DoYourTurn(true);
-        }
-
-        private List<int> Str2List(string data)
-        {
-            List<int> result = new List<int>();
-
-            string[] subString = data.Split(new char[] { ',' });
-            for (int i = 0; i < subString.Length; ++i)
-            {
-                result.Add(int.Parse(subString[i]));
-            }
-
-            return result;
         }
     }
 }

@@ -106,7 +106,7 @@ public static class Utils
             return default(T);
         }
 
-        return child.gameObject.GetComponent<T>();
+        return child.GetComponent<T>();
     }
 
     public static string GetLongName (Transform transform)

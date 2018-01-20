@@ -22,11 +22,14 @@ namespace isletspace
     {
         public AllDancerManager SceneManager;
 
+        public CloseUpUI closeUp;
+
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
             if (gameObject.name == "SettlePanel")
             {
+                closeUp.PreLoad("1234", "4567");
                 Invoke("DoCloseUp", 3);
             }
         }
@@ -36,6 +39,7 @@ namespace isletspace
             int pos = 3;
             Vector3 target = SceneManager.CloseUp(pos);
             Director.Instance.DoAllDancerCloseUp(target);
+            closeUp.Show();
         }
     }
 }
