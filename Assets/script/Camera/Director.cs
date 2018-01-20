@@ -33,10 +33,9 @@ namespace isletspace
 
         IEnumerator changeRoute(string name)
         {
-
             FlashScreen.Instance.DoFlash(Color.black);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.1f);
 
             var scene = Utils.FindDirectChildComponent<SceneCamera>(name, transform);
             if (currentCamera != null)

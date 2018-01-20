@@ -178,48 +178,16 @@ namespace isletspace
 
         public static List<int> GetBeat()
         {
-            int phase = GameManager.gamePhase;
             int time = GameManager.phaseTime;
-            string result = "";
-            switch (phase)
-            {
-                case 99:
-                    result = data.phase0[time].beat;
-                    break;
-                case 0:
-                    result = data.phase1[time].beat;
-                    break;
-                case 1:
-                    result = data.phase2[time].beat;
-                    break;
-                case 2:
-                    result = data.phase3[time].beat;
-                    break;
-            }
-            return Str2List(result);
+            var list = getPhase();
+            return Str2List(list[time].beat);
         }
 
         public static List<int> GetBeatTime()
         {
-            int phase = GameManager.gamePhase;
             int time = GameManager.phaseTime;
-            string result = "";
-            switch (phase)
-            {
-                case 99:
-                    result = data.phase0[time].beattime;
-                    break;
-                case 0:
-                    result = data.phase1[time].beattime;
-                    break;
-                case 1:
-                    result = data.phase2[time].beattime;
-                    break;
-                case 2:
-                    result = data.phase3[time].beattime;
-                    break;
-            }
-            return Str2List(result);
+            var list = getPhase();
+            return Str2List(list[time].beattime);
         }
         
         public static List<int> Str2List(string data)
@@ -233,6 +201,24 @@ namespace isletspace
             }
 
             return result;
+        }
+
+        public static List<OnePhase> getPhase()
+        {
+            int phase = GameManager.gamePhase;
+            switch (phase)
+            {
+                case 99:
+                    return data.phase0;
+                case 0:
+                    return data.phase1;
+                case 1:
+                    return data.phase2;
+                case 2:
+                    return data.phase3;
+                default:
+                    return null;
+            }
         }
     }
 }

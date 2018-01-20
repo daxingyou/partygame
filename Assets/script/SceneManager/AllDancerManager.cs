@@ -57,7 +57,7 @@ namespace isletspace
             ani.DoLightSpotMove();
         }
 
-        public void PlayLightSpotAll()
+        public int PlayLightSpotAll(System.Action callback)
         {
             int total = Random.Range((int)(allDancer.childCount / 2), (int)(allDancer.childCount * 0.7f));
             for (int num = 0; num < total; ++num)
@@ -65,8 +65,9 @@ namespace isletspace
                 int idx = Random.Range(0, allDancer.childCount);
                 float starttime = Random.Range(0f, 1.8f);
                 var ani = allDancer.GetChild(idx).GetComponent<DancerAni>();
-                ani.DoLightSpotMove(starttime);
+                ani.DoLightSpotMove(starttime, callback);
             }
+            return total;
         }
 
         public void AllDrumRandom(float time)

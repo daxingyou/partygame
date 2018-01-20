@@ -166,6 +166,9 @@
     <Compile Include="Assets\script\ui\StartPanel.cs" />
     <Compile Include="Assets\script\ui\Time.cs" />
     <Compile Include="Assets\script\ui\TimeSlider.cs" />
+    <Compile Include="Assets\script\ui\TrainLeaderPanel.cs" />
+    <Compile Include="Assets\script\ui\TrainPlayTurnPanel.cs" />
+    <Compile Include="Assets\script\ui\TrainSettlePanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />

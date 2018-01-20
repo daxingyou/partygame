@@ -21,20 +21,28 @@ namespace isletspace
     public class PlayTurnPanel : PanelBase
     {
         public AllDancerManager SceneManager;
+        public ProgressBar bar;
+
+        int lightSpotCnt;
 
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            //SceneManager.AllDrumRandom(currentTime);
             SceneManager.AllDrumList();
-            Invoke("PlayLightSpotAll", currentTime - 7);
+            Invoke("PlayLightSpotAll", currentTime - 6);
 
             GameManager.phaseTime += 1;
         }
 
         public void PlayLightSpotAll()
         {
-            SceneManager.PlayLightSpotAll();
+            lightSpotCnt = SceneManager.PlayLightSpotAll(LightSpotCallback);
+        }
+
+        public void LightSpotCallback()
+        {
+            float interval = 1f / 3 / ImportRoute.getPhase().Count / lightSpotCnt;
+            bar.AddProgress(interval);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace isletspace
     {
         public string starttimegap = "50000";
 
-        string ipaddress = "192.168.0.77:4001";
+        string ipaddress = "61.174.15.157:4001";
         private SocketNetTools socketNetTools;
 
         private void Awake()

@@ -76,12 +76,12 @@ namespace isletspace
         }
 
         #region 光点飞行动画
-        public void DoLightSpotMove(float startTime = 0)
+        public void DoLightSpotMove(float startTime = 0, System.Action callback = null)
         {
-            StartCoroutine(MoveLightSpot(20, 3f, startTime));
+            StartCoroutine(MoveLightSpot(20, 3f, startTime, callback));
         }
 
-        private IEnumerator MoveLightSpot(int d, float time, float startTime)
+        private IEnumerator MoveLightSpot(int d, float time, float startTime, System.Action callback)
         {
             if (startTime > 0)
             {
@@ -100,6 +100,11 @@ namespace isletspace
                 yield return new WaitForSeconds(timegap);
             }
             
+            if(callback != null)
+            {
+                callback();
+            }
+
             Destroy(obj);
         }
         #endregion

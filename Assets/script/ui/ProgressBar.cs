@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace isletspace
 {
@@ -8,39 +9,76 @@ namespace isletspace
     /// </summary>
     public class ProgressBar : MonoBehaviour
     {
-        private float progressNum;
-        private UnityEngine.UI.Image progressBar;
+        public Image progressBar;
+        public Transform effect;
+
+        private float percnetage;
         private float width;
-        private Transform effect;
 
         private void Start()
         {
-            progressNum = 0;
-            progressBar = GameObject.Find("Img").GetComponent<UnityEngine.UI.Image>();
-            progressBar.fillAmount = progressNum;
-            effect = GameObject.Find("Node").transform;
-            width = progressBar.preferredWidth;
+            percnetage = 0;
+            progressBar.fillAmount = percnetage;
+            width = progressBar.rectTransform.rect.width;
 
-            InvokeRepeating("AddProgress", 0, 0.1f);
+            //InvokeRepeating("AddProgress", 0, 0.1f);
+        }
+
+        public void AddProgress(float interval)
+        {
+            if(percnetage >= 1)
+            {
+                return;
+            }
+
+            float oldPercent = percnetage;
+            if (oldPercent >= 0.65)
+            {
+                percnetage += interval;
+                if (oldPercent < 1 && percnetage >= 1)
+                {
+                    Callback(3);
+                }
+            }
+            else if (oldPercent >= 0.32)
+            {
+                percnetage += interval;
+                if (oldPercent < 0.65f && percnetage >= 0.65f)
+                {
+                    Callback(2);
+                }
+            }
+            else
+            {
+                percnetage += interval;
+                if (oldPercent < 0.32f && percnetage >= 0.32f)
+                {
+                    Callback(1);
+                }
+            }
+
+            float x = width * percnetage - width / 2;
+            effect.DOLocalMoveX(x, 0.1f);
+            progressBar.DOFillAmount(percnetage, 0.1f);
         }
 
         private void AddProgress()
         {
             float interval = 0;
             float duration = 0.1f;
-            float arg1 = progressNum;
+            float arg1 = percnetage;
 
             if (arg1 >= 1)
             {
                 CancelInvoke("AddProgress");
-                progressNum = 1;
+                percnetage = 1;
                 duration = 0.01f;
             }
             else if (arg1 >= 0.65)
             {
                 interval = 0.01f;
-                progressNum += interval;
-                if(arg1 < 1 && progressNum >= 1)
+                percnetage += interval;
+                if(arg1 < 1 && percnetage >= 1)
                 {
                     Callback(3);
                 }
@@ -48,8 +86,8 @@ namespace isletspace
             else if (arg1 >= 0.32)
             {
                 interval = 0.008f;
-                progressNum += interval;
-                if(arg1 < 0.65f && progressNum >= 0.65f)
+                percnetage += interval;
+                if(arg1 < 0.65f && percnetage >= 0.65f)
                 {
                     Callback(2);
                 }
@@ -57,33 +95,29 @@ namespace isletspace
             else
             {
                 interval = 0.005f;
-                progressNum += interval;
-                if (arg1 < 0.32f && progressNum >= 0.32f)
+                percnetage += interval;
+                if (arg1 < 0.32f && percnetage >= 0.32f)
                 {
                     Callback(1);
                 }
             }
-            float x = width * progressNum - width / 2;
+            float x = width * percnetage - width / 2;
             effect.DOLocalMoveX(x, duration);
-            progressBar.DOFillAmount(progressNum, duration);
+            progressBar.DOFillAmount(percnetage, duration);
         }
 
         private void Callback(int tag)
         {
-            if(tag ==1)
+            switch (tag)
             {
-                var fire = GameObject.Find("ImgFire1").GetComponent<UnityEngine.UI.Image>();
-                fire.sprite = Resources.Load("Textures/img_fire_01", typeof(Sprite)) as Sprite;
-            }
-            else if(tag == 2)
-            {
-                var fire = GameObject.Find("ImgFire2").GetComponent<UnityEngine.UI.Image>();
-                fire.sprite = Resources.Load("Textures/img_fire_02", typeof(Sprite)) as Sprite;
-            }
-            else if (tag == 3)
-            {
-                var fire = GameObject.Find("ImgFire3").GetComponent<UnityEngine.UI.Image>();
-                fire.sprite = Resources.Load("Textures/img_fire_03", typeof(Sprite)) as Sprite;
+                case 1:
+                case 2:
+                case 3:
+                    var fire = Utils.FindDirectChildComponent<Image>("ImgFire" + tag, transform);
+                    fire.sprite = Resources.Load("Textures/img_fire_0" + tag, typeof(Sprite)) as Sprite;
+                    break;
+                default:
+                    break;
             }
         }
     }
