@@ -25,8 +25,9 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            Invoke("DoCheer", 0.13f);
+            //Invoke("DoCheer", 0.13f);
             //DoCheer();
+            DoCheer();
         }
 
         override public void DoEnd()
@@ -38,7 +39,21 @@ namespace isletspace
         private void DoCheer()
         {
             SceneManager.DoCheer();
-            Director.Instance.DoCheerRotate();
+            Director.Instance.RegistChangeCamera(cameraScene, DoCheerRotate);
+            //if(gameObject.name == "CheerPanel")
+            //{
+            //    Director.Instance.DoCheerRotate();
+            //}
+            //else if(gameObject.name == "SecondCheerPanel")
+            //{
+            //    Director.Instance.DoSecondCheerRotate();
+            //}
+        }
+
+        private void DoCheerRotate(SceneCamera camera)
+        {
+            camera.CheerRotate();
+            Director.Instance.UnRegistChangeCamera(DoCheerRotate);
         }
     }
 }

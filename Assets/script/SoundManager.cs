@@ -53,7 +53,7 @@ public class SoundManager : ISingleton<SoundManager> {
         aSource.PlayOneShot(EffectSounds[0]);
     }
 
-    public void PlayClose()
+    public void PlayFoot()
     {
         aSource.PlayOneShot(EffectSounds[1]);
     }

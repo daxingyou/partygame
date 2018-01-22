@@ -46,9 +46,12 @@ namespace isletspace
             yield return new WaitForSeconds(0.3f);
             //Èë³¡¿ªµÆ
             spotLight.Begin();
-            SoundManager.Instance.PlayEffect(1);
-            yield return new WaitForSeconds(8.3f);
+            SoundManager.Instance.PlayLaZha();
+            yield return new WaitForSeconds(2.8f);
+            SoundManager.Instance.PlayFoot();
+            yield return new WaitForSeconds(5.5f);
             //ºÚÆÁ×à¹ÄÉù
+            SoundManager.Instance.PlayBackground(3);
             EndCameraFollow();
             spotLight.End();
             StartCoroutine(dancer.DrumConstant(1, 5, 0.5f));

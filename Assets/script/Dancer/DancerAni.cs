@@ -21,11 +21,13 @@ namespace isletspace
     /// </summary>
     public class DancerAni : MonoBehaviour
     {
-        private Animator animator;
-        private Vector3 mid;
-        private Transform lightEffectPos;
+        Animator animator;
+        Vector3 mid;
+        Transform lightEffectPos;
 
-        private Material[] oldMaterial;
+        GuAniManager gumgr;
+
+        bool isUsedOneHand;
 
         #region 常数
         Vector3 target = new Vector3(-500, 0, 0);
@@ -34,6 +36,7 @@ namespace isletspace
         private void Start()
         {
             animator = gameObject.GetComponent<Animator>();
+            gumgr = Utils.FindDirectChildComponent<GuAniManager>("gu", transform);
             mid = (transform.position + target) / 2;
             lightEffectPos = transform.Find("LightEffect");
         }
@@ -49,9 +52,9 @@ namespace isletspace
         public void DoDrum(int type, float time)
         {
             float rate = 1;
-            if (time != 0 && time < 0.5f)
+            if (time != 0 && time < 0.4f)
             {
-                rate = 0.5f / time;
+                rate = 0.4f / time;
             }
             animator.speed = rate;
             
@@ -62,7 +65,8 @@ namespace isletspace
             switch (type)
             {
                 case 1:
-                    realType = Random.Range(1, 3);
+                    realType = isUsedOneHand ? 1 : 2;
+                    isUsedOneHand = !isUsedOneHand;
                     break;
                 case 2:
                     realType = 3;
@@ -145,25 +149,13 @@ namespace isletspace
 
         #region 击鼓特效
         public void DoAddLight()
-        {/*
-            //MeshRenderer smr = Utils.FindDirectChildComponent<MeshRenderer>("gu", transform);
-            SkinnedMeshRenderer smr = Utils.FindDirectChildComponent<SkinnedMeshRenderer>("gu", transform);
-            oldMaterial = smr.materials;
-
-            var mat1 = Resources.Load("prefab/bd_119") as Material;
-            Material[] newMat = { mat1 };
-            smr.materials = newMat;*/
-            var ani = Utils.FindDirectChildComponent<Animator>("gu", transform);
-            ani.SetTrigger("doflash");
+        {
+            gumgr.Begin();
         }
 
         public void DoDelLight()
         {
-            /*
-            //MeshRenderer smr = Utils.FindDirectChildComponent<MeshRenderer>("gu", transform);
-            SkinnedMeshRenderer smr = Utils.FindDirectChildComponent<SkinnedMeshRenderer>("gu", transform);
-            smr.materials = oldMaterial;
-            */
+            gumgr.End();
         }
         #endregion
 

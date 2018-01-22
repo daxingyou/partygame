@@ -46,8 +46,6 @@ namespace isletspace
                     SoundManager.Instance.PlayBackground(GameManager.gamePhase);
             }
 
-            print("   start   play   " + GameManager.gamePhase + " , " + GameManager.phaseTime);
-
             arrowManager.ClearList();
             StartCoroutine(PlayDrumList(ImportRoute.GetBeat(), ImportRoute.GetBeatTime()));
         }

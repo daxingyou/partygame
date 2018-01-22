@@ -24,6 +24,8 @@ namespace isletspace
 
         public CloseUpUI closeUp;
 
+        private Vector3 target;
+
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
@@ -40,9 +42,15 @@ namespace isletspace
         public void DoCloseUp()
         {
             int pos = 3;
-            Vector3 target = SceneManager.CloseUp(pos);
-            Director.Instance.DoAllDancerCloseUp(target);
+            target = SceneManager.CloseUp(pos);
+            Director.Instance.RegistChangeCamera("AllDancerScene", OnAllDancerCloseUp);
             closeUp.Show();
+        }
+
+        private void OnAllDancerCloseUp(SceneCamera camera)
+        {
+            camera.AllDancerCloseUp(target);
+            Director.Instance.UnRegistChangeCamera(OnAllDancerCloseUp);
         }
     }
 }

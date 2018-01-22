@@ -127,6 +127,8 @@
     <Compile Include="Assets\script\Camera\SceneCamera.cs" />
     <Compile Include="Assets\script\Dancer\DancerAni.cs" />
     <Compile Include="Assets\script\Dancer\LookCenter.cs" />
+    <Compile Include="Assets\script\Gu\GuAniManager.cs" />
+    <Compile Include="Assets\script\Gu\GuLightTween.cs" />
     <Compile Include="Assets\script\PlayArrow\ArrowManager.cs" />
     <Compile Include="Assets\script\SceneManager\AllDancerManager.cs" />
     <Compile Include="Assets\script\SceneManager\CheerManager.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Assets\script\ui\PanelBase.cs" />
     <Compile Include="Assets\script\ui\PlayTurnPanel.cs" />
     <Compile Include="Assets\script\ui\ProgressBar.cs" />
+    <Compile Include="Assets\script\ui\ProgressBarNode.cs" />
     <Compile Include="Assets\script\ui\RankPanel.cs" />
     <Compile Include="Assets\script\ui\ReadyPanel.cs" />
     <Compile Include="Assets\script\ui\SettlePanel.cs" />
@@ -187,6 +190,8 @@
     <None Include="Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.xml" />
     <None Include="Assets\Demigiant\readme_DOTweenPro.txt" />
     <None Include="Assets\Font\Num\Num.fnt" />
+    <None Include="Assets\Shader\MyShader.shader" />
+    <None Include="Assets\Shader\TransparentUnlit.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />

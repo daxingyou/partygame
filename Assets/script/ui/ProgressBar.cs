@@ -32,15 +32,15 @@ namespace isletspace
             }
 
             float oldPercent = percnetage;
-            if (oldPercent >= 0.65)
+            if (oldPercent >= 0.65f)
             {
                 percnetage += interval;
-                if (oldPercent < 1 && percnetage >= 1)
+                if (oldPercent < 0.95f && percnetage >= 0.95f)
                 {
                     Callback(3);
                 }
             }
-            else if (oldPercent >= 0.32)
+            else if (oldPercent >= 0.32f)
             {
                 percnetage += interval;
                 if (oldPercent < 0.65f && percnetage >= 0.65f)
@@ -113,8 +113,9 @@ namespace isletspace
                 case 1:
                 case 2:
                 case 3:
-                    var fire = Utils.FindDirectChildComponent<Image>("ImgFire" + tag, transform);
-                    fire.sprite = Resources.Load("Textures/img_fire_0" + tag, typeof(Sprite)) as Sprite;
+                    var fire = Utils.FindDirectChildComponent<ProgressBarNode>("ImgFire" + tag, transform);
+                    fire.NodeActive(tag);
+                    
                     break;
                 default:
                     break;
