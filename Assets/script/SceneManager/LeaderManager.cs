@@ -20,13 +20,13 @@ namespace isletspace
     /// </summary>
     public class LeaderManager : MonoBehaviour
     {
-        public GameObject spotLight;
-        public GameObject fireLight;
+        public TweenLight spotLight;
+        public TweenLight fireLight;
         public GameObject torch;
         public DancerAni dancer;
         public Transform cameraLookPoint;
         
-
+        [Tooltip("For Debug")]
         public bool isCameraFollow = false;
 
         private Transform mainCamera;
@@ -45,18 +45,19 @@ namespace isletspace
             dancer.PlayOP();
             yield return new WaitForSeconds(0.3f);
             //Èë³¡¿ªµÆ
-            spotLight.SetActive(true);
+            spotLight.Begin();
+            SoundManager.Instance.PlayEffect(1);
             yield return new WaitForSeconds(8.3f);
             //ºÚÆÁ×à¹ÄÉù
             EndCameraFollow();
-            spotLight.SetActive(false);
-            StartCoroutine(dancer.DrumRandom(20, 5));
+            spotLight.End();
+            StartCoroutine(dancer.DrumConstant(1, 5, 0.5f));
             yield return new WaitForSeconds(5);
             //½áÊøÑÝ×à
             dancer.PlayOPPose();
-            yield return new WaitForSeconds(0.3f);
             torch.SetActive(true);
-            fireLight.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            fireLight.Begin();
         }
 
         private void StartCameraFollow()

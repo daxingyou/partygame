@@ -20,6 +20,7 @@ namespace isletspace
     /// </summary>
     public class Director : ISingleton<Director>
     {
+        [Tooltip("For Debug")]
         public SceneCamera currentCamera;
 
         public void ChangeCamera(string name)

@@ -17,10 +17,11 @@ namespace isletspace
 {
     public class MoveCamera : MonoBehaviour
     {
+        [Tooltip("For Debug")]
         public bool isPlaying;
 
-        public Vector3 StartPos;
-        public Vector3 StartRotate;
+        private Vector3 StartPos;
+        private Vector3 StartRotate;
 
         #region const
         private Vector3 LookFront = new Vector3(0, 180 - 40, 0);
@@ -55,8 +56,8 @@ namespace isletspace
             //gap
             seq.AppendInterval(0.3f);
             //Rotate
-            seq.Append(transform.DORotate(LookRotatePoint1, 0.8f).SetEase(Ease.Linear));
-            seq.Append(transform.DORotate(LookRotatePoint2, 0.8f).SetEase(Ease.Linear));
+            seq.Append(transform.DORotate(LookRotatePoint1, 1.4f).SetEase(Ease.Linear));
+            seq.Append(transform.DORotate(LookRotatePoint2, 1.4f).SetEase(Ease.Linear));
             //gap
             seq.AppendInterval(0.3f);
             //ZoomOut

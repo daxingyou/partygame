@@ -25,6 +25,8 @@ namespace isletspace
         public Transform panelParent;
         public AllDancerManager allDancerManager;
 
+        public string jumpPanelName;
+
         private PanelBase currentPanel;
 
         private void Start()
@@ -34,9 +36,14 @@ namespace isletspace
 
         public void ClickStart()
         {
-            //JumpTo("OPPanel");
-            JumpTo("ReadyPanel");
-            //JumpTo("SecondCheerPanel");
+            if (string.IsNullOrEmpty(jumpPanelName))
+            {
+                JumpTo("OPPanel");
+            }
+            else
+            {
+                JumpTo(jumpPanelName);
+            }
             NetManager.Instance.StartNet();
         }
 

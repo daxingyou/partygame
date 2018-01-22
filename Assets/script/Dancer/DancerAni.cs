@@ -40,13 +40,22 @@ namespace isletspace
 
         public void DoPose()
         {
+            animator.speed = 1;
             animator.SetTrigger("pose");
             int type = Random.Range(1, 7);
             animator.SetFloat("poseType", type);
         }
 
-        public void DoDrum(int type)
+        public void DoDrum(int type, float time)
         {
+            float rate = 1;
+            if (time != 0 && time < 0.5f)
+            {
+                rate = 0.5f / time;
+            }
+            animator.speed = rate;
+            
+
             animator.SetTrigger("drum");
 
             int realType = type;
@@ -67,6 +76,7 @@ namespace isletspace
 
         public void DoCheer(bool flag)
         {
+            animator.speed = 1;
             animator.SetBool("cheerFlag", flag);
             if (flag)
             {
@@ -128,6 +138,7 @@ namespace isletspace
         }
         public void DoYourTurn(bool flag)
         {
+            animator.speed = 1;
             animator.SetBool("EndLeading", flag);
         }
         #endregion
@@ -165,7 +176,7 @@ namespace isletspace
                 int type = Random.Range(1, 4);
                 if (Random.Range(0f, 1f) < 0.3f)
                 {
-                    DoDrum(type);
+                    DoDrum(type, gap);
                 }
                 yield return new WaitForSeconds(gap);
                 totalTime -= gap;
@@ -179,7 +190,7 @@ namespace isletspace
         {
             for (int i = 0; i < count; ++i)
             {
-                DoDrum(type);
+                DoDrum(type, gap);
                 yield return new WaitForSeconds(gap);
             }
         }
@@ -189,8 +200,9 @@ namespace isletspace
             int preTime = 0;
             for (int i = 0; i < beat.Count; ++i)
             {
-                yield return new WaitForSeconds((beattime[i]) / 1000.0f - 0.3f);
-                DoDrum(beat[i]);
+                float gap = beattime[i] / 1000.0f;
+                yield return new WaitForSeconds(gap - 0.3f);
+                DoDrum(beat[i], gap);
                 yield return new WaitForSeconds(0.3f);
                 if(callback != null)
                 {

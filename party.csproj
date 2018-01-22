@@ -147,13 +147,16 @@
     <Compile Include="Assets\script\net\NetManager.cs" />
     <Compile Include="Assets\script\net\NetPacket.cs" />
     <Compile Include="Assets\script\net\SocketNetTools.cs" />
+    <Compile Include="Assets\script\othertween\FireLightTween.cs" />
     <Compile Include="Assets\script\othertween\LightSpotFade.cs" />
+    <Compile Include="Assets\script\othertween\TweenLight.cs" />
     <Compile Include="Assets\script\rankBoard\OneRank.cs" />
     <Compile Include="Assets\script\rankBoard\RankBoard.cs" />
     <Compile Include="Assets\script\ui\AlwaysPanel.cs" />
     <Compile Include="Assets\script\ui\CheerPanel.cs" />
     <Compile Include="Assets\script\ui\CloseUpUI.cs" />
     <Compile Include="Assets\script\ui\FlashScreen.cs" />
+    <Compile Include="Assets\script\ui\InterPanel.cs" />
     <Compile Include="Assets\script\ui\JoinPanel.cs" />
     <Compile Include="Assets\script\ui\LeaderPanel.cs" />
     <Compile Include="Assets\script\ui\OPPanel.cs" />

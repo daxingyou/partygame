@@ -28,8 +28,11 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            SceneManager.AllDrumList();
-            Invoke("PlayLightSpotAll", currentTime - 6);
+            if (SceneManager != null)
+            {
+                SceneManager.AllDrumList();
+                Invoke("PlayLightSpotAll", currentTime - 6);
+            }
 
             GameManager.phaseTime += 1;
         }

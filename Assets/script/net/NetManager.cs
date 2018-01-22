@@ -21,7 +21,7 @@ namespace isletspace
     /// </summary>
     public class NetManager : ISingleton<NetManager>
     {
-        public string starttimegap = "50000";
+        public string starttimegap = "35000";
 
         string ipaddress = "61.174.15.157:4001";
         private SocketNetTools socketNetTools;

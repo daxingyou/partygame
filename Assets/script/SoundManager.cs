@@ -48,7 +48,7 @@ public class SoundManager : ISingleton<SoundManager> {
     }
     #endregion
 
-    public void PlayClick()
+    public void PlayLaZha()
     {
         aSource.PlayOneShot(EffectSounds[0]);
     }

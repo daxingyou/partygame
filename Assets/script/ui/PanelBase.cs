@@ -40,6 +40,8 @@ namespace isletspace
     /// </summary>
     public class PanelBase : MonoBehaviour
     {
+        public bool isForceLoop;
+
         public List<NextPanel> nextPanelOrder;
         public string cameraScene = "";
 
@@ -86,6 +88,10 @@ namespace isletspace
 
         virtual public void TimeOut()
         {
+            if (isForceLoop)
+            {
+                return;
+            }
             CancelInvoke("TimeOut");
             Over();
         }
