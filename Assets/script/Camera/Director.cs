@@ -36,11 +36,12 @@ namespace isletspace
                 return false;
             }
             
-            if (currentCamera != null && currentCamera.gameObject.name == name)
+            if (currentCamera != null && currentCamera.name == name)
             {
                 return false;
             }
             isChanging = name;
+
             StartCoroutine(changeRoute(name));
             return true;
         }

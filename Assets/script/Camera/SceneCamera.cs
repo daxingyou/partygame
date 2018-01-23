@@ -21,52 +21,67 @@ namespace isletspace
     /// </summary>
     public class SceneCamera : MonoBehaviour
     {
+        public bool canChangeCamera;
+
         [Tooltip("For Debug")]
         public MoveCamera currentCamera;
-
-        private void Awake()
-        {
-            //StartCamera();
-        }
 
         public void StartCamera()
         {
             gameObject.SetActive(true);
-            PickCamera();
-            InvokeRepeating("JumpCamera", 3, 4);
+            if (canChangeCamera)
+            {
+                PickCamera();
+                InvokeRepeating("JumpRandomCamera", 2.5f, 4);
+            }
         }
 
         public void StopCamera()
         {
             gameObject.SetActive(false);
+            if (currentCamera != null)
+            {
+                currentCamera.End();
+                currentCamera = null;
+                CancelInvoke("JumpRandomCamera");
+            }
         }
 
-        public void PickCamera()
+        public void PickCamera(string name = null)
         {
-            int randidx = Random.Range(0, transform.childCount);
-            //randidx = 0;
-            var camera = transform.GetChild(randidx).GetComponent<MoveCamera>();
-
-            if(currentCamera != null && camera.name == currentCamera.name)
+            MoveCamera camera;
+            if (string.IsNullOrEmpty(name))
             {
-                camera = transform.GetChild((randidx + 1) % transform.childCount).GetComponent<MoveCamera>();
+                int randidx = Random.Range(0, transform.childCount);
+                camera = transform.GetChild(randidx).GetComponent<MoveCamera>();
+
+                if (currentCamera != null && camera.name == currentCamera.name)
+                {
+                    camera = transform.GetChild((randidx + 1) % transform.childCount).GetComponent<MoveCamera>();
+                }
+            }
+            else
+            {
+                camera = Utils.FindDirectChildComponent<MoveCamera>(name, transform);
             }
 
             camera.Begin();
             currentCamera = camera;
         }
 
-        public void JumpCamera()
+        public void JumpCamera(string name = null)
         {
             if(currentCamera != null)
             {
                 currentCamera.End();
             }
-            PickCamera();
+            PickCamera(name);
         }
 
-        //TODO  random camera func
-        //TODO  jump camera func
+        public void JumpRandomCamera()
+        {
+            JumpCamera();
+        }
 
         /// <summary>
         /// 众舞者摄像机拉近
@@ -74,7 +89,11 @@ namespace isletspace
         /// <param name="target"></param>
         public void AllDancerCloseUp(Vector3 target)
         {
-            //TODO  if not main camera, jump to main.
+            CancelInvoke("JumpRandomCamera");
+            if (currentCamera.name != "MainCamera")
+            {
+                JumpCamera("MainCamera");
+            }
             var camera = Utils.FindDirectChildComponent<LookUpCamera>("MainCamera", transform);
             camera.DoCameraMove(target);
         }

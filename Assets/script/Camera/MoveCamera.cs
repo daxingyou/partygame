@@ -61,7 +61,6 @@ namespace isletspace
         {
             if(pathMgr != null)
             {
-                print( "   move   " + gameObject.name);
                 pathMgr.DOPlay();
             }
         }
