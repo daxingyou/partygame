@@ -123,7 +123,9 @@
     <Compile Include="Assets\StylizedExplosionPack\scripts\instantiateEffectCaller.cs" />
     <Compile Include="Assets\StylizedExplosionPack\scripts\particleColorChanger.cs" />
     <Compile Include="Assets\script\Camera\Director.cs" />
+    <Compile Include="Assets\script\Camera\LookUpCamera.cs" />
     <Compile Include="Assets\script\Camera\MoveCamera.cs" />
+    <Compile Include="Assets\script\Camera\RotateCamera.cs" />
     <Compile Include="Assets\script\Camera\SceneCamera.cs" />
     <Compile Include="Assets\script\Dancer\DancerAni.cs" />
     <Compile Include="Assets\script\Dancer\LookCenter.cs" />

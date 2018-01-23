@@ -25,7 +25,7 @@ namespace isletspace
         {
             var com = gameObject.GetComponent<Renderer>();
             var mid = com.material.color;
-            mid.a = 1f;
+            mid.a = 0.6f;
             DOTween.To(() => com.material.color, x => com.material.color = x, mid, time).SetLoops(2, LoopType.Yoyo);
             transform.DOScale(1, time).SetLoops(2, LoopType.Yoyo);
         }

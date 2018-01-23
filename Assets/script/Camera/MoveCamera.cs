@@ -5,68 +5,73 @@
    MoveCamera.cs
    PartyRhythmGame
    
-   Created by WuIslet on 2018-01-08.
+   Created by WuIslet on 2018-01-23.
    
 *************************************************************/
 
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using DG.Tweening;
 
 namespace isletspace
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MoveCamera : MonoBehaviour
     {
-        [Tooltip("For Debug")]
-        public bool isPlaying;
-
-        private Vector3 StartPos;
-        private Vector3 StartRotate;
-
-        #region const
-        private Vector3 LookFront = new Vector3(0, 180 - 40, 0);
-        private Vector3 LookRotatePoint1 = new Vector3(0, 180, 0);
-        private Vector3 LookRotatePoint2 = new Vector3(0, 180 + 40, 0);
-        #endregion
+        protected Vector3 StartPos;
+        protected Vector3 StartRotate;
+        protected DOTweenPath pathMgr;
 
         void Awake()
+        {
+            pathMgr = gameObject.GetComponent<DOTweenPath>();
+            RecordStartTransorm();
+        }
+
+        private void RecordStartTransorm()
         {
             StartPos = transform.position;
             StartRotate = transform.rotation.eulerAngles;
         }
 
-        public int DoCameraMove(Vector3 target)
+        public void Begin()
         {
-            if (target == null)
+            RecordStartTransorm();
+            gameObject.SetActive(true);
+            StartMove();
+        }
+
+        public void End()
+        {
+            ResetPos();
+            gameObject.SetActive(false);
+        }
+
+        public void ResetPos()
+        {
+            StopMove();
+            transform.position = StartPos;
+            transform.rotation = Quaternion.Euler(StartRotate);
+        }
+
+        virtual public void StartMove()
+        {
+            if(pathMgr != null)
             {
-                return -1;
+                print( "   move   " + gameObject.name);
+                pathMgr.DOPlay();
             }
+        }
 
-            if (isPlaying)
+        virtual public void StopMove()
+        {
+            if (pathMgr != null)
             {
-                return -2;
+                pathMgr.DOPause();
             }
-
-            isPlaying = true;
-
-            Sequence seq = DOTween.Sequence();
-            //ZoomIn
-            seq.Append(transform.DOMove(target, 0.8f).SetEase(Ease.OutExpo));
-            seq.Join(transform.DORotate(LookFront, 0.8f));
-            //gap
-            seq.AppendInterval(0.3f);
-            //Rotate
-            seq.Append(transform.DORotate(LookRotatePoint1, 1.4f).SetEase(Ease.Linear));
-            seq.Append(transform.DORotate(LookRotatePoint2, 1.4f).SetEase(Ease.Linear));
-            //gap
-            seq.AppendInterval(0.3f);
-            //ZoomOut
-            seq.Append(transform.DOMove(StartPos, 0.8f));
-            seq.Join(transform.DORotate(StartRotate, 0.8f));
-            //PlayEnd
-            seq.AppendCallback(() => { isPlaying = false; });
-
-            return 0;
         }
     }
 }

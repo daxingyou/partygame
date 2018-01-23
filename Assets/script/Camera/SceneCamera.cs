@@ -21,14 +21,48 @@ namespace isletspace
     /// </summary>
     public class SceneCamera : MonoBehaviour
     {
+        [Tooltip("For Debug")]
+        public MoveCamera currentCamera;
+
+        private void Awake()
+        {
+            //StartCamera();
+        }
+
         public void StartCamera()
         {
             gameObject.SetActive(true);
+            PickCamera();
+            InvokeRepeating("JumpCamera", 3, 4);
         }
 
         public void StopCamera()
         {
             gameObject.SetActive(false);
+        }
+
+        public void PickCamera()
+        {
+            int randidx = Random.Range(0, transform.childCount);
+            //randidx = 0;
+            var camera = transform.GetChild(randidx).GetComponent<MoveCamera>();
+
+            if(currentCamera != null && camera.name == currentCamera.name)
+            {
+                camera = transform.GetChild((randidx + 1) % transform.childCount).GetComponent<MoveCamera>();
+            }
+
+            camera.Begin();
+            currentCamera = camera;
+        }
+
+        public void JumpCamera()
+        {
+            if(currentCamera != null)
+            {
+                currentCamera.End();
+            }
+            PickCamera();
         }
 
         //TODO  random camera func
@@ -41,7 +75,7 @@ namespace isletspace
         public void AllDancerCloseUp(Vector3 target)
         {
             //TODO  if not main camera, jump to main.
-            var camera = Utils.FindDirectChildComponent<MoveCamera>("MainCamera", transform);
+            var camera = Utils.FindDirectChildComponent<LookUpCamera>("MainCamera", transform);
             camera.DoCameraMove(target);
         }
 
