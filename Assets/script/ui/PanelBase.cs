@@ -45,7 +45,7 @@ namespace isletspace
         public List<NextPanel> nextPanelOrder;
         public string cameraScene = "";
 
-        public float currentTime;
+        public float currentTimeOut;
         public Vector2 OriginPos;
 
         [System.NonSerialized]
@@ -67,10 +67,17 @@ namespace isletspace
             {
                 return;
             }
-            currentTime = nextPanelOrder[l].timeout;
-            if (currentTime > 0)
+
+            SetTimeOut(nextPanelOrder[l].timeout);
+        }
+
+        protected void SetTimeOut(float timeout)
+        {
+            CancelInvoke("TimeOut");
+            currentTimeOut = timeout;
+            if(timeout > 0)
             {
-                Invoke("TimeOut", currentTime);
+                Invoke("TimeOut", currentTimeOut);
             }
         }
 

@@ -52,9 +52,9 @@ namespace isletspace
         public void DoDrum(int type, float time)
         {
             float rate = 1;
-            if (time != 0 && time < 0.4f)
+            if (time != 0 && time < 0.6f)
             {
-                rate = 0.4f / time;
+                rate = 0.6f / time;
             }
             animator.speed = rate;
             
@@ -201,6 +201,18 @@ namespace isletspace
                     callback(beat[i]);
                 }
                 preTime = beattime[i];
+            }
+        }
+
+        public IEnumerator DrumSolo()
+        {
+            float preTime = 0;
+            for (int i = 0; i < GameManager.soloList.Count; ++i)
+            {
+                float gap = GameManager.soloList[i] - preTime;
+                yield return new WaitForSeconds(gap);
+                DoDrum(1, gap);
+                preTime = GameManager.soloList[i];
             }
         }
         #endregion

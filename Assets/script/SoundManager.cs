@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class SoundManager : ISingleton<SoundManager> {
 	public AudioClip[] Backgrounds;
@@ -19,17 +20,38 @@ public class SoundManager : ISingleton<SoundManager> {
     }
 
     #region BGM
-    public void PlayMenuBackground(){
-		AudioClip ac = Backgrounds [0];
+    public void PlaySoloBackground(){
+		AudioClip ac = Backgrounds [3];
         if(bgSource.isPlaying == false || bgSource.clip != ac)
         {
             bgSource.clip = ac;
             bgSource.Play();
         }
-	}
+    }
 
-	public void PlayShopBackground(){
-		AudioClip ac = Backgrounds [1];
+    public void PlayGuideBackground()
+    {
+        AudioClip ac = Backgrounds[4];
+        if (bgSource.isPlaying == false || bgSource.clip != ac)
+        {
+            bgSource.clip = ac;
+            bgSource.Play();
+        }
+    }
+
+    public void PlayJoinBackground()
+    {
+        AudioClip ac = Backgrounds[5];
+        if (bgSource.isPlaying == false || bgSource.clip != ac)
+        {
+            bgSource.clip = ac;
+            bgSource.Play();
+        }
+    }
+
+    public void PlayCheerBackground()
+    {
+        AudioClip ac = Backgrounds[6];
         if (bgSource.isPlaying == false || bgSource.clip != ac)
         {
             bgSource.clip = ac;
@@ -46,6 +68,24 @@ public class SoundManager : ISingleton<SoundManager> {
             bgSource.Play();
         }
     }
+    
+    public void StopBackground()
+    {
+        if (bgSource.isPlaying)
+        {
+            bgSource.Stop();
+        }
+    }
+
+    public void StopBackground(float time)
+    {
+        if (!bgSource.isPlaying)
+        {
+            return;
+        }
+
+        bgSource.DOFade(0, time);
+    }
     #endregion
 
     public void PlayLaZha()
@@ -58,39 +98,39 @@ public class SoundManager : ISingleton<SoundManager> {
         aSource.PlayOneShot(EffectSounds[1]);
     }
 
-    public void PlayRoundStartSound()
+    public void PlaySingleA()
+    {
+        aSource.PlayOneShot(EffectSounds[2]);
+    }
+
+    public void PlaySingleB()
+    {
+        aSource.PlayOneShot(EffectSounds[3]);
+    }
+
+    public void PlaySingleAB()
     {
         aSource.PlayOneShot(EffectSounds[4]);
     }
 
-    public void PlayShuffle()
+    public void PlayAllA()
     {
         aSource.PlayOneShot(EffectSounds[5]);
     }
 
-    public void PlayDizeSound()
+    public void PlayAllB()
     {
         aSource.PlayOneShot(EffectSounds[6]);
     }
 
-    public void PlayGet4Card()
+    public void PlayAllAB()
     {
         aSource.PlayOneShot(EffectSounds[7]);
     }
 
-    public void PlayDropCard()
+    public void PlayCollect()
     {
         aSource.PlayOneShot(EffectSounds[8]);
-    }
-
-    public void PlaySelectCard()
-    {
-        aSource.PlayOneShot(EffectSounds[9]);
-    }
-
-    public void PlayRoundEndSound()
-    {
-        aSource.PlayOneShot(EffectSounds[11]);
     }
 
     public void PlaySettleSound()

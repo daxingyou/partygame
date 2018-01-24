@@ -47,7 +47,11 @@ namespace isletspace
 
         IEnumerator getText()
         {
-            var www = new WWW(Utils.GetStreamingPath() + "Route.json");
+            var www = new WWW(Utils.GetStreamingPath() + "SoloRoute.json");
+            yield return www;
+            SetSoloList(www.text);
+
+            www = new WWW(Utils.GetStreamingPath() + "Route.json");
             yield return www;
             Decode(www.text);
             SetNextPanel();
@@ -174,6 +178,15 @@ namespace isletspace
             panel.nextPanelOrder.Reverse();
             panel = Utils.FindDirectChildComponent<PanelBase>("SettlePanel", panelParent);
             panel.nextPanelOrder.Reverse();
+        }
+
+        private void SetSoloList(string json)
+        {
+            print(json);
+
+            JsonSerializer serializer = new JsonSerializer();
+            StringReader sr = new StringReader(json);
+            GameManager.soloList = serializer.Deserialize(new JsonTextReader(sr), typeof(List<float>)) as List<float>;
         }
 
         public static List<int> GetBeat()

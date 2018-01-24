@@ -47,15 +47,16 @@ namespace isletspace
             //Èë³¡¿ªµÆ
             spotLight.Begin();
             SoundManager.Instance.PlayLaZha();
-            yield return new WaitForSeconds(2.8f);
+            yield return new WaitForSeconds(3f);
             SoundManager.Instance.PlayFoot();
-            yield return new WaitForSeconds(5.5f);
-            //ºÚÆÁ×à¹ÄÉù
-            SoundManager.Instance.PlayBackground(3);
-            EndCameraFollow();
+            yield return new WaitForSeconds(5.3f);
             spotLight.End();
-            StartCoroutine(dancer.DrumConstant(1, 5, 0.5f));
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(0.5f);
+            //ºÚÆÁ×à¹ÄÉù
+            SoundManager.Instance.PlaySoloBackground();
+            EndCameraFollow();
+            StartCoroutine(dancer.DrumSolo());
+            yield return new WaitForSeconds(12f);
             //½áÊøÑÝ×à
             dancer.PlayOPPose();
             torch.SetActive(true);
@@ -96,6 +97,11 @@ namespace isletspace
         }
 
         public void PlayJoin()
+        {
+            Invoke("DelayPlayJoin", 1);
+        }
+
+        private void DelayPlayJoin()
         {
             dancer.PlayJoin();
         }

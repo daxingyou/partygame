@@ -39,15 +39,21 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            if (gameObject.name == "LeaderPanel")
+            //manager.StartPanel("AlwaysPanel");
+            if(GameManager.gamePhase > 10) //保险
             {
-                //manager.StartPanel("AlwaysPanel");
-                if(GameManager.gamePhase < 5)
-                    SoundManager.Instance.PlayBackground(GameManager.gamePhase);
+                GameManager.gamePhase = 0;
             }
 
+            SoundManager.Instance.PlayBackground(GameManager.gamePhase);
             arrowManager.ClearList();
-            StartCoroutine(PlayDrumList(ImportRoute.GetBeat(), ImportRoute.GetBeatTime()));
+            float startTime = 0;
+            if(GameManager.phaseTime == 0) //第一回合额外片头时间
+            {
+                SetTimeOut(currentTimeOut + GameManager.PHASE_START_DELAY[GameManager.gamePhase]);
+                startTime = GameManager.PHASE_START_DELAY[GameManager.gamePhase];
+            }
+            StartCoroutine(PlayDrumList(startTime, ImportRoute.GetBeat(), ImportRoute.GetBeatTime()));
         }
 
         public override void DoEnd()
@@ -56,8 +62,12 @@ namespace isletspace
             SceneManager.dancer.DoYourTurn(false);
         }
 
-        IEnumerator PlayDrumList(List<int> beat, List<int> beattime)
+        IEnumerator PlayDrumList(float startDelay, List<int> beat, List<int> beattime)
         {
+            if(startDelay > 0)
+            {
+                yield return new WaitForSeconds(startDelay);
+            }
             yield return StartCoroutine(SceneManager.dancer.DrumList(beat, beattime, arrowManager.AddArrow));
             
             yield return new WaitForSeconds(0.3f);

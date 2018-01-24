@@ -25,13 +25,14 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            countDown.StartCountDown((int)currentTime);
+            countDown.StartCountDown((int)currentTimeOut);
         }
 
         override public void DoEnd()
         {
             base.DoEnd();
             countDown.StopCountDown();
+            SoundManager.Instance.StopBackground();
         }
     }
 }

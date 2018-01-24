@@ -20,8 +20,6 @@ namespace isletspace
             percnetage = 0;
             progressBar.fillAmount = percnetage;
             width = progressBar.rectTransform.rect.width;
-
-            //InvokeRepeating("AddProgress", 0, 0.1f);
         }
 
         public void AddProgress(float interval)

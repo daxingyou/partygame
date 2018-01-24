@@ -19,8 +19,11 @@ namespace isletspace
     /// <summary>
     /// 
     /// </summary>
+
     public static class GameManager
     {
+        public static List<float> PHASE_START_DELAY = new List<float>() { 15.218f, 5.579f, 7.1475f };
+
         public static int currentPlayNum = 0;
         public static event Action UpdatePlayNumCallback;
 
@@ -53,5 +56,7 @@ namespace isletspace
         }
 
         public static int phaseTime = 0;
+
+        public static List<float> soloList = new List<float>();
     }
 }

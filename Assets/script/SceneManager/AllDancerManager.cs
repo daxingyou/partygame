@@ -89,7 +89,7 @@ namespace isletspace
                 var ani = allDancer.GetChild(i).GetComponent<DancerAni>();
                 if (ani.gameObject.activeSelf)
                 {
-                    StartCoroutine(ani.DrumConstant(2, 10, 0.5f));
+                    StartCoroutine(ani.DrumConstant(1, 10, 0.8f));
                 }
             }
         }

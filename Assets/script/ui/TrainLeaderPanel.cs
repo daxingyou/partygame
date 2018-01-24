@@ -29,6 +29,7 @@ namespace isletspace
             base.DoStart(manager);
             arrowManager.ClearList();
             StartCoroutine(PlayDrumList(ImportRoute.GetBeat(), ImportRoute.GetBeatTime()));
+            SoundManager.Instance.PlayGuideBackground();
         }
 
         public override void DoEnd()

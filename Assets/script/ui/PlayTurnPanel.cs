@@ -31,7 +31,7 @@ namespace isletspace
             if (SceneManager != null)
             {
                 SceneManager.AllDrumList();
-                Invoke("PlayLightSpotAll", currentTime - 6);
+                Invoke("PlayLightSpotAll", currentTimeOut - 3);
             }
 
             GameManager.phaseTime += 1;
