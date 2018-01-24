@@ -29,10 +29,9 @@ namespace isletspace
         public void StartCamera()
         {
             gameObject.SetActive(true);
-            if (canChangeCamera)
+            if (canChangeCamera)  // TODO 统一允许切换摄像机，是否随机的判断需放置在另外的地方，并且有个取消随机的方法； 注意，这个跟下面的注册方法有重叠部分。
             {
-                PickCamera();
-                InvokeRepeating("JumpRandomCamera", 2.5f, 4);
+                InvokeRepeating("JumpRandomCamera", 0, 3);
             }
         }
 
@@ -47,40 +46,40 @@ namespace isletspace
             }
         }
 
-        public void PickCamera(string name = null)
+        public void JumpCamera(string name)
         {
-            MoveCamera camera;
-            if (string.IsNullOrEmpty(name))
+            if(currentCamera != null && currentCamera.name == name)
             {
-                int randidx = Random.Range(0, transform.childCount);
-                camera = transform.GetChild(randidx).GetComponent<MoveCamera>();
-
-                if (currentCamera != null && camera.name == currentCamera.name)
-                {
-                    camera = transform.GetChild((randidx + 1) % transform.childCount).GetComponent<MoveCamera>();
-                }
-            }
-            else
-            {
-                camera = Utils.FindDirectChildComponent<MoveCamera>(name, transform);
+                return;
             }
 
+            if (currentCamera != null)
+            {
+                currentCamera.End();
+            }
+
+            var camera = Utils.FindDirectChildComponent<MoveCamera>(name, transform);
             camera.Begin();
             currentCamera = camera;
         }
 
-        public void JumpCamera(string name = null)
-        {
-            if(currentCamera != null)
-            {
-                currentCamera.End();
-            }
-            PickCamera(name);
-        }
-
         public void JumpRandomCamera()
         {
-            JumpCamera();
+            MoveCamera camera;
+            int randidx = Random.Range(0, transform.childCount);
+            camera = transform.GetChild(randidx).GetComponent<MoveCamera>();
+
+            if(currentCamera != null)
+            {
+                if(camera.name == currentCamera.name) //避免随机到同一个摄像机
+                {
+                    camera = transform.GetChild((randidx + 1) % transform.childCount).GetComponent<MoveCamera>();
+                }
+                currentCamera.End();
+            }
+            
+            camera.Begin();
+            currentCamera = camera;
         }
 
         /// <summary>
@@ -90,10 +89,7 @@ namespace isletspace
         public void AllDancerCloseUp(Vector3 target)
         {
             CancelInvoke("JumpRandomCamera");
-            if (currentCamera.name != "MainCamera")
-            {
-                JumpCamera("MainCamera");
-            }
+            JumpCamera("MainCamera");
             var camera = Utils.FindDirectChildComponent<LookUpCamera>("MainCamera", transform);
             camera.DoCameraMove(target);
         }
@@ -101,11 +97,32 @@ namespace isletspace
         /// <summary>
         /// 欢呼摄像机旋转
         /// </summary>
-        public void CheerRotate()
+        public void CheerRotate()  //TODO 统一化用camera下的移动控制
         {
             var camera = transform.Find("CheerCamera");
             camera.rotation = Quaternion.Euler(0, -15, 0);
             camera.DORotate(new Vector3(0, 15f, 0), 4f).SetEase(Ease.Linear);
+        }
+
+        /// <summary>
+        /// 众舞者摄像机虚化
+        /// </summary>
+        public void AllDancerBlur()
+        {
+            CancelInvoke("JumpRandomCamera");
+            JumpCamera("MainCamera");
+            var camera = Utils.FindDirectChildComponent<UnityStandardAssets.ImageEffects.Blur>("MainCamera", transform);
+            camera.enabled = true;
+        }
+
+        /// <summary>
+        /// 结束随机切换并定格到主相机
+        /// </summary>
+        /// <param name="name">主相机名字</param>
+        public void CancelRandomJumpCamera(string name)
+        {
+            CancelInvoke("JumpRandomCamera");
+            JumpCamera(name);
         }
     }
 }

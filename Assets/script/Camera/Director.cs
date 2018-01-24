@@ -102,33 +102,5 @@ namespace isletspace
                 afterChangeCamera -= callback;
             }
         }
-
-        //public void DoCheerRotate()
-        //{
-        //    if (currentCamera.gameObject.name != "CheerScene" && !isChanging)
-        //    {
-        //        ChangeCamera("CheerScene");
-        //    }
-
-        //    afterChangeCamera += currentCamera.CheerRotate;
-        //}
-
-        //public void DoSecondCheerRotate()
-        //{
-        //    if (currentCamera.gameObject.name != "SecondCheerScene" && !isChanging)
-        //    {
-        //        ChangeCamera("SecondCheerScene");
-        //    }
-        //    currentCamera.CheerRotate();
-        //}
-
-        //public void DoAllDancerCloseUp(Vector3 target)
-        //{
-        //    if (currentCamera.gameObject.name != "AllDancerScene")
-        //    {
-        //        ChangeCamera("AllDancerScene");
-        //    }
-        //    currentCamera.AllDancerCloseUp(target);
-        //}
     }
 }

@@ -40,11 +40,13 @@ namespace isletspace
     /// </summary>
     public class PanelBase : MonoBehaviour
     {
+        [Tooltip("For Debug")]
         public bool isForceLoop;
 
-        public List<NextPanel> nextPanelOrder;
+        public List<NextPanel> nextPanelOrder; //TODO  想用栈结构储存，但是注意是先进先出的，要用轻量级队列。
         public string cameraScene = "";
 
+        [Tooltip("For Debug")]
         public float currentTimeOut;
         public Vector2 OriginPos;
 
@@ -71,7 +73,7 @@ namespace isletspace
             SetTimeOut(nextPanelOrder[l].timeout);
         }
 
-        protected void SetTimeOut(float timeout)
+        protected void SetTimeOut(float timeout) //TODO 时长的修改没有刷新对应方法，应该要做成注册形式。
         {
             CancelInvoke("TimeOut");
             currentTimeOut = timeout;

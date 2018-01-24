@@ -26,13 +26,15 @@ namespace isletspace
         {
             base.DoStart(manager);
             SoundManager.Instance.PlayCheerBackground();
+            SoundManager.Instance.PlayCheerPeople();
+            SoundManager.Instance.PlayCheerFire();
+            SoundManager.Instance.FadeBackground(currentTimeOut);
             DoCheer();
         }
 
         override public void DoEnd()
         {
             base.DoEnd();
-            SoundManager.Instance.StopBackground();
             SceneManager.CheerEnd();
         }
 

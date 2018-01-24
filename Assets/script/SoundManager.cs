@@ -77,14 +77,29 @@ public class SoundManager : ISingleton<SoundManager> {
         }
     }
 
-    public void StopBackground(float time)
+    public void FadeBackground(float time)
     {
+        StartCoroutine(DelayFadeBackground(time));
+    }
+
+    private IEnumerator DelayFadeBackground(float time)
+    {
+        print("     delay fade  background   " + time  + bgSource.isPlaying);
         if (!bgSource.isPlaying)
         {
-            return;
+            yield break;
         }
 
-        bgSource.DOFade(0, time);
+        if (time > 2)
+        {
+            yield return new WaitForSeconds(time - 2);
+            time = 2;
+        }
+
+        bgSource.DOFade(0, time).onComplete = ()=> {
+            bgSource.volume = 1;
+            bgSource.Stop();
+        };
     }
     #endregion
 
@@ -133,14 +148,14 @@ public class SoundManager : ISingleton<SoundManager> {
         aSource.PlayOneShot(EffectSounds[8]);
     }
 
-    public void PlaySettleSound()
+    public void PlayCheerPeople()
     {
-        aSource.PlayOneShot(EffectSounds[12]);
+        aSource.PlayOneShot(EffectSounds[9]);
     }
 
-    public void PlayHuSound()
+    public void PlayCheerFire()
     {
-        aSource.PlayOneShot(EffectSounds[13]);
+        aSource.PlayOneShot(EffectSounds[10]);
     }
 
     public void PlayTingSound()

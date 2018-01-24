@@ -24,7 +24,8 @@ namespace isletspace
     public class RankPanel : PanelBase
     {
         public RankBoard board;
-        public Blur cam;
+
+        private Blur currentCameraBlur;
 
         private void Start()
         {
@@ -40,13 +41,21 @@ namespace isletspace
         {
             base.DoStart(manager);
             manager.EndPanel("AlwaysPanel");
-            cam.enabled = true;
+            currentCameraBlur = Utils.GetChildComponent<Blur>(Director.Instance.currentCamera.transform);
+            if (currentCameraBlur != null)
+            {
+                currentCameraBlur.enabled = true;
+            }
         }
 
         public override void DoEnd()
         {
             base.DoEnd();
-            cam.enabled = false;
+            if(currentCameraBlur != null)
+            {
+                currentCameraBlur.enabled = false;
+                currentCameraBlur = null;
+            }
         }
 
         public void OnRankRet(NetPacket msg)

@@ -43,7 +43,6 @@ namespace isletspace
 
         public void DoPose()
         {
-            animator.speed = 1;
             animator.SetTrigger("pose");
             int type = Random.Range(1, 7);
             animator.SetFloat("poseType", type);
@@ -57,7 +56,6 @@ namespace isletspace
                 rate = 0.6f / time;
             }
             animator.speed = rate;
-            
 
             animator.SetTrigger("drum");
 
@@ -80,7 +78,6 @@ namespace isletspace
 
         public void DoCheer(bool flag)
         {
-            animator.speed = 1;
             animator.SetBool("cheerFlag", flag);
             if (flag)
             {
@@ -142,7 +139,6 @@ namespace isletspace
         }
         public void DoYourTurn(bool flag)
         {
-            animator.speed = 1;
             animator.SetBool("EndLeading", flag);
         }
         #endregion
@@ -174,9 +170,11 @@ namespace isletspace
                 totalTime -= gap;
                 if(totalTime < 0)
                 {
+                    animator.speed = 1; //因为DoDrum会改变速度，结束时需要改回来。
                     yield break;
                 }
             }
+            animator.speed = 1; //因为DoDrum会改变速度，结束时需要改回来。
         }
         public IEnumerator DrumConstant(int type, int count, float gap)
         {
@@ -185,6 +183,7 @@ namespace isletspace
                 DoDrum(type, gap);
                 yield return new WaitForSeconds(gap);
             }
+            animator.speed = 1; //因为DoDrum会改变速度，结束时需要改回来。
         }
 
         public IEnumerator DrumList(List<int> beat, List<int> beattime, System.Action<int> callback = null)
@@ -202,6 +201,7 @@ namespace isletspace
                 }
                 preTime = beattime[i];
             }
+            animator.speed = 1; //因为DoDrum会改变速度，结束时需要改回来。
         }
 
         public IEnumerator DrumSolo()
@@ -211,9 +211,11 @@ namespace isletspace
             {
                 float gap = GameManager.soloList[i] - preTime;
                 yield return new WaitForSeconds(gap);
-                DoDrum(1, gap);
+                int beat = ((i + 1) == GameManager.soloList.Count) ? 2 : 1; //特殊判断，最后一拍用type2。
+                DoDrum(beat, gap);
                 preTime = GameManager.soloList[i];
             }
+            animator.speed = 1; //因为DoDrum会改变速度，结束时需要改回来。
         }
         #endregion
     }

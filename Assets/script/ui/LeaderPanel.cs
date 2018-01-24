@@ -34,7 +34,7 @@ namespace isletspace
     public class LeaderPanel : PanelBase
     {
         public LeaderManager SceneManager;
-        public ArrowManager arrowManager;
+        public ArrowManager arrowManager; //TODO 节奏条考虑放入AllwaysPanel。
 
         public override void DoStart(UIManager manager)
         {

@@ -44,8 +44,8 @@ namespace isletspace
 
             Sequence seq = DOTween.Sequence();
             //ZoomIn
-            seq.Append(transform.DOMove(target, 0.1f).SetEase(Ease.OutExpo));
-            seq.Join(transform.DORotate(LookFront, 0.1f));
+            seq.Append(transform.DOMove(target, 0.5f));
+            seq.Join(transform.DORotate(LookFront, 0.5f));
             //gap
             seq.AppendInterval(0.3f);
             //Rotate
@@ -54,8 +54,8 @@ namespace isletspace
             //gap
             seq.AppendInterval(0.3f);
             //ZoomOut
-            seq.Append(transform.DOMove(StartPos, 0.3f));
-            seq.Join(transform.DORotate(StartRotate, 0.3f));
+            seq.Append(transform.DOMove(StartPos, 0.5f));
+            seq.Join(transform.DORotate(StartRotate, 0.5f));
             //PlayEnd
             seq.AppendCallback(() => { isPlaying = false; });
 

@@ -144,7 +144,7 @@ namespace isletspace
 
             for (int i = 0; i < data.phase3.Count; ++i)
             {
-                string endphase = i == (data.phase3.Count - 1) ? "RankPanel" : "LeaderPanel";
+                string endphase = i == (data.phase3.Count - 1) ? "EDPanel" : "LeaderPanel";
 
                 string[] substring = data.phase3[i].time.Split(new char[] { ',' });
 

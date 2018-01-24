@@ -26,13 +26,13 @@ namespace isletspace
         {
             base.DoStart(manager);
             countDown.StartCountDown((int)currentTimeOut);
+            SoundManager.Instance.FadeBackground(currentTimeOut);
         }
 
         override public void DoEnd()
         {
             base.DoEnd();
             countDown.StopCountDown();
-            SoundManager.Instance.StopBackground();
         }
     }
 }

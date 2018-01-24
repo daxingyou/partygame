@@ -98,6 +98,22 @@ public static class Utils
         return null;
     }
 
+    public static T GetChildComponent<T>(Transform t)
+    {
+        T result = t.GetComponentInChildren<T>();
+        if (result != null)
+            return result;
+
+        for (int i = 0; i < t.childCount; i++)
+        {
+            t = t.GetChild(i);
+            result = GetChildComponent<T>(t);
+            if (result != null)
+                return result;
+        }
+        return default(T);
+    }
+
     public static T FindDirectChildComponent<T>(string name, Transform obj)
     {
         var child = obj.Find(name);
