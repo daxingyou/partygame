@@ -29,12 +29,12 @@ namespace isletspace
 
         private void Start()
         {
-            NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
+            GameManager.RankCallback += OnRankRet;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            NetManager.Instance.RemoveEventListener(PacketType.RankListRet, OnRankRet);
+            GameManager.RankCallback -= OnRankRet;
         }
 
         public override void DoStart(UIManager manager)
@@ -58,11 +58,9 @@ namespace isletspace
             }
         }
 
-        public void OnRankRet(NetPacket msg)
+        public void OnRankRet()
         {
-            string data = msg.data;
-            print("   receive  rank ret  " + data);
-            board.SetAllRank(data);
+            board.SetAllRank();
         }
     }
 }

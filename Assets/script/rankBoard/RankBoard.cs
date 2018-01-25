@@ -20,37 +20,15 @@ namespace isletspace
 {
     public class RankBoard : MonoBehaviour
     {
-        List<RankVO> lastData;
-
-        public void SetAllRank(string json)
+        public void SetAllRank()
         {
-            JsonSerializer serializer = new JsonSerializer();
-            StringReader sr = new StringReader(json);
-            List<RankVO> data = serializer.Deserialize(new JsonTextReader(sr), typeof(List<RankVO>)) as List<RankVO>;
-
-            //if(lastData == null)
+            var data = GameManager.RankData;
+            for (int i = 0; i < data.Count; ++i)
             {
-                if(transform.childCount > 0)
-                {
-                    for (int i = transform.childCount - 1; i >= 0; --i)
-                    {
-                        Destroy(transform.GetChild(i).gameObject);
-                    }
-                }
-
-                lastData = data;
-                for (int i = 0; i < data.Count; ++i)
-                {
-                    var obj = Pool.CreateObject("UI/one", transform);
-                    var one = obj.GetComponent<OneRank>();
-                    one.SetAllData(data[i]);
-                }
+                var obj = Pool.CreateObject("UI/one", transform);
+                var one = obj.GetComponent<OneRank>();
+                one.SetAllData(data[i]);
             }
-            //else
-            //{
-                //diff lastData & data;
-                //play diff ani
-            //}
         }
     }
 }

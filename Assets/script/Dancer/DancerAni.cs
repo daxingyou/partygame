@@ -141,9 +141,14 @@ namespace isletspace
         {
             if (flag)
             {
-                SoundManager.Instance.PlayGO();
+                Invoke("DelayGo", 0.45f);
             }
             animator.SetBool("EndLeading", flag);
+        }
+
+        private void DelayGo()
+        {
+            SoundManager.Instance.PlayGO();
         }
         #endregion
 

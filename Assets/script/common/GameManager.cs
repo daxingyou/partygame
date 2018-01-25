@@ -9,9 +9,11 @@
    
 *************************************************************/
 
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 //TODO  Unity场景中的CheerSceneBase、SecondCheerSceneBase中的所有欢呼的人，并没有用统一的预制件做。需要重新创建。
@@ -62,7 +64,22 @@ namespace isletspace
         public static List<float> soloList = new List<float>();
 
         public static int MVPIndex = 999;
+        public static List<RankVO> RankData;
+        public static Action RankCallback;
 
+        public static void SetRankData(string json)
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            StringReader sr = new StringReader(json);
+            List<RankVO> data = serializer.Deserialize(new JsonTextReader(sr), typeof(List<RankVO>)) as List<RankVO>;
+            RankData = data;
+
+            if(RankCallback != null)
+            {
+                RankCallback();
+            }
+        }
+        
         public static void PickMVP()
         {
             MVPIndex = 3;

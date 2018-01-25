@@ -25,18 +25,17 @@ namespace isletspace
 
         private void Start()
         {
-            NetManager.Instance.AddEventListener(PacketType.RankListRet, OnRankRet);
+            GameManager.RankCallback += OnRankRet;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            NetManager.Instance.RemoveEventListener(PacketType.RankListRet, OnRankRet);
+            GameManager.RankCallback -= OnRankRet;
         }
 
-        public void OnRankRet(NetPacket msg)
+        public void OnRankRet()
         {
-            string data = msg.data;
-            board.SetAllRank(data);
+            board.SetAllRank();
         }
     }
 }

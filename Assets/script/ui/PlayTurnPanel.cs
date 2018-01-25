@@ -33,7 +33,8 @@ namespace isletspace
             base.DoStart(manager);
             
             TryDelayIfLastPanel();
-            
+            TryPreLoadIfNextSettle();
+
             SceneManager.AllDrumList();
             var startLightTime = currentTimeOut - 3; //这个常数是光球飞行需要的时间。优先保证光球能飞完成。//修改光球起飞时间，可能会影响到ProgressBar.AniRoute的流程时间对不上
             startLightTime = Mathf.Clamp(startLightTime, 0, ImportRoute.GetBeatTime().Sum() / 1000f); //将起始时间限制在合法范围内。

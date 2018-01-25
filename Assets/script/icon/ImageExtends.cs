@@ -38,7 +38,7 @@ public class ImageExtends : MonoBehaviour
 
     IEnumerator DownloadImg(Image image)
     {
-        Debug.Log("downloading url:" + url);
+        //Debug.Log("downloading url:" + url);
         WWW www = new WWW(url);
         yield return www;
         while (!www.isDone)

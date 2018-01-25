@@ -39,7 +39,7 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            //manager.StartPanel("AlwaysPanel");
+            manager.StartPanel("AlwaysPanel");
             if(GameManager.gamePhase > 10) //±£œ’
             {
                 GameManager.gamePhase = 0;

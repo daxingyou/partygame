@@ -39,6 +39,7 @@ namespace isletspace
             AddEventListener(PacketType.ConnectSucc, OnConnectOK);
             AddEventListener(PacketType.AccountCountRet, OnUpdatePlayerNum);
             AddEventListener(PacketType.MsgAck, OnAck);
+            AddEventListener(PacketType.RankListRet, OnRankListRet);
 
             socketNetTools.OnConnect -= OnConnect;
             socketNetTools.OnConnect += OnConnect;
@@ -109,6 +110,11 @@ namespace isletspace
         public void OnAck(NetPacket msg)
         {
             print("    ACK  " + msg.data);
+        }
+
+        public void OnRankListRet(NetPacket msg)
+        {
+            GameManager.SetRankData(msg.data);
         }
         #endregion
 
