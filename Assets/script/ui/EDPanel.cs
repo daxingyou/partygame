@@ -24,6 +24,7 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
+            FlashScreen.Instance.DoUnCover(0.1f);
             Director.Instance.RegistChangeCamera(cameraScene, DoEndCamera);
         }
 

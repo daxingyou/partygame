@@ -25,9 +25,8 @@ namespace isletspace
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            SoundManager.Instance.PlayCheerBackground();
-            SoundManager.Instance.PlayCheerPeople();
-            SoundManager.Instance.PlayCheerFire();
+            FlashScreen.Instance.DoUnCover(0.1f);
+            SoundManager.Instance.PlayCheerFX();
             SoundManager.Instance.FadeBackground(currentTimeOut);
             DoCheer();
         }

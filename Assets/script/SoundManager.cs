@@ -49,16 +49,6 @@ public class SoundManager : ISingleton<SoundManager> {
         }
     }
 
-    public void PlayCheerBackground()
-    {
-        AudioClip ac = Backgrounds[6];
-        if (bgSource.isPlaying == false || bgSource.clip != ac)
-        {
-            bgSource.clip = ac;
-            bgSource.Play();
-        }
-    }
-
     public void PlayBackground(int no)
     {
         AudioClip ac = Backgrounds[no];
@@ -84,7 +74,6 @@ public class SoundManager : ISingleton<SoundManager> {
 
     private IEnumerator DelayFadeBackground(float time)
     {
-        print("     delay fade  background   " + time  + bgSource.isPlaying);
         if (!bgSource.isPlaying)
         {
             yield break;
@@ -148,44 +137,14 @@ public class SoundManager : ISingleton<SoundManager> {
         aSource.PlayOneShot(EffectSounds[8]);
     }
 
-    public void PlayCheerPeople()
+    public void PlayCheerFX()
     {
         aSource.PlayOneShot(EffectSounds[9]);
     }
 
-    public void PlayCheerFire()
+    public void PlayGO()
     {
         aSource.PlayOneShot(EffectSounds[10]);
-    }
-
-    public void PlayTingSound()
-    {
-        aSource.PlayOneShot(EffectSounds[15]);
-    }
-
-    public void PlayGetCard()
-    {
-        aSource.PlayOneShot(EffectSounds[16]);
-    }
-
-    public void PlayFall()
-    {
-        aSource.PlayOneShot(EffectSounds[17]);
-    }
-
-    public void PlayBuy()
-    {
-        aSource.PlayOneShot(EffectSounds[18]);
-    }
-
-    public void PlayLose()
-    {
-        aSource.PlayOneShot(EffectSounds[19]);
-    }
-
-    public void PlayWin()
-    {
-        aSource.PlayOneShot(EffectSounds[20]);
     }
 
     public void PlayEffect(int index)

@@ -1,0 +1,34 @@
+
+jiesuoxgn.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fire_01
+  rotate: false
+  xy: 682, 483
+  size: 180, 315
+  orig: 180, 315
+  offset: 0, 0
+  index: -1
+fire_02
+  rotate: false
+  xy: 420, 459
+  size: 260, 339
+  orig: 260, 339
+  offset: 0, 0
+  index: -1
+fire_03
+  rotate: false
+  xy: 2, 2
+  size: 306, 369
+  orig: 306, 369
+  offset: 0, 0
+  index: -1
+stone
+  rotate: false
+  xy: 2, 373
+  size: 416, 425
+  orig: 416, 425
+  offset: 0, 0
+  index: -1

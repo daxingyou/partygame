@@ -30,13 +30,7 @@ namespace isletspace
         {
             base.DoStart(manager);
             SceneManager.AllDrumConstant();
-            PickShow();
             Invoke("DoCloseUp", 0.5f);
-        }
-
-        public void PickShow()
-        {
-            closeUp.PreLoad("1234", "http://wx.qlogo.cn/mmopen/vi_32/icvxBfeXY9WGXGhjE7ELzuBCQKxLu4laWkXYtRROIdxT8UXZPQmfREIE3VFXc7Krib8oREiclGC8QicZP0fCqcAYRw/132");
         }
 
         public void DoCloseUp()

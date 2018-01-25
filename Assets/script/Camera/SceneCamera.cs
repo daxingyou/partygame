@@ -101,7 +101,7 @@ namespace isletspace
         {
             var camera = transform.Find("CheerCamera");
             camera.rotation = Quaternion.Euler(0, -15, 0);
-            camera.DORotate(new Vector3(0, 15f, 0), 4f).SetEase(Ease.Linear);
+            camera.DORotate(new Vector3(0, 15f, 0), 5f).SetEase(Ease.Linear);
         }
 
         /// <summary>

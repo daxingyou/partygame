@@ -58,5 +58,22 @@ namespace isletspace
         public static int phaseTime = 0;
 
         public static List<float> soloList = new List<float>();
+
+        public static int MVPIndex = 999;
+
+        public static void PickMVP()
+        {
+            MVPIndex = 3;
+        }
+
+        public static string GetMVPName()
+        {
+            return "Play of The Game!";
+        }
+
+        public static string GetMVPUrl()
+        {
+            return "http://wx.qlogo.cn/mmopen/vi_32/icvxBfeXY9WGXGhjE7ELzuBCQKxLu4laWkXYtRROIdxT8UXZPQmfREIE3VFXc7Krib8oREiclGC8QicZP0fCqcAYRw/132";
+        }
     }
 }

@@ -27,7 +27,10 @@ namespace isletspace
             for (int i = 0; i < transform.childCount; ++i)
             {
                 var child = transform.GetChild(i).GetComponent<Light>();
-                DOTween.To(() => child.intensity, x => child.intensity = x, 0, 0.25f).From();
+                if (child != null)
+                {
+                    child.DOIntensity(0, 0.25f).From();
+                }
             }
         }
 
@@ -36,7 +39,10 @@ namespace isletspace
             for (int i = 0; i < transform.childCount; ++i)
             {
                 var child = transform.GetChild(i).GetComponent<Light>();
-                DOTween.To(() => child.intensity, x => child.intensity = x, 0, 0.25f);
+                if (child != null)
+                {
+                    child.DOIntensity(0, 0.25f);
+                }
             }
             Invoke("DelayActiveFalse", 0.25f);
         }

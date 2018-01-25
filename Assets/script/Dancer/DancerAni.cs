@@ -139,6 +139,10 @@ namespace isletspace
         }
         public void DoYourTurn(bool flag)
         {
+            if (flag)
+            {
+                SoundManager.Instance.PlayGO();
+            }
             animator.SetBool("EndLeading", flag);
         }
         #endregion

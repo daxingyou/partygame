@@ -24,12 +24,13 @@ namespace isletspace
         public Text nameObj;
         public IconManager headimg;
 
-        public void PreLoad(string name, string url)
+        public void PreLoad()
         {
             nameObj = Utils.FindDirectChildComponent<Text>("name", transform);
-            nameObj.text = name;
+            nameObj.text = GameManager.GetMVPName();
             headimg = Utils.FindDirectChildComponent<IconManager>("headimg", transform);
-            headimg.SetFace(url);
+            headimg.SetFace(GameManager.GetMVPUrl());
+            gameObject.SetActive(false);
         }
 
         public void Show()

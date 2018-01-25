@@ -24,23 +24,35 @@ namespace isletspace
     {
         public RawImage image;
 
+        [Tooltip("For Debug")]
+        public bool isCover;
+
         public void DoFlash(Color color)
         {
+            if(isCover)
+            {
+                return;
+            }
             color.a = 0;
             image.color = color;
             image.DOFade(1, 0.1f).SetLoops(2, LoopType.Yoyo);
         }
 
-        public void DoCover(Color color)
+        public void DoCover(Color color, float time)
         {
+            isCover = true;
             color.a = 0;
             image.color = color;
-            image.DOFade(1, 0.3f);
+            image.DOFade(1, time).SetEase(Ease.Linear);
         }
 
-        public void DoUnCover()
+        public void DoUnCover(float time)
         {
-            image.DOFade(0, 0.3f);
+            if(!isCover)
+            {
+                return;
+            }
+            image.DOFade(0, time).SetEase(Ease.Linear).onComplete = () => { isCover = false; };
         }
     }
 }

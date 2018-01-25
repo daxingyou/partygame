@@ -1,6 +1,8 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using Spine.Unity;
 
 namespace isletspace
 {
@@ -11,6 +13,7 @@ namespace isletspace
     {
         public Image progressBar;
         public Transform effect;
+        public Transform iconAni;
 
         private float percnetage;
         private float width;
@@ -30,78 +33,24 @@ namespace isletspace
             }
 
             float oldPercent = percnetage;
-            if (oldPercent >= 0.65f)
+            percnetage += interval;
+            
+            if (oldPercent < 0.99f && percnetage >= 0.99f)
             {
-                percnetage += interval;
-                if (oldPercent < 0.95f && percnetage >= 0.95f)
-                {
-                    Callback(3);
-                }
+                Callback(3);
             }
-            else if (oldPercent >= 0.32f)
+            if (oldPercent < 0.66f && percnetage >= 0.66f)
             {
-                percnetage += interval;
-                if (oldPercent < 0.65f && percnetage >= 0.65f)
-                {
-                    Callback(2);
-                }
+                Callback(2);
             }
-            else
+            if (oldPercent < 0.32f && percnetage >= 0.32f)
             {
-                percnetage += interval;
-                if (oldPercent < 0.32f && percnetage >= 0.32f)
-                {
-                    Callback(1);
-                }
+                Callback(1);
             }
 
             float x = width * percnetage - width / 2;
             effect.DOLocalMoveX(x, 0.1f);
             progressBar.DOFillAmount(percnetage, 0.1f);
-        }
-
-        private void AddProgress()
-        {
-            float interval = 0;
-            float duration = 0.1f;
-            float arg1 = percnetage;
-
-            if (arg1 >= 1)
-            {
-                CancelInvoke("AddProgress");
-                percnetage = 1;
-                duration = 0.01f;
-            }
-            else if (arg1 >= 0.65)
-            {
-                interval = 0.01f;
-                percnetage += interval;
-                if(arg1 < 1 && percnetage >= 1)
-                {
-                    Callback(3);
-                }
-            }
-            else if (arg1 >= 0.32)
-            {
-                interval = 0.008f;
-                percnetage += interval;
-                if(arg1 < 0.65f && percnetage >= 0.65f)
-                {
-                    Callback(2);
-                }
-            }
-            else
-            {
-                interval = 0.005f;
-                percnetage += interval;
-                if (arg1 < 0.32f && percnetage >= 0.32f)
-                {
-                    Callback(1);
-                }
-            }
-            float x = width * percnetage - width / 2;
-            effect.DOLocalMoveX(x, duration);
-            progressBar.DOFillAmount(percnetage, duration);
         }
 
         private void Callback(int tag)
@@ -113,11 +62,42 @@ namespace isletspace
                 case 3:
                     var fire = Utils.FindDirectChildComponent<ProgressBarNode>("ImgFire" + tag, transform);
                     fire.NodeActive(tag);
+
+                    StartCoroutine(AniRoute(tag, fire.transform));
                     
                     break;
                 default:
                     break;
             }
+        }
+
+        private IEnumerator AniRoute(int tag, Transform target)
+        {
+            iconAni.gameObject.SetActive(true);
+            iconAni.GetComponent<SkeletonGraphic>().Skeleton.SetSkin("fire_0" + tag);
+
+            iconAni.DOLocalMove(target.localPosition, 1).From();
+            iconAni.DOScale(Vector3.one * 0.03f, 1).From();
+            
+            yield return new WaitForSeconds(0.9f);
+
+            iconAni.GetComponent<SkeletonGraphic>().AnimationState.SetAnimation(0, "animation2", false);
+
+            yield return new WaitForSeconds(0.5f);
+
+            iconAni.GetChild(0).gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            iconAni.GetChild(1).gameObject.SetActive(true);
+
+            FlashScreen.Instance.DoCover(new Color(0.89f, 0.26f, 0.26f), 1);
+
+            yield return new WaitForSeconds(0.8f);
+
+            iconAni.GetChild(0).gameObject.SetActive(false);
+            iconAni.GetChild(1).gameObject.SetActive(false);
+            iconAni.gameObject.SetActive(false);
         }
     }
 }
