@@ -129,11 +129,13 @@
     <Compile Include="Assets\script\Camera\SceneCamera.cs" />
     <Compile Include="Assets\script\Dancer\DancerAni.cs" />
     <Compile Include="Assets\script\Dancer\LookCenter.cs" />
+    <Compile Include="Assets\script\Effect\RandomFirework.cs" />
     <Compile Include="Assets\script\Gu\GuAniManager.cs" />
     <Compile Include="Assets\script\Gu\GuLightTween.cs" />
     <Compile Include="Assets\script\PlayArrow\ArrowManager.cs" />
     <Compile Include="Assets\script\SceneManager\AllDancerManager.cs" />
     <Compile Include="Assets\script\SceneManager\CheerManager.cs" />
+    <Compile Include="Assets\script\SceneManager\EDManager.cs" />
     <Compile Include="Assets\script\SceneManager\LeaderManager.cs" />
     <Compile Include="Assets\script\SoundManager.cs" />
     <Compile Include="Assets\script\UIManager.cs" />

@@ -78,14 +78,14 @@ public class SoundManager : ISingleton<SoundManager> {
         {
             yield break;
         }
-
-        if (time > 2)
+        
+        if (time > 3)
         {
-            yield return new WaitForSeconds(time - 2);
-            time = 2;
+            yield return new WaitForSeconds(time - 3);
+            time = 3;
         }
 
-        bgSource.DOFade(0, time).onComplete = ()=> {
+        bgSource.DOFade(0, time - 0.5f).onComplete = ()=> {
             bgSource.volume = 1;
             bgSource.Stop();
         };

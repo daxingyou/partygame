@@ -15,6 +15,8 @@ using UnityEngine;
 
 namespace isletspace
 {
+    public delegate void AddCallback(int downidx, int type);
+
     /// <summary>
     /// 
     /// </summary>
@@ -22,7 +24,7 @@ namespace isletspace
     {
         public Transform List;
 
-        public void AddArrow(int type)
+        public void AddArrow(int downidx, int type) //预留参数downidx用来倒计时。
         {
             string path = "";
             switch (type)
@@ -39,7 +41,7 @@ namespace isletspace
                 default:
                     return;
             }
-            Pool.CreateObject(path, List);
+            var arrow = Pool.CreateObject(path, List);
         }
 
         public void ClearList()

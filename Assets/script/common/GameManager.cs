@@ -14,6 +14,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO  Unity场景中的CheerSceneBase、SecondCheerSceneBase中的所有欢呼的人，并没有用统一的预制件做。需要重新创建。
+
 namespace isletspace
 {
     /// <summary>

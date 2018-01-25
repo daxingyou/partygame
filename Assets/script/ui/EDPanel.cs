@@ -20,12 +20,13 @@ namespace isletspace
     /// </summary>
     public class EDPanel : PanelBase
     {
-        public AllDancerManager SceneManager;
+        public EDManager SceneManager;
         override public void DoStart(UIManager manager)
         {
             base.DoStart(manager);
             FlashScreen.Instance.DoUnCover(0.1f);
             Director.Instance.RegistChangeCamera(cameraScene, DoEndCamera);
+            SceneManager.DoCheer();
         }
 
         private void DoEndCamera(SceneCamera camera)

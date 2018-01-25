@@ -190,7 +190,7 @@ namespace isletspace
             animator.speed = 1; //因为DoDrum会改变速度，结束时需要改回来。
         }
 
-        public IEnumerator DrumList(List<int> beat, List<int> beattime, System.Action<int> callback = null)
+        public IEnumerator DrumList(List<int> beat, List<int> beattime, AddCallback callback = null)
         {
             int preTime = 0;
             for (int i = 0; i < beat.Count; ++i)
@@ -201,7 +201,7 @@ namespace isletspace
                 yield return new WaitForSeconds(0.3f);
                 if(callback != null)
                 {
-                    callback(beat[i]);
+                    callback(beat.Count - i, beat[i]);
                 }
                 preTime = beattime[i];
             }
