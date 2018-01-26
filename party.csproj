@@ -159,6 +159,7 @@
     <Compile Include="Assets\script\othertween\TweenLight.cs" />
     <Compile Include="Assets\script\rankBoard\OneRank.cs" />
     <Compile Include="Assets\script\rankBoard\RankBoard.cs" />
+    <Compile Include="Assets\script\thirdpart\ConditionalHideAttribute.cs" />
     <Compile Include="Assets\script\ui\AlwaysPanel.cs" />
     <Compile Include="Assets\script\ui\CheerPanel.cs" />
     <Compile Include="Assets\script\ui\CloseUpUI.cs" />

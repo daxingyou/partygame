@@ -18,6 +18,7 @@ namespace isletspace
     /// <summary>
     /// 
     /// </summary>
+    [ExecuteInEditMode]
     public class LookCenter : MonoBehaviour
     {
         private void Start()

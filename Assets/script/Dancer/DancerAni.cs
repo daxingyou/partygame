@@ -141,7 +141,7 @@ namespace isletspace
         {
             if (flag)
             {
-                Invoke("DelayGo", 0.45f);
+                Invoke("DelayGo", 0.25f);
             }
             animator.SetBool("EndLeading", flag);
         }

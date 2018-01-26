@@ -25,6 +25,14 @@ namespace isletspace
             width = progressBar.rectTransform.rect.width;
         }
 
+        private void OnGUI()
+        {
+            if (GUILayout.Button("action1"))
+            {
+                AddProgress(0.1f);
+            }
+        }
+
         public void AddProgress(float interval)
         {
             if(percnetage >= 1)
@@ -78,7 +86,9 @@ namespace isletspace
 
             iconAni.DOLocalMove(target.localPosition, 1).From();
             iconAni.DOScale(Vector3.one * 0.03f, 1).From();
-            
+
+            SoundManager.Instance.PlayIcon();
+
             yield return new WaitForSeconds(0.9f);
 
             iconAni.GetComponent<SkeletonGraphic>().AnimationState.SetAnimation(0, "animation2", false);

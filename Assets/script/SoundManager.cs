@@ -147,6 +147,16 @@ public class SoundManager : ISingleton<SoundManager> {
         aSource.PlayOneShot(EffectSounds[10]);
     }
 
+    public void PlayIcon()
+    {
+        aSource.PlayOneShot(EffectSounds[11]);
+    }
+
+    public void PlayFirework()
+    {
+        aSource.PlayOneShot(EffectSounds[12]);
+    }
+
     public void PlayEffect(int index)
     {
         aSource.PlayOneShot(EffectSounds[index]);

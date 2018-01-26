@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>5.4.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -144,6 +142,7 @@
   <ItemGroup>
     <Compile Include="Assets\Demigiant\DOTweenPro\Editor\DOTweenAnimationInspector.cs" />
     <Compile Include="Assets\Editor\AddFileHeadComment.cs" />
+    <Compile Include="Assets\Editor\ConditionalHidePropertyDrawer.cs" />
     <Compile Include="Assets\Editor\FindMissingScriptsRecursively.cs" />
     <Compile Include="Assets\Editor\GetEnumDes.cs" />
     <Compile Include="Assets\Editor\ImageEffects\AntialiasingEditor.cs" />

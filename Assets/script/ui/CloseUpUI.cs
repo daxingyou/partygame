@@ -26,21 +26,23 @@ namespace isletspace
 
         public void PreLoad()
         {
+            Hide();
             nameObj = Utils.FindDirectChildComponent<Text>("name", transform);
             nameObj.text = GameManager.GetMVPName();
             headimg = Utils.FindDirectChildComponent<IconManager>("headimg", transform);
             headimg.SetFace(GameManager.GetMVPUrl());
-            gameObject.SetActive(false);
         }
 
         public void Show()
         {
-            gameObject.SetActive(true);
+            //gameObject.SetActive(true);
+            transform.localPosition = Vector3.forward * 10;
         }
 
         public void Hide()
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            transform.localPosition = Vector3.forward * -10;
         }
     }
 }

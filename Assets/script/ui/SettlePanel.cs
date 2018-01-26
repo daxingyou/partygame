@@ -21,7 +21,6 @@ namespace isletspace
     public class SettlePanel : PanelBase
     {
         public AllDancerManager SceneManager;
-
         public CloseUpUI closeUp;
 
         private Vector3 target;
@@ -30,14 +29,19 @@ namespace isletspace
         {
             base.DoStart(manager);
             SceneManager.AllDrumConstant();
-            Invoke("DoCloseUp", 0.5f);
+            DoCloseUp();
         }
 
         public void DoCloseUp()
         {
-            int pos = 3;
+            int pos = 4;
             target = SceneManager.CloseUp(pos);
             Director.Instance.RegistChangeCamera("AllDancerScene", OnAllDancerCloseUp);
+            Invoke("DelayShowCloseUp", 0.5f);
+        }
+
+        public void DelayShowCloseUp()
+        {
             closeUp.Show();
         }
 

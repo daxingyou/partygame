@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -40,15 +40,21 @@ namespace isletspace
     /// </summary>
     public class PanelBase : MonoBehaviour
     {
-        [Tooltip("For Debug")]
+        [Header("æµ‹è¯•ç”¨ç‰ˆé¢ã€‚é™¤éçŸ¥é“ï¼Œå¦åˆ™ä¸è¦éšä¾¿è®¾ç½®")]
+        public bool EnableDebugPanel = true;
+        [ConditionalHide("EnableDebugPanel", true)]
         public bool isForceLoop;
-
-        public List<NextPanel> nextPanelOrder; //TODO  ÏëÓÃÕ»½á¹¹´¢´æ£¬µ«ÊÇ×¢ÒâÊÇÏÈ½øÏÈ³öµÄ£¬ÒªÓÃÇáÁ¿¼¶¶ÓÁĞ¡£
-        public string cameraScene = "";
-
-        [Tooltip("For Debug")]
+        [ConditionalHide("EnableDebugPanel", true)]
         public float currentTimeOut;
-        public Vector2 OriginPos;
+        
+        [Header("MovePanel")]
+        public bool EnableMovePanel = true;
+        [ConditionalHide("EnableMovePanel", true)]
+        public Vector3 OriginPos;
+        [Header("--------------------")]
+
+        public List<NextPanel> nextPanelOrder; //TODO  æƒ³ç”¨æ ˆç»“æ„å‚¨å­˜ï¼Œä½†æ˜¯æ³¨æ„æ˜¯å…ˆè¿›å…ˆå‡ºçš„ï¼Œè¦ç”¨è½»é‡çº§é˜Ÿåˆ—ã€‚
+        public string cameraScene = "";
 
         [System.NonSerialized]
         public UIManager manager;
@@ -59,7 +65,7 @@ namespace isletspace
             this.manager = manager;
             gameObject.SetActive(true);
 
-            if(OriginPos != null)
+            if(EnableMovePanel)
             {
                 transform.DOLocalMove(Vector3.zero, 1);
             }
@@ -73,7 +79,7 @@ namespace isletspace
             SetTimeOut(nextPanelOrder[l].timeout);
         }
 
-        protected void SetTimeOut(float timeout) //TODO Ê±³¤µÄĞŞ¸ÄÃ»ÓĞË¢ĞÂ¶ÔÓ¦·½·¨£¬Ó¦¸ÃÒª×ö³É×¢²áĞÎÊ½¡£
+        protected void SetTimeOut(float timeout) //TODO æ—¶é•¿çš„ä¿®æ”¹æ²¡æœ‰åˆ·æ–°å¯¹åº”æ–¹æ³•ï¼Œåº”è¯¥è¦åšæˆæ³¨å†Œå½¢å¼ã€‚
         {
             CancelInvoke("TimeOut");
             currentTimeOut = timeout;
@@ -85,14 +91,14 @@ namespace isletspace
 
         virtual public void DoEnd()
         {
-            gameObject.SetActive(false);
-
-            transform.localPosition = OriginPos;
-            /*  //TODO  Òª²»Òª×öÒÆ¶¯ÍæÁËÔÙSetActive(False)£¿
-            if (OriginPos != null)
+            if (EnableMovePanel) //ç§»åŠ¨çš„ç‰ˆé¢ä¸éšè—
             {
-                transform.DOLocalMove(OriginPos, 1);
-            }*/
+                transform.localPosition = OriginPos;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         virtual public void TimeOut()

@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -9,10 +9,12 @@
    
 *************************************************************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 namespace isletspace
 {
@@ -29,7 +31,7 @@ namespace isletspace
         public void StartCamera()
         {
             gameObject.SetActive(true);
-            if (canChangeCamera)  // TODO Í³Ò»ÔÊĞíÇĞ»»ÉãÏñ»ú£¬ÊÇ·ñËæ»úµÄÅĞ¶ÏĞè·ÅÖÃÔÚÁíÍâµÄµØ·½£¬²¢ÇÒÓĞ¸öÈ¡ÏûËæ»úµÄ·½·¨£» ×¢Òâ£¬Õâ¸ö¸úÏÂÃæµÄ×¢²á·½·¨ÓĞÖØµş²¿·Ö¡£
+            if (canChangeCamera)  // TODO ç»Ÿä¸€å…è®¸åˆ‡æ¢æ‘„åƒæœºï¼Œæ˜¯å¦éšæœºçš„åˆ¤æ–­éœ€æ”¾ç½®åœ¨å¦å¤–çš„åœ°æ–¹ï¼Œå¹¶ä¸”æœ‰ä¸ªå–æ¶ˆéšæœºçš„æ–¹æ³•ï¼› æ³¨æ„ï¼Œè¿™ä¸ªè·Ÿä¸‹é¢çš„æ³¨å†Œæ–¹æ³•æœ‰é‡å éƒ¨åˆ†ã€‚
             {
                 InvokeRepeating("JumpRandomCamera", 0, 3);
             }
@@ -71,7 +73,7 @@ namespace isletspace
 
             if(currentCamera != null)
             {
-                if(camera.name == currentCamera.name) //±ÜÃâËæ»úµ½Í¬Ò»¸öÉãÏñ»ú
+                if(camera.name == currentCamera.name) //é¿å…éšæœºåˆ°åŒä¸€ä¸ªæ‘„åƒæœº
                 {
                     camera = transform.GetChild((randidx + 1) % transform.childCount).GetComponent<MoveCamera>();
                 }
@@ -83,7 +85,7 @@ namespace isletspace
         }
 
         /// <summary>
-        /// ÖÚÎèÕßÉãÏñ»úÀ­½ü
+        /// ä¼—èˆè€…æ‘„åƒæœºæ‹‰è¿‘
         /// </summary>
         /// <param name="target"></param>
         public void AllDancerCloseUp(Vector3 target)
@@ -95,9 +97,9 @@ namespace isletspace
         }
 
         /// <summary>
-        /// »¶ºôÉãÏñ»úĞı×ª
+        /// æ¬¢å‘¼æ‘„åƒæœºæ—‹è½¬
         /// </summary>
-        public void CheerRotate()  //TODO Í³Ò»»¯ÓÃcameraÏÂµÄÒÆ¶¯¿ØÖÆ
+        public void CheerRotate()  //TODO ç»Ÿä¸€åŒ–ç”¨cameraä¸‹çš„ç§»åŠ¨æ§åˆ¶
         {
             var camera = transform.Find("CheerCamera");
             camera.rotation = Quaternion.Euler(0, -15, 0);
@@ -105,7 +107,7 @@ namespace isletspace
         }
 
         /// <summary>
-        /// ÖÚÎèÕßÉãÏñ»úĞé»¯
+        /// ä¼—èˆè€…æ‘„åƒæœºè™šåŒ–
         /// </summary>
         public void AllDancerBlur()
         {
@@ -116,9 +118,9 @@ namespace isletspace
         }
 
         /// <summary>
-        /// ½áÊøËæ»úÇĞ»»²¢¶¨¸ñµ½Ö÷Ïà»ú
+        /// ç»“æŸéšæœºåˆ‡æ¢å¹¶å®šæ ¼åˆ°ä¸»ç›¸æœº
         /// </summary>
-        /// <param name="name">Ö÷Ïà»úÃû×Ö</param>
+        /// <param name="name">ä¸»ç›¸æœºåå­—</param>
         public void CancelRandomJumpCamera(string name)
         {
             CancelInvoke("JumpRandomCamera");
