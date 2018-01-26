@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -14,9 +14,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using DG.DemiLib;
 using UnityEngine;
 
-//TODO  Unity³¡¾°ÖĞµÄCheerSceneBase¡¢SecondCheerSceneBaseÖĞµÄËùÓĞ»¶ºôµÄÈË£¬²¢Ã»ÓĞÓÃÍ³Ò»µÄÔ¤ÖÆ¼ş×ö¡£ĞèÒªÖØĞÂ´´½¨¡£
+//TODO  Unityåœºæ™¯ä¸­çš„CheerSceneBaseã€SecondCheerSceneBaseä¸­çš„æ‰€æœ‰æ¬¢å‘¼çš„äººï¼Œå¹¶æ²¡æœ‰ç”¨ç»Ÿä¸€çš„é¢„åˆ¶ä»¶åšã€‚éœ€è¦é‡æ–°åˆ›å»ºã€‚
 
 namespace isletspace
 {
@@ -72,6 +75,7 @@ namespace isletspace
             JsonSerializer serializer = new JsonSerializer();
             StringReader sr = new StringReader(json);
             List<RankVO> data = serializer.Deserialize(new JsonTextReader(sr), typeof(List<RankVO>)) as List<RankVO>;
+
             RankData = data;
 
             if(RankCallback != null)
@@ -82,17 +86,28 @@ namespace isletspace
         
         public static void PickMVP()
         {
-            MVPIndex = 3;
+            MVPIndex = UnityEngine.Random.Range(0, 10);
+            MVPIndex = MVPIndex%RankData.Count;
         }
 
         public static string GetMVPName()
         {
-            return "Play of The Game!";
+            return RankData[MVPIndex].name;
         }
 
         public static string GetMVPUrl()
         {
-            return "http://wx.qlogo.cn/mmopen/vi_32/icvxBfeXY9WGXGhjE7ELzuBCQKxLu4laWkXYtRROIdxT8UXZPQmfREIE3VFXc7Krib8oREiclGC8QicZP0fCqcAYRw/132";
+            return RankData[MVPIndex].pic_url;
+        }
+
+        public static int GetMVPTarget()
+        {
+            int sum = 0;
+            for (int i = 0; i < RankData[MVPIndex].pic_url.Length; ++i)
+            {
+                sum += (int)RankData[MVPIndex].pic_url[i];
+            }
+            return sum % 100;
         }
     }
 }

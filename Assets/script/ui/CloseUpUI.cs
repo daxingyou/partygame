@@ -26,7 +26,7 @@ namespace isletspace
 
         public void PreLoad()
         {
-            Hide();
+            //Hide();
             nameObj = Utils.FindDirectChildComponent<Text>("name", transform);
             nameObj.text = GameManager.GetMVPName();
             headimg = Utils.FindDirectChildComponent<IconManager>("headimg", transform);
@@ -35,14 +35,12 @@ namespace isletspace
 
         public void Show()
         {
-            //gameObject.SetActive(true);
             transform.localPosition = Vector3.forward * 10;
         }
 
         public void Hide()
         {
-            //gameObject.SetActive(false);
-            transform.localPosition = Vector3.forward * -10;
+            transform.localPosition = Vector3.forward * -650;
         }
     }
 }

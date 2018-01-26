@@ -22,6 +22,16 @@ namespace isletspace
     {
         public void SetAllRank()
         {
+            if (transform.childCount > 0)
+            {
+                for (int i = transform.childCount - 1; i >= 0; --i)
+                {
+                    Destroy(transform.GetChild(i).gameObject);
+                }
+            }
+
+            print("   rank   data   " + JsonConvert.SerializeObject(GameManager.RankData));
+
             var data = GameManager.RankData;
             for (int i = 0; i < data.Count; ++i)
             {

@@ -47,6 +47,7 @@ namespace isletspace
 
             var ani = target.GetComponent<DancerAni>();
             ani.DoPose();
+            ani.DoAddPoseLight();
 
             return target.position;
         }

@@ -55,7 +55,10 @@ public class ImageExtends : MonoBehaviour
 
             Sprite m_sprite = Sprite.Create(tex2d, new Rect(0, 0, tex2d.width, tex2d.height), new Vector2(0, 0));
             image.sprite = m_sprite;
-            cache.Add(url, m_sprite);
+            if (!cache.ContainsKey(url))
+            {
+                cache.Add(url, m_sprite);
+            }
         }
     }
 }

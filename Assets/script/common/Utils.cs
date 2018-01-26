@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Net;
+using Newtonsoft.Json;
 
 public static class Utils
 {
@@ -469,6 +470,46 @@ public static class Utils
         cache.Remove(0, len + 1 + subdata[0].Length);
         return data;
     }
+
+
+
+    public static string Decode(ref List<byte> cache)
+    {
+        //首先要获取长度，整形4个字节，如果字节数不足4个字节
+        if (cache.Count < 4)
+        {
+            return null;
+        }
+
+        var cachedata = Encoding.UTF8.GetString(cache.ToArray());
+
+
+        //Debug.Log("  Raw  DAtga   :" + JsonConvert.SerializeObject(cache));
+        string[] subdata = cachedata.ToString().Split(new char[] { ':' }, 2);
+
+        if (subdata.Length < 2) //没接到分割符
+        {
+            return null;
+        }
+        //Debug.Log("    splitt  Data   " + subdata[0] + "  -  " + subdata[1]);
+
+        int headlen = subdata[0].Length + 1;
+
+        int len = int.Parse(subdata[0]);
+        if (len >= subdata[1].Length) //接受的数据长度不够
+        {
+            return null;
+        }
+
+        string data = subdata[1].Substring(0, len);
+        
+        //讲剩余没处理的消息存入消息池
+        cache.RemoveRange(0, len + headlen);
+
+        return data;
+    }
+
+
 
     public static void ChildLook(Transform obj)
     {

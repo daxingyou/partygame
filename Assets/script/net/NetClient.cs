@@ -10,7 +10,6 @@ using System.Text;
 using System.Reflection;
 using isletspace;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 public class NetClient
 {
@@ -22,7 +21,8 @@ public class NetClient
     //每次接受和发送数据的大小
     private const int size = 1024;
     //接收数据池
-    private StringBuilder receiveCache;
+    private StringBuilder receiveCacheList;
+    private List<byte> receiveCache;
     private bool isReceiving;
     // 连接成功
     public Action connectCallBack;
@@ -32,7 +32,8 @@ public class NetClient
     public void StartClient()
     {
         buffer = new byte[size];
-        receiveCache = new StringBuilder();
+        receiveCacheList = new StringBuilder();
+        receiveCache = new List<byte>();
 
         IPAddress[] adds = Dns.GetHostAddresses(address);
 
@@ -112,7 +113,7 @@ public class NetClient
             string dataStr = Utils.ToStr(msg);
             if(msg.msg_id != PacketType.HeartBeat)
             {
-                //Debug.LogFormat("=>>:{0} - data:[{1}]", msg.msg_id, dataStr);
+                Debug.LogFormat("=>>:{0} - data:[{1}]", msg.msg_id, dataStr);
             }
 #endif
 
@@ -209,7 +210,8 @@ public class NetClient
     {
         //UnityEngine.Debug.Log("接收到数据");
         //将接收到的数据放入数据池中
-        receiveCache.Append(Encoding.UTF8.GetString(data));
+        receiveCacheList.Append(Encoding.UTF8.GetString(data));
+        receiveCache.AddRange(data);
         //如果没在读数据
         if (!isReceiving)
         {
@@ -224,7 +226,7 @@ public class NetClient
         string data = Utils.Decode(ref receiveCache);
         if (data != null)
         {
-            //Debug.Log("    ReadData   " + data + "    =>    " + receiveCache);
+            Debug.Log("    ReadData   " + data + "    =>    " + receiveCacheList.ToString());
 
             //说明获取到一条完整数据
             JsonSerializer serializer = new JsonSerializer();

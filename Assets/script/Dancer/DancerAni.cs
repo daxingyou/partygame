@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -25,18 +25,20 @@ namespace isletspace
         Vector3 mid;
         Transform lightEffectPos;
 
-        GuAniManager gumgr;
+        GuAniManager guManager;
+        PoseLightManager poseLightManager;
 
         bool isUsedOneHand;
 
-        #region ³£Êı
+        #region å¸¸æ•°
         Vector3 target = new Vector3(-500, 0, 0);
         #endregion
         
         private void Start()
         {
             animator = gameObject.GetComponent<Animator>();
-            gumgr = Utils.FindDirectChildComponent<GuAniManager>("gu", transform);
+            guManager = Utils.FindDirectChildComponent<GuAniManager>("gu", transform);
+            poseLightManager = Utils.FindDirectChildComponent<PoseLightManager>("fff_Object028", transform);
             mid = (transform.position + target) / 2;
             lightEffectPos = transform.Find("LightEffect");
         }
@@ -86,7 +88,7 @@ namespace isletspace
             }
         }
 
-        #region ¹âµã·ÉĞĞ¶¯»­
+        #region å…‰ç‚¹é£è¡ŒåŠ¨ç”»
         public void DoLightSpotMove(float startTime = 0, System.Action callback = null)
         {
             StartCoroutine(MoveLightSpot(20, 3f, startTime, callback));
@@ -120,7 +122,7 @@ namespace isletspace
         }
         #endregion
 
-        #region Æ¬Í·¶¯×÷
+        #region ç‰‡å¤´åŠ¨ä½œ
         public void PlayOP()
         {
             animator.SetTrigger("OP");
@@ -152,19 +154,33 @@ namespace isletspace
         }
         #endregion
 
-        #region »÷¹ÄÌØĞ§
-        public void DoAddLight()
+        #region å‡»é¼“ç‰¹æ•ˆ
+        public void DoAddGuLight()
         {
-            gumgr.Begin();
+            guManager.Begin();
         }
 
-        public void DoDelLight()
+        public void DoDelGuLight()
         {
-            gumgr.End();
+            guManager.End();
         }
         #endregion
 
-        #region ×Ô¶¯ĞòÁĞ»÷¹Ä
+        #region ç‰¹å†™ç‰¹æ•ˆ
+        public void DoAddPoseLight()
+        {
+            poseLightManager.Begin();;
+        }
+
+        public void DoDelPoseLight()
+        {
+            poseLightManager.End();
+        }
+
+        #endregion
+
+
+        #region è‡ªåŠ¨åºåˆ—å‡»é¼“
         public IEnumerator DrumRandom(int count, float totalTime)
         {
             for (int i = 0; i < count; ++i)
@@ -179,11 +195,11 @@ namespace isletspace
                 totalTime -= gap;
                 if(totalTime < 0)
                 {
-                    animator.speed = 1; //ÒòÎªDoDrum»á¸Ä±äËÙ¶È£¬½áÊøÊ±ĞèÒª¸Ä»ØÀ´¡£
+                    animator.speed = 1; //å› ä¸ºDoDrumä¼šæ”¹å˜é€Ÿåº¦ï¼Œç»“æŸæ—¶éœ€è¦æ”¹å›æ¥ã€‚
                     yield break;
                 }
             }
-            animator.speed = 1; //ÒòÎªDoDrum»á¸Ä±äËÙ¶È£¬½áÊøÊ±ĞèÒª¸Ä»ØÀ´¡£
+            animator.speed = 1; //å› ä¸ºDoDrumä¼šæ”¹å˜é€Ÿåº¦ï¼Œç»“æŸæ—¶éœ€è¦æ”¹å›æ¥ã€‚
         }
         public IEnumerator DrumConstant(int type, int count, float gap)
         {
@@ -192,7 +208,7 @@ namespace isletspace
                 DoDrum(type, gap);
                 yield return new WaitForSeconds(gap);
             }
-            animator.speed = 1; //ÒòÎªDoDrum»á¸Ä±äËÙ¶È£¬½áÊøÊ±ĞèÒª¸Ä»ØÀ´¡£
+            animator.speed = 1; //å› ä¸ºDoDrumä¼šæ”¹å˜é€Ÿåº¦ï¼Œç»“æŸæ—¶éœ€è¦æ”¹å›æ¥ã€‚
         }
 
         public IEnumerator DrumList(List<int> beat, List<int> beattime, AddCallback callback = null)
@@ -210,7 +226,7 @@ namespace isletspace
                 }
                 preTime = beattime[i];
             }
-            animator.speed = 1; //ÒòÎªDoDrum»á¸Ä±äËÙ¶È£¬½áÊøÊ±ĞèÒª¸Ä»ØÀ´¡£
+            animator.speed = 1; //å› ä¸ºDoDrumä¼šæ”¹å˜é€Ÿåº¦ï¼Œç»“æŸæ—¶éœ€è¦æ”¹å›æ¥ã€‚
         }
 
         public IEnumerator DrumSolo()
@@ -220,11 +236,11 @@ namespace isletspace
             {
                 float gap = GameManager.soloList[i] - preTime;
                 yield return new WaitForSeconds(gap);
-                int beat = ((i + 1) == GameManager.soloList.Count) ? 2 : 1; //ÌØÊâÅĞ¶Ï£¬×îºóÒ»ÅÄÓÃtype2¡£
+                int beat = ((i + 1) == GameManager.soloList.Count) ? 2 : 1; //ç‰¹æ®Šåˆ¤æ–­ï¼Œæœ€åä¸€æ‹ç”¨type2ã€‚
                 DoDrum(beat, gap);
                 preTime = GameManager.soloList[i];
             }
-            animator.speed = 1; //ÒòÎªDoDrum»á¸Ä±äËÙ¶È£¬½áÊøÊ±ĞèÒª¸Ä»ØÀ´¡£
+            animator.speed = 1; //å› ä¸ºDoDrumä¼šæ”¹å˜é€Ÿåº¦ï¼Œç»“æŸæ—¶éœ€è¦æ”¹å›æ¥ã€‚
         }
         #endregion
     }

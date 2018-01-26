@@ -18,9 +18,9 @@ namespace isletspace
 {
     public struct RankVO
     {
-        public int id;
         public int rank;
         public int score;
+        public string id;
         public string name;
         public string pic_url;
     }

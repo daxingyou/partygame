@@ -1,4 +1,4 @@
-/*************************************************************
+﻿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -34,15 +34,14 @@ namespace isletspace
 
         public void DoCloseUp()
         {
-            int pos = 4;
-            target = SceneManager.CloseUp(pos);
+            target = SceneManager.CloseUp(GameManager.GetMVPTarget());
             Director.Instance.RegistChangeCamera("AllDancerScene", OnAllDancerCloseUp);
             Invoke("DelayShowCloseUp", 0.5f);
         }
 
         public void DelayShowCloseUp()
         {
-            closeUp.Show();
+            //closeUp.Show(); //TODO 需要界面延迟显示的时候使用
         }
 
         private void OnAllDancerCloseUp(SceneCamera camera)
