@@ -39,12 +39,12 @@ public class NetClient
 
         if (adds[0].AddressFamily == AddressFamily.InterNetworkV6)
         {
-            //Debug.Log("Connect InterNetworkV6");
+            Debug.Log("Connect InterNetworkV6");
             client = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);
         }
         else
         {
-            //Debug.Log("Connect InterNetwork");
+            Debug.Log("Connect InterNetwork");
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
@@ -52,7 +52,7 @@ public class NetClient
         //IAsyncResult result = client.BeginConnect(IPAddress.Parse(address), port, AsyncAccept2, client);
 
         DelayUtils.Start(waitConnection(result));
-        //Debug.Log(string.Format("StartClient {0}:{1}", address, port));
+        Debug.Log(string.Format("StartClient {0}:{1}", address, port));
     }
 
     private IEnumerator waitConnection(IAsyncResult result)
@@ -67,7 +67,7 @@ public class NetClient
 
     private void AsyncAccept2(IAsyncResult reuslt)
     {
-        //Debug.Log("AsnycAccept2");
+        Debug.Log("AsnycAccept2");
     }
 
     public void StopClient()
@@ -81,7 +81,7 @@ public class NetClient
         try
         {
             client.Shutdown(SocketShutdown.Both);
-            //Debug.Log("Shutdown Socket");
+            Debug.Log("Shutdown Socket");
         }
         catch
         {
@@ -90,7 +90,7 @@ public class NetClient
         try
         {
             client.Close();
-            //Debug.Log("Close Socket");
+            Debug.Log("Close Socket");
         }
         catch
         {
@@ -121,7 +121,7 @@ public class NetClient
 
             byte[] result = Encoding.UTF8.GetBytes(data.ToCharArray());
 
-            //Debug.Log(result.Length);
+            Debug.Log(result.Length);
             client.Send(result);
         }
         else
@@ -141,7 +141,7 @@ public class NetClient
         try
         {
             Socket client = result.AsyncState as Socket;
-            //Debug.Log("AsyncAccept");
+            Debug.Log("AsyncAccept");
             BeginReceive(client);
         }
         catch (Exception ex)
@@ -177,7 +177,7 @@ public class NetClient
 
     private void EndReceive2(IAsyncResult result)
     {
-        //Debug.Log("EndReceive2");
+        Debug.Log("EndReceive2");
     }
 
     //监听到消息之后调用的函数
@@ -185,6 +185,7 @@ public class NetClient
     {
         //try
         {
+            Debug.Log("   end  3");
             Socket client = result.AsyncState as Socket;
             //获取消息的长度
             int len = client.EndReceive(result);
@@ -208,7 +209,7 @@ public class NetClient
     // 服务器接受客户端发送的消息
     public void Receive(byte[] data)
     {
-        //UnityEngine.Debug.Log("接收到数据");
+        UnityEngine.Debug.Log("接收到数据" + Encoding.UTF8.GetString(data));
         //将接收到的数据放入数据池中
         receiveCacheList.Append(Encoding.UTF8.GetString(data));
         receiveCache.AddRange(data);
@@ -235,7 +236,7 @@ public class NetClient
             
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
             string dataStr = Utils.ToStr(msg);
-            //Debug.LogFormat("<<=:{0} - data:[{1}]", msg.msg_id, dataStr);
+            Debug.LogFormat("<<=:{0} - data:[{1}]", msg.msg_id, dataStr);
 #endif
             if (receiveCallBack != null)
             {

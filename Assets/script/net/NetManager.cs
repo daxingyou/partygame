@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -21,10 +21,11 @@ namespace isletspace
     /// </summary>
     public class NetManager : ISingleton<NetManager>
     {
-        [Tooltip("´ÓÎÒ¿ªÊ¼µ½ÑµÁ·½×¶Î¿ªÊ¼µÄÊ±¼ä¼ä¸ô(ms)")]
+        [Tooltip("ä»æˆ‘å¼€å§‹åˆ°è®­ç»ƒé˜¶æ®µå¼€å§‹çš„æ—¶é—´é—´éš”(ms)")]
         public string starttimegap = "49000";
 
         string ipaddress = "61.174.15.157:4001";
+        //string ipaddress = "192.168.0.77:4001";
         private SocketNetTools socketNetTools;
 
         private void Awake()
@@ -73,7 +74,7 @@ namespace isletspace
         {
             if (!socketNetTools.Connected)
             {
-                Debug.Log("Á¬½ÓÓÎÏ··şÎñÆ÷Ê§°Ü");
+                Debug.Log("è¿æ¥æ¸¸æˆæœåŠ¡å™¨å¤±è´¥");
             }
         }
 

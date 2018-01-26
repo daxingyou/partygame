@@ -484,19 +484,19 @@ public static class Utils
         var cachedata = Encoding.UTF8.GetString(cache.ToArray());
 
 
-        //Debug.Log("  Raw  DAtga   :" + JsonConvert.SerializeObject(cache));
+        Debug.Log("  Raw  DAtga   :" + JsonConvert.SerializeObject(cache));
         string[] subdata = cachedata.ToString().Split(new char[] { ':' }, 2);
 
         if (subdata.Length < 2) //没接到分割符
         {
             return null;
         }
-        //Debug.Log("    splitt  Data   " + subdata[0] + "  -  " + subdata[1]);
+        Debug.Log("    splitt  Data   " + subdata[0] + "  -  " + subdata[1]);
 
         int headlen = subdata[0].Length + 1;
 
         int len = int.Parse(subdata[0]);
-        if (len >= subdata[1].Length) //接受的数据长度不够
+        if (len > subdata[1].Length) //接受的数据长度不够
         {
             return null;
         }
