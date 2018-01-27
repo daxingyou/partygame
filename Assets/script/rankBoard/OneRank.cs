@@ -11,6 +11,7 @@
 
 using UnityEngine;
 using System.Collections;
+using Newtonsoft.Json;
 using UnityEngine.UI;
 
 
@@ -44,6 +45,7 @@ namespace isletspace
 
         public void SetAllData(RankVO data)
         {
+            print("   set all data  " + JsonConvert.SerializeObject(data) + "   >  " + NameObj);
             if (data.rank < 4)
             {
                 RankImgObj.gameObject.SetActive(true);
@@ -59,9 +61,19 @@ namespace isletspace
 
                 RankObj.text = data.rank.ToString();
             }
-            ScoreObj.text = "分数：" + data.score.ToString();
-            NameObj.text = data.name;
-            HeadImgObj.SetFace(data.pic_url);
+
+            if (ScoreObj != null)
+            {
+                ScoreObj.text = "分数：" + data.score;
+            }
+            if (NameObj != null)
+            {
+                NameObj.text = data.name;
+            }
+            if (HeadImgObj != null)
+            {
+                HeadImgObj.SetFace(data.pic_url);
+            }
         }
 
         public void PlayNewAni()

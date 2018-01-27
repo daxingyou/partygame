@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Net;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 
 public static class Utils
@@ -475,38 +476,59 @@ public static class Utils
 
     public static string Decode(ref List<byte> cache)
     {
+        Debug.Log("  Raw  DAta   :" + JsonConvert.SerializeObject(cache));
+
+
         //首先要获取长度，整形4个字节，如果字节数不足4个字节
         if (cache.Count < 4)
         {
             return null;
         }
 
-        var cachedata = Encoding.UTF8.GetString(cache.ToArray());
-
-
-        Debug.Log("  Raw  DAtga   :" + JsonConvert.SerializeObject(cache));
-        string[] subdata = cachedata.ToString().Split(new char[] { ':' }, 2);
-
-        if (subdata.Length < 2) //没接到分割符
+        int len = 0;
+        int head = -1;
+        for (int i = 0; i < cache.Count; ++i)
         {
+            byte ch = cache[i];
+            Debug.Log("    for    new  " + (char)ch + " , " + ch);
+            if (48 > ch && ch > 58)
+            {
+                //数据出错了！！！
+                return null;
+            }
+            if (ch == 58)
+            {
+                head = i;
+                break;
+            }
+            len = len*10 + ch - 48;
+        }
+
+        if (head == -1)
+        {
+            //没解到分隔符
             return null;
         }
-        Debug.Log("    splitt  Data   " + subdata[0] + "  -  " + subdata[1]);
 
-        int headlen = subdata[0].Length + 1;
+        Debug.Log("    len   compare   " + len + " + " + head + "  >?  " + cache.Count);
 
-        int len = int.Parse(subdata[0]);
-        if (len > subdata[1].Length) //接受的数据长度不够
+        if (len + head + 1 > cache.Count)
         {
+            //长度不够
             return null;
         }
 
-        string data = subdata[1].Substring(0, len);
-        
+        byte[] onedata = new byte [len];
+        for (int i = 0; i < len; i++)
+        {
+            onedata[i] = cache[i + head + 1];
+        }
         //讲剩余没处理的消息存入消息池
-        cache.RemoveRange(0, len + headlen);
+        cache.RemoveRange(0, len + head + 1);
 
-        return data;
+        Debug.Log("   final  data " + Encoding.UTF8.GetString(onedata));
+        
+        return Encoding.UTF8.GetString(onedata);
     }
 
 

@@ -20,7 +20,7 @@ namespace isletspace
 {
     public class RankBoard : MonoBehaviour
     {
-        public void SetAllRank()
+        public void SetAllRank(string prefabName, List<RankVO> data)
         {
             if (transform.childCount > 0)
             {
@@ -30,12 +30,11 @@ namespace isletspace
                 }
             }
 
-            print("   rank   data   " + JsonConvert.SerializeObject(GameManager.RankData));
-
-            var data = GameManager.RankData;
+            print("   rank   data   " + JsonConvert.SerializeObject(data));
+            
             for (int i = 0; i < data.Count; ++i)
             {
-                var obj = Pool.CreateObject("UI/one", transform);
+                var obj = Pool.CreateObject(prefabName, transform);
                 var one = obj.GetComponent<OneRank>();
                 one.SetAllData(data[i]);
             }

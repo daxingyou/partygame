@@ -40,7 +40,6 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
-            manager.EndPanel("AlwaysPanel");
             currentCameraBlur = Utils.GetChildComponent<Blur>(Director.Instance.currentCamera.transform);
             if (currentCameraBlur != null)
             {
@@ -60,7 +59,7 @@ namespace isletspace
 
         public void OnRankRet()
         {
-            board.SetAllRank();
+            board.SetAllRank("UI/one", GameManager.RankData);
         }
     }
 }

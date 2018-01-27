@@ -21,9 +21,10 @@ namespace isletspace
     public class EDPanel : PanelBase
     {
         public EDManager SceneManager;
-        override public void DoStart(UIManager manager)
+        public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
+            manager.EndPanel("AlwaysPanel");
             FlashScreen.Instance.DoUnCover(1f);
             Director.Instance.RegistChangeCamera(cameraScene, DoEndCamera);
             SceneManager.DoCheer();

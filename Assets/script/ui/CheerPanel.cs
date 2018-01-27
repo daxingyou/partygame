@@ -22,7 +22,7 @@ namespace isletspace
     {
         public CheerManager SceneManager;
 
-        override public void DoStart(UIManager manager)
+        public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
             FlashScreen.Instance.DoUnCover(1f);
@@ -31,7 +31,7 @@ namespace isletspace
             DoCheer();
         }
 
-        override public void DoEnd()
+        public override void DoEnd()
         {
             base.DoEnd();
             SceneManager.CheerEnd();

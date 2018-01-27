@@ -60,7 +60,7 @@ namespace isletspace
         public UIManager manager;
         
 
-        virtual public void DoStart(UIManager manager)
+        public virtual void DoStart(UIManager manager)
         {
             this.manager = manager;
             gameObject.SetActive(true);
@@ -89,7 +89,7 @@ namespace isletspace
             }
         }
 
-        virtual public void DoEnd()
+        public virtual void DoEnd()
         {
             if (EnableMovePanel) //移动的版面不隐藏
             {
@@ -101,7 +101,7 @@ namespace isletspace
             }
         }
 
-        virtual public void TimeOut()
+        public virtual void TimeOut()
         {
             if (isForceLoop)
             {

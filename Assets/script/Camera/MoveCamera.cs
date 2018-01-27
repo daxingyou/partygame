@@ -57,7 +57,7 @@ namespace isletspace
             transform.rotation = Quaternion.Euler(StartRotate);
         }
 
-        virtual public void StartMove()
+        public virtual void StartMove()
         {
             if(pathMgr != null)
             {
@@ -65,7 +65,7 @@ namespace isletspace
             }
         }
 
-        virtual public void StopMove()
+        public virtual void StopMove()
         {
             if (pathMgr != null)
             {

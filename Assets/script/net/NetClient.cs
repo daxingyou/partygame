@@ -227,7 +227,7 @@ public class NetClient
         string data = Utils.Decode(ref receiveCache);
         if (data != null)
         {
-            Debug.Log("    ReadData   " + data + "    =>    " + receiveCacheList.ToString());
+            Debug.Log("    ReadData   " + data + "    =>    " + JsonConvert.SerializeObject(receiveCache));
 
             //说明获取到一条完整数据
             JsonSerializer serializer = new JsonSerializer();
