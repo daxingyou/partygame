@@ -74,6 +74,9 @@ namespace isletspace
                 case 3:
                     realType = 4;
                     break;
+                case 9:
+                    realType = 5;
+                    break;
             }
             animator.SetFloat("drumType", realType);
         }
@@ -236,7 +239,7 @@ namespace isletspace
             {
                 float gap = GameManager.soloList[i] - preTime;
                 yield return new WaitForSeconds(gap);
-                int beat = ((i + 1) == GameManager.soloList.Count) ? 2 : 1; //特殊判断，最后一拍用type2。
+                int beat = ((i + 1) == GameManager.soloList.Count) ? 9 : 1; //特殊判断，最后一拍用type9。
                 DoDrum(beat, gap);
                 preTime = GameManager.soloList[i];
             }

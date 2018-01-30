@@ -49,6 +49,16 @@ public class SoundManager : ISingleton<SoundManager> {
         }
     }
 
+    public void PlayEndingBackground()
+    {
+        AudioClip ac = Backgrounds[6];
+        if (bgSource.isPlaying == false || bgSource.clip != ac)
+        {
+            bgSource.clip = ac;
+            bgSource.Play();
+        }
+    }
+
     public void PlayBackground(int no)
     {
         AudioClip ac = Backgrounds[no];

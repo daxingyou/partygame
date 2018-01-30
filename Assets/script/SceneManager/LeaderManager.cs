@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -39,12 +39,12 @@ namespace isletspace
 
         IEnumerator OPRoute()
         {
-            //³õÊ¼»¯³¡¾°
+            //åˆå§‹åŒ–åœºæ™¯
             StartCameraFollow();
             yield return new WaitForSeconds(1f);
             dancer.PlayOP();
             yield return new WaitForSeconds(0.3f);
-            //Èë³¡¿ªµÆ
+            //å…¥åœºå¼€ç¯
             spotLight.Begin();
             SoundManager.Instance.PlayLaZha();
             yield return new WaitForSeconds(3f);
@@ -52,13 +52,14 @@ namespace isletspace
             yield return new WaitForSeconds(5.3f);
             spotLight.End();
             yield return new WaitForSeconds(0.5f);
-            //ºÚÆÁ×à¹ÄÉù
+            //é»‘å±å¥é¼“å£°
             SoundManager.Instance.PlaySoloBackground();
             EndCameraFollow();
             StartCoroutine(dancer.DrumSolo());
             yield return new WaitForSeconds(12f);
-            //½áÊøÑİ×à
+            //ç»“æŸæ¼”å¥
             dancer.PlayOPPose();
+            SoundManager.Instance.PlayLaZha();
             torch.SetActive(true);
             yield return new WaitForSeconds(0.3f);
             fireLight.Begin();

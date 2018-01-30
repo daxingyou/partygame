@@ -40,6 +40,7 @@ namespace isletspace
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
+            SoundManager.Instance.PlayEndingBackground();
             currentCameraBlur = Utils.GetChildComponent<Blur>(Director.Instance.currentCamera.transform);
             if (currentCameraBlur != null)
             {

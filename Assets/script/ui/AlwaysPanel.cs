@@ -13,6 +13,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace isletspace
@@ -38,11 +39,12 @@ namespace isletspace
         {
             List<RankVO> top5 = new List<RankVO>(5);
             top5.AddRange(GameManager.RankData);
+
             if (top5.Count > 5)
             {
-                top5.RemoveRange(5, top5.Count);
+                top5.RemoveRange(5, top5.Count - 5);
             }
-            board.SetAllRank("UI/smallone", GameManager.RankData);
+            board.SetAllRank("UI/smallone", top5);
         }
     }
 }

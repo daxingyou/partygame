@@ -476,7 +476,7 @@ public static class Utils
 
     public static string Decode(ref List<byte> cache)
     {
-        Debug.Log("  Raw  DAta   :" + JsonConvert.SerializeObject(cache));
+        //Debug.Log("  Raw  DAta   :" + JsonConvert.SerializeObject(cache));
 
 
         //首先要获取长度，整形4个字节，如果字节数不足4个字节
@@ -490,7 +490,7 @@ public static class Utils
         for (int i = 0; i < cache.Count; ++i)
         {
             byte ch = cache[i];
-            Debug.Log("    for    new  " + (char)ch + " , " + ch);
+            //Debug.Log("    for    new  " + (char)ch + " , " + ch);
             if (48 > ch && ch > 58)
             {
                 //数据出错了！！！
@@ -510,7 +510,7 @@ public static class Utils
             return null;
         }
 
-        Debug.Log("    len   compare   " + len + " + " + head + "  >?  " + cache.Count);
+        //Debug.Log("    len   compare   " + len + " + " + head + "  >?  " + cache.Count);
 
         if (len + head + 1 > cache.Count)
         {
@@ -526,7 +526,7 @@ public static class Utils
         //讲剩余没处理的消息存入消息池
         cache.RemoveRange(0, len + head + 1);
 
-        Debug.Log("   final  data " + Encoding.UTF8.GetString(onedata));
+        //Debug.Log("   final  data " + Encoding.UTF8.GetString(onedata));
         
         return Encoding.UTF8.GetString(onedata);
     }

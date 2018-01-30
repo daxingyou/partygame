@@ -30,7 +30,7 @@ namespace isletspace
                 }
             }
 
-            print("   rank   data   " + JsonConvert.SerializeObject(data));
+            //print("   rank   data   " + JsonConvert.SerializeObject(data));
             
             for (int i = 0; i < data.Count; ++i)
             {

@@ -44,6 +44,7 @@ namespace isletspace
             {
                 JumpTo(jumpPanelName);
             }
+            SoundManager.Instance.PlaySingleA();
             NetManager.Instance.StartNet();
         }
 

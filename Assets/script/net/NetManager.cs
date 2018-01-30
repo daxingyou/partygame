@@ -104,7 +104,7 @@ namespace isletspace
 
         public void OnUpdatePlayerNum(NetPacket msg)
         {
-            print("    update player num  " + msg.data);
+            //print("    update player num  " + msg.data);
             GameManager.SetPlayNum(msg);
         }
 

@@ -113,7 +113,7 @@ public class NetClient
             string dataStr = Utils.ToStr(msg);
             if(msg.msg_id != PacketType.HeartBeat)
             {
-                Debug.LogFormat("=>>:{0} - data:[{1}]", msg.msg_id, dataStr);
+                //Debug.LogFormat("=>>:{0} - data:[{1}]", msg.msg_id, dataStr);
             }
 #endif
 
@@ -177,7 +177,7 @@ public class NetClient
 
     private void EndReceive2(IAsyncResult result)
     {
-        Debug.Log("EndReceive2");
+        //Debug.Log("EndReceive2");
     }
 
     //监听到消息之后调用的函数
@@ -185,7 +185,7 @@ public class NetClient
     {
         //try
         {
-            Debug.Log("   end  3");
+            //Debug.Log("   end  3");
             Socket client = result.AsyncState as Socket;
             //获取消息的长度
             int len = client.EndReceive(result);
@@ -209,7 +209,7 @@ public class NetClient
     // 服务器接受客户端发送的消息
     public void Receive(byte[] data)
     {
-        UnityEngine.Debug.Log("接收到数据" + Encoding.UTF8.GetString(data));
+        //UnityEngine.Debug.Log("接收到数据" + Encoding.UTF8.GetString(data));
         //将接收到的数据放入数据池中
         receiveCacheList.Append(Encoding.UTF8.GetString(data));
         receiveCache.AddRange(data);
@@ -227,7 +227,7 @@ public class NetClient
         string data = Utils.Decode(ref receiveCache);
         if (data != null)
         {
-            Debug.Log("    ReadData   " + data + "    =>    " + JsonConvert.SerializeObject(receiveCache));
+            //Debug.Log("    ReadData   " + data + "    =>    " + JsonConvert.SerializeObject(receiveCache));
 
             //说明获取到一条完整数据
             JsonSerializer serializer = new JsonSerializer();
@@ -236,7 +236,7 @@ public class NetClient
             
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
             string dataStr = Utils.ToStr(msg);
-            Debug.LogFormat("<<=:{0} - data:[{1}]", msg.msg_id, dataStr);
+            //Debug.LogFormat("<<=:{0} - data:[{1}]", msg.msg_id, dataStr);
 #endif
             if (receiveCallBack != null)
             {

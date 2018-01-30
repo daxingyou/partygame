@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -34,13 +34,13 @@ namespace isletspace
     public class LeaderPanel : PanelBase
     {
         public LeaderManager SceneManager;
-        public ArrowManager arrowManager; //TODO ½Ú×àÌõ¿¼ÂÇ·ÅÈëAllwaysPanel¡£
+        public ArrowManager arrowManager; //TODO èŠ‚å¥æ¡è€ƒè™‘æ”¾å…¥AllwaysPanelã€‚
 
         public override void DoStart(UIManager manager)
         {
             base.DoStart(manager);
             manager.StartPanel("AlwaysPanel");
-            if(GameManager.gamePhase > 10) //±£ÏÕ
+            if(GameManager.gamePhase > 10) //ä¿é™©
             {
                 GameManager.gamePhase = 0;
             }
@@ -48,7 +48,7 @@ namespace isletspace
             SoundManager.Instance.PlayBackground(GameManager.gamePhase);
             arrowManager.ClearList();
             float startTime = 0;
-            if(GameManager.phaseTime == 0) //µÚÒ»»ØºÏ¶îÍâÆ¬Í·Ê±¼ä
+            if(GameManager.phaseTime == 0) //ç¬¬ä¸€å›åˆé¢å¤–ç‰‡å¤´æ—¶é—´
             {
                 SetTimeOut(currentTimeOut + GameManager.PHASE_START_DELAY[GameManager.gamePhase]);
                 startTime = GameManager.PHASE_START_DELAY[GameManager.gamePhase];

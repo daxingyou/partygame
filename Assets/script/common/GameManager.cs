@@ -29,7 +29,7 @@ namespace isletspace
 
     public static class GameManager
     {
-        public static List<float> PHASE_START_DELAY = new List<float>() { 15.218f, 5.579f, 7.1475f };
+        public static List<float> PHASE_START_DELAY = new List<float>() { 8.133f, 5.579f, 7.1475f };
 
         public static int currentPlayNum = 0;
         public static event Action UpdatePlayNumCallback;
@@ -86,22 +86,38 @@ namespace isletspace
         
         public static void PickMVP()
         {
+            if (RankData == null || RankData.Count == 0)
+            {
+                return;
+            }
             MVPIndex = UnityEngine.Random.Range(0, 10);
             MVPIndex = MVPIndex%RankData.Count;
         }
 
         public static string GetMVPName()
         {
+            if (MVPIndex == 999)
+            {
+                return "佚名";
+            }
             return RankData[MVPIndex].name;
         }
 
         public static string GetMVPUrl()
         {
+            if (MVPIndex == 999)
+            {
+                return "";
+            }
             return RankData[MVPIndex].pic_url;
         }
 
         public static int GetMVPTarget()
         {
+            if (MVPIndex == 999)
+            {
+                return 5;
+            }
             int sum = 0;
             for (int i = 0; i < RankData[MVPIndex].pic_url.Length; ++i)
             {

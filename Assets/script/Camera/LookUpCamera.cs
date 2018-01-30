@@ -45,13 +45,13 @@ namespace isletspace
             SoundManager.Instance.PlayFirework();
             Sequence seq = DOTween.Sequence();
             //ZoomIn
-            seq.Append(transform.DOMove(target, 0.4f));
-            seq.Join(transform.DORotate(LookFront, 0.4f));
+            seq.Append(transform.DOMove(target, 0.3f));
+            seq.Join(transform.DORotate(LookFront, 0.3f));
             //Rotate
-            seq.Append(transform.DORotate(LookRotatePoint2, 2.8f).SetEase(Ease.Linear));
+            seq.Append(transform.DORotate(LookRotatePoint2, 3.1f).SetEase(Ease.Linear));
             //ZoomOut
-            seq.Append(transform.DOMove(StartPos, 0.4f));
-            seq.Join(transform.DORotate(StartRotate, 0.4f));
+            seq.Append(transform.DOMove(StartPos, 0.2f));
+            seq.Join(transform.DORotate(StartRotate, 0.2f));
             //PlayEnd
             seq.AppendCallback(() => { isPlaying = false; });
 

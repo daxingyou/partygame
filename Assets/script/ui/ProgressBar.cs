@@ -25,13 +25,13 @@ namespace isletspace
             width = progressBar.rectTransform.rect.width;
         }
 
-        private void OnGUI()
-        {
-            if (GUILayout.Button("action1"))
-            {
-                AddProgress(0.1f);
-            }
-        }
+        //private void OnGUI()
+        //{
+        //    if (GUILayout.Button("action1"))
+        //    {
+        //        AddProgress(0.1f);
+        //    }
+        //}
 
         public void AddProgress(float interval)
         {
@@ -70,9 +70,8 @@ namespace isletspace
                 case 3:
                     var fire = Utils.FindDirectChildComponent<ProgressBarNode>("ImgFire" + tag, transform);
                     fire.NodeActive(tag);
-
                     StartCoroutine(AniRoute(tag, fire.transform));
-                    
+
                     break;
                 default:
                     break;

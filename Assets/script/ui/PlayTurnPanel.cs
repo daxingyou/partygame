@@ -1,4 +1,4 @@
-/*************************************************************
+ï»¿/*************************************************************
    Copyright(C) 2017 by dayugame
    All rights reserved.
    
@@ -22,7 +22,7 @@ namespace isletspace
     public class PlayTurnPanel : PanelBase
     {
         public AllDancerManager SceneManager;
-        public ProgressBar bar; //TODO ½ø¶ÈÌõ¿¼ÂÇ·ÅÈëAllwaysPanel¡£
+        public ProgressBar bar; //TODO è¿›åº¦æ¡è€ƒè™‘æ”¾å…¥AllwaysPanelã€‚
         public List<GameObject> SpriteAniList;
         public CloseUpUI closeUp;
 
@@ -36,8 +36,8 @@ namespace isletspace
             TryPreLoadIfNextSettle();
 
             SceneManager.AllDrumList();
-            var startLightTime = currentTimeOut - 3; //Õâ¸ö³£ÊıÊÇ¹âÇò·ÉĞĞĞèÒªµÄÊ±¼ä¡£ÓÅÏÈ±£Ö¤¹âÇòÄÜ·ÉÍê³É¡£//ĞŞ¸Ä¹âÇòÆğ·ÉÊ±¼ä£¬¿ÉÄÜ»áÓ°Ïìµ½ProgressBar.AniRouteµÄÁ÷³ÌÊ±¼ä¶Ô²»ÉÏ
-            startLightTime = Mathf.Clamp(startLightTime, 0, ImportRoute.GetBeatTime().Sum() / 1000f); //½«ÆğÊ¼Ê±¼äÏŞÖÆÔÚºÏ·¨·¶Î§ÄÚ¡£
+            var startLightTime = currentTimeOut - 3; //è¿™ä¸ªå¸¸æ•°æ˜¯å…‰çƒé£è¡Œéœ€è¦çš„æ—¶é—´ã€‚ä¼˜å…ˆä¿è¯å…‰çƒèƒ½é£å®Œæˆã€‚//ä¿®æ”¹å…‰çƒèµ·é£æ—¶é—´ï¼Œå¯èƒ½ä¼šå½±å“åˆ°ProgressBar.AniRouteçš„æµç¨‹æ—¶é—´å¯¹ä¸ä¸Š
+            startLightTime = Mathf.Clamp(startLightTime, 0, ImportRoute.GetBeatTime().Sum() / 1000f); //å°†èµ·å§‹æ—¶é—´é™åˆ¶åœ¨åˆæ³•èŒƒå›´å†…ã€‚
 
             Invoke("PlayLightSpotAll", startLightTime);
 
@@ -66,7 +66,7 @@ namespace isletspace
         }
 
         /// <summary>
-        /// Èç¹ûÏÂÒ»¸ö³¡¾°ÊÇCheerPanel¡£ÔòÈÏÎªÕâ¸ö½×¶ÎÊÇ×îºóÒ»¸ö½×¶Î£¬¶îÍâ×·¼ÓÈô¸ÉÃë²¥·Å×ª³¡¶¯»­¡£
+        /// å¦‚æœä¸‹ä¸€ä¸ªåœºæ™¯æ˜¯CheerPanelã€‚åˆ™è®¤ä¸ºè¿™ä¸ªé˜¶æ®µæ˜¯æœ€åä¸€ä¸ªé˜¶æ®µï¼Œé¢å¤–è¿½åŠ è‹¥å¹²ç§’æ’­æ”¾è½¬åœºåŠ¨ç”»ã€‚
         /// </summary>
         private void TryDelayIfLastPanel()
         {
@@ -76,7 +76,7 @@ namespace isletspace
                 return;
             }
 
-            if (nextPanelOrder[l].nextName == "CheerPanel" || nextPanelOrder[l].nextName == "SecondCheerPanel" || nextPanelOrder[l].nextName == "EDPanel") //TODO  ÔİÊ±ÕâÑùÅĞ¶Ï£¬²»¹»×¼È·¡£
+            if (nextPanelOrder[l].nextName == "CheerPanel" || nextPanelOrder[l].nextName == "SecondCheerPanel" || nextPanelOrder[l].nextName == "EDPanel") //TODO  æš‚æ—¶è¿™æ ·åˆ¤æ–­ï¼Œä¸å¤Ÿå‡†ç¡®ã€‚
             {
                 StartCoroutine(ChangePanelRoute(currentTimeOut));
                 SetTimeOut(currentTimeOut + 7f);
@@ -85,11 +85,11 @@ namespace isletspace
 
         private IEnumerator ChangePanelRoute(float time)
         {
-            yield return new WaitForSeconds(time);           //µÈ´ıÕı³£Á÷³Ì½áÊø
+            yield return new WaitForSeconds(time);           //ç­‰å¾…æ­£å¸¸æµç¨‹ç»“æŸ
 
-            Director.Instance.currentCamera.CancelRandomJumpCamera("MainCamera");  //¹Ø±Õ¾µÍ·Ëæ»úÇĞ»»
+            Director.Instance.currentCamera.CancelRandomJumpCamera("MainCamera");  //å…³é—­é•œå¤´éšæœºåˆ‡æ¢
 
-            //TODO  ÕâÀïµÄÏÂ°ë¶ÎÁ÷³ÌÔÚProgressBar.AniRouteÀïÍê³ÉÁË¡£×îºÃÒ»Õû¸öÁ÷³ÌÄÜ×ö³ÉÒ»¸öÍ³Ò»µÄĞ¯³Ì¡£
+            //TODO  è¿™é‡Œçš„ä¸‹åŠæ®µæµç¨‹åœ¨ProgressBar.AniRouteé‡Œå®Œæˆäº†ã€‚æœ€å¥½ä¸€æ•´ä¸ªæµç¨‹èƒ½åšæˆä¸€ä¸ªç»Ÿä¸€çš„æºç¨‹ã€‚
         }
 
         private void TryPreLoadIfNextSettle()
@@ -100,7 +100,7 @@ namespace isletspace
                 return;
             }
 
-            if (nextPanelOrder[l].nextName == "SettlePanel") //TODO  ÔİÊ±ÕâÑùÅĞ¶Ï£¬²»¹»×¼È·¡£
+            if (nextPanelOrder[l].nextName == "SettlePanel") //TODO  æš‚æ—¶è¿™æ ·åˆ¤æ–­ï¼Œä¸å¤Ÿå‡†ç¡®ã€‚
             {
                 GameManager.PickMVP();
                 closeUp.PreLoad();

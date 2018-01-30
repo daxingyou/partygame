@@ -45,7 +45,7 @@ namespace isletspace
 
         public void SetAllData(RankVO data)
         {
-            print("   set all data  " + JsonConvert.SerializeObject(data) + "   >  " + NameObj);
+            //print("   set all data  " + JsonConvert.SerializeObject(data) + "   >  " + NameObj);
             if (data.rank < 4)
             {
                 RankImgObj.gameObject.SetActive(true);
