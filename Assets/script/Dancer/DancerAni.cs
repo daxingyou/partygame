@@ -220,9 +220,11 @@ namespace isletspace
             for (int i = 0; i < beat.Count; ++i)
             {
                 float gap = beattime[i] / 1000.0f;
-                yield return new WaitForSeconds(gap - 0.3f);
+                float drumDelayTime = gap * 0.7f;
+                drumDelayTime = drumDelayTime > 0.3f ? 0.3f : drumDelayTime;
+                yield return new WaitForSeconds(gap - drumDelayTime);
                 DoDrum(beat[i], gap);
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(drumDelayTime);
                 if(callback != null)
                 {
                     callback(beat.Count - i, beat[i]);
